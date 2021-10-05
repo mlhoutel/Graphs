@@ -1,7 +1,6 @@
 package AdjacencyMatrix;
 
 import GraphAlgorithms.GraphTools;
-import Nodes.AbstractNode;
 import Nodes.DirectedNode;
 
 public class AdjacencyMatrixDirectedValuedGraph extends AdjacencyMatrixDirectedGraph {

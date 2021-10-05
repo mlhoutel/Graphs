@@ -1,9 +1,9 @@
 package AdjacencyList;
 
-import java.util.ArrayList;
-
 import GraphAlgorithms.GraphTools;
 import Nodes.UndirectedNode;
+
+import java.util.ArrayList;
 
 public class UndirectedValuedGraph extends UndirectedGraph{
 

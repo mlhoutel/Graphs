@@ -1,5 +1,6 @@
 package Abstraction;
 
+import AdjacencyMatrix.AdjacencyMatrixUndirectedGraph;
 import Nodes.AbstractNode;
 
 public abstract class AbstractMatrixGraph<A extends AbstractNode> implements IGraph {
@@ -40,4 +41,5 @@ public abstract class AbstractMatrixGraph<A extends AbstractNode> implements IGr
         return this.order;
     }
 
+    public abstract AdjacencyMatrixUndirectedGraph Clone();
 }

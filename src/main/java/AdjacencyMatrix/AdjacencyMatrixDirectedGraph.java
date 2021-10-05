@@ -1,10 +1,9 @@
 package AdjacencyMatrix;
 
 import Abstraction.AbstractMatrixGraph;
-import GraphAlgorithms.GraphTools;
-import Nodes.AbstractNode;
-import Nodes.DirectedNode;
 import Abstraction.IDirectedGraph;
+import GraphAlgorithms.GraphTools;
+import Nodes.DirectedNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +20,11 @@ public class AdjacencyMatrixDirectedGraph extends AbstractMatrixGraph<DirectedNo
 
 	public AdjacencyMatrixDirectedGraph() {
 		super();
+	}
+
+	@Override
+	public AdjacencyMatrixUndirectedGraph Clone() {
+		return new AdjacencyMatrixUndirectedGraph(this.matrix);
 	}
 
 	public AdjacencyMatrixDirectedGraph(int[][] M) {
@@ -76,8 +80,7 @@ public class AdjacencyMatrixDirectedGraph extends AbstractMatrixGraph<DirectedNo
 	
 	@Override
 	public boolean isArc(DirectedNode from, DirectedNode to) {
-		// A completer
-		return true;
+		return matrix[from.getLabel()][to.getLabel()] > 0;
 	}
 
 	/**
@@ -85,7 +88,9 @@ public class AdjacencyMatrixDirectedGraph extends AbstractMatrixGraph<DirectedNo
 	 */
 	@Override
 	public void removeArc(DirectedNode from, DirectedNode to) {
-		// A completer
+		if (isArc(from, to)) {
+			matrix[from.getLabel()][to.getLabel()]--;
+		}
 	}
 
 	/**
@@ -93,7 +98,7 @@ public class AdjacencyMatrixDirectedGraph extends AbstractMatrixGraph<DirectedNo
 	 */
 	@Override
 	public void addArc(DirectedNode from, DirectedNode to) {
-		// A completer
+		matrix[from.getLabel()][to.getLabel()]++;
 	}
 
 

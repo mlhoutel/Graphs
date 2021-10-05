@@ -1,9 +1,9 @@
 package Abstraction;
 
+import Nodes.AbstractNode;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import Nodes.AbstractNode;
 
 public abstract class AbstractListGraph<A extends AbstractNode> implements IGraph {
 

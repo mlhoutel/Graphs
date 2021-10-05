@@ -1,9 +1,9 @@
 package AdjacencyList;
 
-import java.util.ArrayList;
-
 import GraphAlgorithms.GraphTools;
 import Nodes.DirectedNode;
+
+import java.util.ArrayList;
 
 public class DirectedValuedGraph extends DirectedGraph {
 

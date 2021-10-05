@@ -1,13 +1,12 @@
 package AdjacencyMatrix;
 
 import Abstraction.AbstractMatrixGraph;
+import Abstraction.IUndirectedGraph;
 import GraphAlgorithms.GraphTools;
 import Nodes.AbstractNode;
 import Nodes.UndirectedNode;
-import Abstraction.IUndirectedGraph;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,7 +22,12 @@ public class AdjacencyMatrixUndirectedGraph extends AbstractMatrixGraph<Undirect
 	public AdjacencyMatrixUndirectedGraph() {
 		super();
 	}
-	
+
+	@Override
+	public AdjacencyMatrixUndirectedGraph Clone() {
+		return new AdjacencyMatrixUndirectedGraph(this.matrix);
+	}
+
 	public AdjacencyMatrixUndirectedGraph(int[][] mat) {
 		this.order=mat.length;
 		this.matrix = new int[this.order][this.order];
@@ -67,8 +71,10 @@ public class AdjacencyMatrixUndirectedGraph extends AbstractMatrixGraph<Undirect
 	
 	@Override
 	public boolean isEdge(UndirectedNode x, UndirectedNode y) {
-		// A completer
-		return true;		
+		if (matrix[x.getLabel()][y.getLabel()] == 0) { return false; }
+		if (matrix[y.getLabel()][x.getLabel()] == 0) { return false; }
+
+		return true;
 	}
 	
 	/**
@@ -76,7 +82,8 @@ public class AdjacencyMatrixUndirectedGraph extends AbstractMatrixGraph<Undirect
      */
 	@Override
 	public void removeEdge(UndirectedNode x, UndirectedNode y) {
-		// A completer
+		matrix[x.getLabel()][y.getLabel()]--;
+		matrix[y.getLabel()][x.getLabel()]--;
 	}
 
 	/**
@@ -84,7 +91,8 @@ public class AdjacencyMatrixUndirectedGraph extends AbstractMatrixGraph<Undirect
      */
 	@Override
 	public void addEdge(UndirectedNode x, UndirectedNode y) {
-		// A completer
+		matrix[x.getLabel()][y.getLabel()]++;
+		matrix[y.getLabel()][x.getLabel()]++;
 	}
 
 	
@@ -110,17 +118,21 @@ public class AdjacencyMatrixUndirectedGraph extends AbstractMatrixGraph<Undirect
 
 	public static void main(String[] args) {
 		int[][] mat2 = GraphTools.generateGraphData(10, 35, false, true, false, 100001);
-		GraphTools.afficherMatrix(mat2);
+		// GraphTools.afficherMatrix(mat2);
+
 		AdjacencyMatrixUndirectedGraph am = new AdjacencyMatrixUndirectedGraph(mat2);
 		System.out.println(am);
-		System.out.println("N = "+am.getNbNodes()+ "\n M = "+am.getNbEdges());
+		System.out.println("N = "+am.getNbNodes()+ "\nM = "+am.getNbEdges());
+
 		List<Integer> t2 = am.getNeighbours(new UndirectedNode(2));
-		for (Integer integer : t2) {
-			System.out.print(integer + ", ");
-		}
+		List<String> t2s = new ArrayList<String>();
+		for (Integer integer : t2) { t2s.add(integer.toString()); }
+		System.out.println(String.join(", ", t2s));
+
 		am.isEdge(new UndirectedNode(2), new UndirectedNode(5));
-		for(int i = 0; i<3;i++)
+		for(int i = 0; i < 3;i++)
 			am.addEdge(new UndirectedNode(2), new UndirectedNode(5));
+
 		System.out.println(am);
 		am.removeEdge(new UndirectedNode(2), new UndirectedNode(5));
 		System.out.println(am);
