@@ -1,4 +1,4 @@
-package java.AdjacenyMatrix;
+package AdjacenyMatrix;
 
 import AdjacencyMatrix.AdjacencyMatrixUndirectedGraph;
 import GraphAlgorithms.GraphTools;
