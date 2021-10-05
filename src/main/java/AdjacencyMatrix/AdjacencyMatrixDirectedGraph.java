@@ -6,7 +6,7 @@ import GraphAlgorithms.GraphTools;
 import Nodes.DirectedNode;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List; 
 
 /**
  * This class represents the directed graphs structured by an adjacency matrix.
