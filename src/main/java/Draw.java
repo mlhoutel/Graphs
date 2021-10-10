@@ -9,7 +9,7 @@ public class Draw extends JFrame {
     private static final long serialVersionUID = -8123406571694511514L;
 
     public Draw() {
-        super("JGrapghX tutoriel: Exemple 1");
+        super("Draw");
 
         JGraph graph = new JGraph();
         this.getContentPane().add(new JScrollPane(graph));
