@@ -9,11 +9,11 @@ import org.junit.jupiter.api.Assertions;
 
 public class AdjacencyMatrixUndirectedGraphTest {
 
-    int[][] mat;
-    AdjacencyMatrixUndirectedGraph adj;
+    static int[][] mat;
+    static AdjacencyMatrixUndirectedGraph adj;
 
     @BeforeAll
-    void initMatrix() {
+    static void initMatrix() {
         mat = GraphTools.generateGraphData(10, 35, false, true, false, 100001);
         adj = new AdjacencyMatrixUndirectedGraph(mat);
     }
