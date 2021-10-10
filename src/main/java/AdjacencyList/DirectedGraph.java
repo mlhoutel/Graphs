@@ -68,18 +68,24 @@ public class DirectedGraph extends AbstractListGraph<DirectedNode> implements ID
 
     @Override
     public boolean isArc(DirectedNode from, DirectedNode to) {
-    	// A completer
-    	return false;
+        return getNodeOfList(from).getSuccs().containsKey(getNodeOfList(to));
+
     }
 
     @Override
     public void removeArc(DirectedNode from, DirectedNode to) {
-    	// A completer
+    	if(isArc(from, to)){
+            getNodeOfList(from).getSuccs().remove(getNodeOfList(to));
+    	}
     }
 
     @Override
     public void addArc(DirectedNode from, DirectedNode to) {
-    	// A completer
+    	if(!isArc(from,to)){
+            getNodeOfList(from).getSuccs().put(getNodeOfList(to),1);
+    	}else{
+            getNodeOfList(from).getSuccs().put(getNodeOfList(to),getNodeOfList(from).getSuccs().get(getNodeOfList(to))+1);
+        }
     }
 
     //--------------------------------------------------
@@ -119,9 +125,16 @@ public class DirectedGraph extends AbstractListGraph<DirectedNode> implements ID
     }
 
     @Override
-    public IDirectedGraph computeInverse() {
+    public DirectedGraph computeInverse() {
         DirectedGraph g = new DirectedGraph(this);
-        // A completer
+        for (int i = 0; i < order; i++) {
+            DirectedNode ni = nodes.get(i);
+            for (DirectedNode j : ni.getSuccs().keySet()) {
+                if(isArc(nodes.get(i), j)){
+                    g.addArc(nodes.get(j.getLabel()),ni);
+                }
+            }
+        }
         return g;
     }
     

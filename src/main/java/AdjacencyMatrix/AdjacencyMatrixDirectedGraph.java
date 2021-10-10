@@ -22,11 +22,6 @@ public class AdjacencyMatrixDirectedGraph extends AbstractMatrixGraph<DirectedNo
 		super();
 	}
 
-	@Override
-	public AdjacencyMatrixUndirectedGraph Clone() {
-		return new AdjacencyMatrixUndirectedGraph(this.matrix);
-	}
-
 	public AdjacencyMatrixDirectedGraph(int[][] M) {
 		this.order = M.length;
 		this.matrix = new int[this.order][this.order];

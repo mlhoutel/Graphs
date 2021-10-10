@@ -56,4 +56,13 @@ public abstract class AbstractListGraph<A extends AbstractNode> implements IGrap
      */
     public abstract A makeNode(int label);
 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        AbstractListGraph other = (AbstractListGraph) obj;
+        return other.nodes.size() == this.nodes.size() && other.nodes.containsAll(this.nodes);
+    }
 }

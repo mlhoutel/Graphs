@@ -10,5 +10,4 @@ public interface IGraph {
 	 * @return the adjacency matrix representation int[][] of the graph
  	 */
 	int[][] toAdjacencyMatrix();
-
 }

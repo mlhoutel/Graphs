@@ -41,5 +41,12 @@ public abstract class AbstractMatrixGraph<A extends AbstractNode> implements IGr
         return this.order;
     }
 
-    public abstract AdjacencyMatrixUndirectedGraph Clone();
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (getClass() != obj.getClass()) return false;
+        AbstractMatrixGraph other = (AbstractMatrixGraph) obj;
+        return other.matrix == this.matrix;
+    }
 }
