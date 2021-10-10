@@ -74,21 +74,19 @@ public class UndirectedGraph extends AbstractListGraph<UndirectedNode> implement
     @Override
     public boolean isEdge(UndirectedNode x, UndirectedNode y) {  
     	return getNodeOfList(x).getNeighbours().containsKey(getNodeOfList(y));
-        // A completer
-    	//return true;
     }
 
     @Override
     public void removeEdge(UndirectedNode x, UndirectedNode y) {
     	if(isEdge(x,y)){
-    		// A completer
+            getNodeOfList(x).getNeighbours().remove(getNodeOfList(y));
     	}
     }
 
     @Override
     public void addEdge(UndirectedNode x, UndirectedNode y) {
     	if(!isEdge(x,y)){
-    		// A completer
+            getNodeOfList(x).getNeighbours().put(getNodeOfList(y),1);
     	}
     }
 
