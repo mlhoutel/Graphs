@@ -1,11 +1,11 @@
 package GraphAlgorithms;
 
 import java.util.ArrayList;
-import main.java.utils.Canvas;
+import Utils.Canvas;
 
 public class BinaryHeap {
 
-    private ArrayList<Integer> nodes;
+    public ArrayList<Integer> nodes;
 
     public BinaryHeap() {
         this.nodes = new ArrayList<Integer>();
@@ -19,15 +19,15 @@ public class BinaryHeap {
             super(errorMessage);
         }
     }
-    
+
     public boolean isEmpty() {
-        return  this.nodes.size() == 0;
+        return this.nodes.size() == 0;
     }
-    
-    private int getFatherIndex(int i){
-        return (i-1) / 2;
+
+    public int getFatherIndex(int i) {
+        return (i - 1) / 2;
     }
-    
+
     public int getFirstChildIndex(int i) {
         return 2 * i + 1;
     }
@@ -36,31 +36,28 @@ public class BinaryHeap {
         return 2 * i + 2;
     }
 
-    private boolean hasFather(int i){
+    public boolean hasFather(int i) {
         return i != 0;
     }
 
-    private boolean hasFirstChild(int i) {
+    public boolean hasFirstChild(int i) {
         return getFirstChildIndex(i) < this.nodes.size();
     }
-    
-    private boolean hasSecondChild(int i) {
+
+    public boolean hasSecondChild(int i) {
         return getSecondChildIndex(i) < this.nodes.size();
     }
-    
 
-    
     public void insert(int element) {
-            // naive add
-            this.nodes.add(element);
+        // naive add
+        this.nodes.add(element);
 
-            // Percolate
-            int index = this.nodes.size() - 1;
-            this.percolateUp(index);
-            this.percolateDown(index);
+        // Percolate
+        int index = this.nodes.size() - 1;
+        this.percolateUp(index);
+        this.percolateDown(index);
 
     }
-
 
     /*
         While the node has a father and its father value
@@ -73,9 +70,9 @@ public class BinaryHeap {
             int fatherIndex = getFatherIndex(index);
             int fatherValue = this.nodes.get(fatherIndex);
 
-             if(fatherValue > value){
-                 swap(index, fatherIndex);
-                 percolateUp(fatherIndex);
+            if (fatherValue > value) {
+                swap(index, fatherIndex);
+                percolateUp(fatherIndex);
             }
         }
     }
@@ -86,6 +83,8 @@ public class BinaryHeap {
         current node to bring lower the higher value.
     */
     public void percolateDown(int index) {
+        System.out.println("\n" + this);
+
         if (!isLeaf(index)) {
             int bestChildIndex = getBestChildPos(index);
             int value = this.nodes.get(index);
@@ -96,41 +95,43 @@ public class BinaryHeap {
             }
         }
     }
-    
-    
-    
+
     public int remove() {
-    	// A completer
-    	return 0;
+        int value = this.nodes.get(0);
+        if (!isLeaf(0)) {
+            this.nodes.set(0, this.nodes.get(this.nodes.size() - 1));
+            this.nodes.remove(nodes.size() - 1);
+            this.percolateDown(0);
+        }
+        return value;
     }
 
-    private int getBestChildPos(int index) {
+    public int getBestChildPos(int index) {
         if (hasSecondChild(index)) {
             int firstChildIndex = getFirstChildIndex(index);
-            int secondChildIndex  = getSecondChildIndex(index);
+            int secondChildIndex = getSecondChildIndex(index);
             int firstChildValue = this.nodes.get(firstChildIndex);
-            int secondChildValue= this.nodes.get(secondChildIndex);
-            return (firstChildValue > secondChildValue) ? firstChildIndex : secondChildIndex;
+            int secondChildValue = this.nodes.get(secondChildIndex);
+            return (firstChildValue < secondChildValue) ? firstChildIndex : secondChildIndex;
         } else {
             return getFirstChildIndex(index);
         }
     }
 
-    
     /**
-	 * Test if the node is a leaf in the binary heap
-	 * 
-	 * @returns true if it's a leaf or false else
-	 * 
-	 */	
-    private boolean isLeaf(int index) {
-    	return !hasFirstChild(index);
+     * Test if the node is a leaf in the binary heap
+     * 
+     * @returns true if it's a leaf or false else
+     * 
+     */
+    public boolean isLeaf(int index) {
+        return !hasFirstChild(index);
     }
 
-    private void swap(int father, int child) {
+    public void swap(int father, int child) {
         int temp = nodes.get(father);
-        this.nodes.set(father, nodes.get(child)); 
-        this.nodes.set(child,temp); 
+        this.nodes.set(father, nodes.get(child));
+        this.nodes.set(child, temp);
     }
 
     public String toString() {
@@ -142,11 +143,11 @@ public class BinaryHeap {
     }
 
     /**
-	 * Recursive test to check the validity of the binary heap
-	 * 
-	 * @returns a boolean equal to True if the binary tree is compact from left to right
-	 * 
-	 */
+     * Recursive test to check the validity of the binary heap
+     * 
+     * @returns a boolean equal to True if the binary tree is compact from left to right
+     * 
+     */
     public boolean test() {
         return this.isEmpty() || testRec(0);
     }
@@ -160,14 +161,61 @@ public class BinaryHeap {
             if (right >= this.nodes.size()) {
                 return nodes.get(left) >= nodes.get(root) && testRec(left);
             } else {
-                return nodes.get(left) >= nodes.get(root) && testRec(left) && nodes.get(right) >= nodes.get(root) && testRec(right);
+                return nodes.get(left) >= nodes.get(root) && testRec(left) && nodes.get(right) >= nodes.get(root)
+                        && testRec(right);
             }
         }
     }
 
+    public static void VisitDisplay(BinaryHeap bin, Canvas canvas, Object root, Object parent, int index, int depth, int width) {
+        /*
+        int height = 20;
+        int width = 20;
+        
+        if (bin.hasFirstChild(index)) {
+            int childIndex = bin.getFirstChildIndex(index);
+        
+            int baseX = depth * 100
+            int baseY = width * 100
+            
+            Object child = canvas.graph.insertVertex(root, null, bin.nodes.get(childIndex).toString(), baseX, baseY, baseX + width, baseY + width);
+            Object edge = canvas.graph.insertEdge(root, null, "", parent, child);
+        
+            VisitDisplay(bin, canvas, child, childIndex, depth+1, width);
+        }
+        
+        if (bin.hasSecondChild(index)) {
+            int childIndex = bin.getSecondChildIndex(index);
+            
+            int baseX = depth * 100
+            int baseY = width * 100
+            
+            Object child = canvas.graph.insertVertex(root, null, bin.nodes.get(childIndex).toString(), baseX, baseY, baseX + width, baseY + width);
+            Object edge = canvas.graph.insertEdge(root, null, "", parent, child);
+        
+            VisitDisplay(bin, canvas, child, childIndex, depth+1, width + 1);
+        }*/
+    }
+
+    public static void Display(BinaryHeap bin) {
+        /*
+        Canvas canvas = new Canvas("Binary Heap");
+        canvas.graph.getModel().beginUpdate();
+        
+        try {
+            Object parent = graph.getDefaultParent();
+            VisitDisplay(bin, canvas, parent, parent, 0, 0, 0);
+        }
+        finally {
+            graph.getModel().endUpdate();
+            graph.Draw();
+        }
+        */
+    }
+
     public static void main(String[] args) {
         BinaryHeap jarjarBin = new BinaryHeap();
-        System.out.println(jarjarBin.isEmpty()+"\n");
+        System.out.println(jarjarBin.isEmpty() + "\n");
         int k = 20;
         int m = k;
         int min = 2;
@@ -177,13 +225,17 @@ public class BinaryHeap {
             System.out.print("insert " + rand);
             System.out.println("\n" + jarjarBin);
 
-            jarjarBin.insert(rand);            
+            jarjarBin.insert(rand);
             k--;
         }
         // A completer
-        Canvas canvas = new Canvas();
+        System.out.println("\n" + jarjarBin);
+        System.out.println("removing...");
+        System.out.println("removed value"+jarjarBin.remove());
         System.out.println("\n" + jarjarBin);
         System.out.println(jarjarBin.test());
+
+        //Display(jarjarBin);
     }
 
 }

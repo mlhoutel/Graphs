@@ -30,7 +30,17 @@ public class BinaryHeapEdge {
 	 * @param val the edge weight
 	 */
     public void insert(UndirectedNode from, UndirectedNode to, int val) {
-    	// To complete
+		if(isEmpty()){
+			binh.add(new Triple<UndirectedNode,UndirectedNode,Integer>(from, to, val));
+		}else{
+			binh.add(new Triple<UndirectedNode,UndirectedNode,Integer>(from, to, val));
+			int dest = binh.size()-1;
+			int src = (dest-1)/2;
+			while(dest > 0 && binh.get(src).getThird() > binh.get(dest).getThird()){
+				swap(src, dest);
+				dest = src;src = (src-1)/2;
+			}
+		}
     }
 
     
@@ -41,9 +51,14 @@ public class BinaryHeapEdge {
 	 * 
 	 */
     public Triple<UndirectedNode,UndirectedNode,Integer> remove() {
-    	// To complete
-    	return null;
-        
+		/*int value = this.binh.get(0).getThird();
+        if (!isLeaf(0)) {
+            this.binh.set(0, this.binh.get(this.binh.size() - 1));
+            this.binh.remove(binh.size() - 1);
+            this.percolateDown(0);
+        }
+        return value;
+    */
     }
     
 
