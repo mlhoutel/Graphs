@@ -1,6 +1,6 @@
-package Abstraction;
+package Graphs.Abstraction;
 
-import Nodes.AbstractNode;
+import Graphs.Nodes.AbstractNode;
 
 import java.util.ArrayList;
 import java.util.List;

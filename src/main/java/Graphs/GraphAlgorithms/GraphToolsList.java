@@ -1,6 +1,6 @@
-package GraphAlgorithms;
+package Graphs.GraphAlgorithms;
 
-import AdjacencyList.DirectedGraph;
+import Graphs.AdjacencyList.DirectedGraph;
 
 import java.util.List;
 

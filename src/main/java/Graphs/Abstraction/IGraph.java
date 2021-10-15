@@ -1,4 +1,4 @@
-package Abstraction;
+package Graphs.Abstraction;
 
 public interface IGraph {
 	/**

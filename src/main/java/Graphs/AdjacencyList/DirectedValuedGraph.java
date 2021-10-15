@@ -1,7 +1,7 @@
-package AdjacencyList;
+package Graphs.AdjacencyList;
 
-import GraphAlgorithms.GraphTools;
-import Nodes.DirectedNode;
+import Graphs.GraphAlgorithms.GraphTools;
+import Graphs.Nodes.DirectedNode;
 
 import java.util.ArrayList;
 

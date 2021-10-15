@@ -1,4 +1,4 @@
-package Nodes;
+package Graphs.Nodes;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

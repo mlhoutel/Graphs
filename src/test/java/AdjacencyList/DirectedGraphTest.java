@@ -1,9 +1,9 @@
 package AdjacencyList;
 
-import GraphAlgorithms.GraphTools;
-import Nodes.DirectedNode;
+import Graphs.GraphAlgorithms.GraphTools;
+import Graphs.Nodes.DirectedNode;
+import Graphs.AdjacencyList.DirectedGraph;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 

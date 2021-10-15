@@ -1,4 +1,4 @@
-package Nodes;
+package Graphs.Nodes;
 
 
 public abstract class AbstractNode {

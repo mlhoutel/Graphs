@@ -1,7 +1,7 @@
-package GraphAlgorithms;
+package Graphs.GraphAlgorithms;
 
-import Collection.Triple;
-import Nodes.UndirectedNode;
+import Graphs.Collection.Triple;
+import Graphs.Nodes.UndirectedNode;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,23 +51,26 @@ public class BinaryHeapEdge {
 	 * 
 	 */
     public Triple<UndirectedNode,UndirectedNode,Integer> remove() {
-		/*int value = this.binh.get(0).getThird();
-        if (!isLeaf(0)) {
-            this.binh.set(0, this.binh.get(this.binh.size() - 1));
-            this.binh.remove(binh.size() - 1);
-            this.percolateDown(0);
-        }
-        return value;
+
+    Triple<UndirectedNode, UndirectedNode, Integer> value = this.binh.get(0);
+    /*
+    int value =  this.binh.get(0).getThird();
+    if (!isLeaf(0)) {
+        this.binh.set(0, this.binh.get(this.binh.size() - 1));
+        this.binh.remove(binh.size() - 1);
+        this.percolateDown(0);
+    }
     */
+    return value;
     }
     
-
+    
     /**
-	 * From an edge indexed by src, find the child having the least weight and return it
-	 * 
-	 * @param src an index of the list edges
-	 * @return the index of the child edge with the least weight
-	 */
+    * From an edge indexed by src, find the child having the least weight and return it
+    * 
+    * @param src an index of the list edges
+    * @return the index of the child edge with the least weight
+    */
     private int getBestChildPos(int src) {
     	int lastIndex = binh.size()-1; 
         if (isLeaf(src)) { // the leaf is a stopping case, then we return a default value

@@ -1,9 +1,9 @@
-package AdjacencyList;
+package Graphs.AdjacencyList;
 
-import Abstraction.AbstractListGraph;
-import Abstraction.IDirectedGraph;
-import GraphAlgorithms.GraphTools;
-import Nodes.DirectedNode;
+import Graphs.Abstraction.AbstractListGraph;
+import Graphs.Abstraction.IDirectedGraph;
+import Graphs.GraphAlgorithms.GraphTools;
+import Graphs.Nodes.DirectedNode;
 
 import java.util.ArrayList;
 

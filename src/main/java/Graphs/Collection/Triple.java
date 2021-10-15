@@ -1,4 +1,4 @@
-package Collection;
+package Graphs.Collection;
 
 public class Triple<A, B, C> {
 	private  A first;

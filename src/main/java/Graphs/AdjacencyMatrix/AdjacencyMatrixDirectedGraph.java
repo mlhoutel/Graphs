@@ -1,9 +1,9 @@
-package AdjacencyMatrix;
+package Graphs.AdjacencyMatrix;
 
-import Abstraction.AbstractMatrixGraph;
-import Abstraction.IDirectedGraph;
-import GraphAlgorithms.GraphTools;
-import Nodes.DirectedNode;
+import Graphs.Abstraction.AbstractMatrixGraph;
+import Graphs.Abstraction.IDirectedGraph;
+import Graphs.GraphAlgorithms.GraphTools;
+import Graphs.Nodes.DirectedNode;
 
 import java.util.ArrayList;
 import java.util.List; 

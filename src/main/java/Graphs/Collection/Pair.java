@@ -1,4 +1,4 @@
-package Collection;
+package Graphs.Collection;
 
 public class Pair<A, B> {
 

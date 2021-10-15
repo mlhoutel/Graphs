@@ -1,10 +1,10 @@
-package AdjacencyMatrix;
+package Graphs.AdjacencyMatrix;
 
-import Abstraction.AbstractMatrixGraph;
-import Abstraction.IUndirectedGraph;
-import GraphAlgorithms.GraphTools;
-import Nodes.AbstractNode;
-import Nodes.UndirectedNode;
+import Graphs.Abstraction.AbstractMatrixGraph;
+import Graphs.Abstraction.IUndirectedGraph;
+import Graphs.GraphAlgorithms.GraphTools;
+import Graphs.Nodes.AbstractNode;
+import Graphs.Nodes.UndirectedNode;
 
 import java.util.ArrayList;
 import java.util.List;

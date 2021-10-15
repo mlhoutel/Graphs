@@ -1,6 +1,6 @@
-package Abstraction;
+package Graphs.Abstraction;
 
-import Nodes.DirectedNode;
+import Graphs.Nodes.DirectedNode;
 
 public interface IDirectedGraph extends IGraph {
 

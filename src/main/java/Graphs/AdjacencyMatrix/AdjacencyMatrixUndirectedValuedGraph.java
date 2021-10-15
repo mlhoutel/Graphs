@@ -1,9 +1,9 @@
-package AdjacencyMatrix;
+package Graphs.AdjacencyMatrix;
 
-import GraphAlgorithms.GraphTools;
-import Nodes.DirectedNode;
+import Graphs.GraphAlgorithms.GraphTools;
+import Graphs.Nodes.UndirectedNode;
 
-public class AdjacencyMatrixDirectedValuedGraph extends AdjacencyMatrixDirectedGraph {
+public class AdjacencyMatrixUndirectedValuedGraph extends AdjacencyMatrixUndirectedGraph {
 
 	//--------------------------------------------------
 	// 				Class variables
@@ -15,26 +15,29 @@ public class AdjacencyMatrixDirectedValuedGraph extends AdjacencyMatrixDirectedG
 	// 				Constructors
 	//-------------------------------------------------- 
 
-	public AdjacencyMatrixDirectedValuedGraph(int[][] mat, int[][] matrixVal) {
+	public AdjacencyMatrixUndirectedValuedGraph(int[][] mat, int[][] matrixVal) {
 		super();
 		this.order = mat.length;
 		this.matrix = new int[this.order][this.order];
 		this.matrixCosts = new int[this.order][this.order];
 		for(int i =0;i<this.order;i++){
-			for(int j=0;j<this.order;j++){
+			for(int j=i;j<this.order;j++){
 				int val = mat[i][j];
 				int cost = matrixVal[i][j]; 
-				this.matrix[i][j] = val;				
-				this.matrixCosts[i][j] = cost; 
+				this.matrix[i][j] = val;
+				this.matrix[j][i] = val;
+				this.matrixCosts[i][j] = cost;
+				this.matrixCosts[j][i] = cost; 
 				this.m += val;					
 			}
 		}
 	}
 
+
 	//--------------------------------------------------
 	// 					Accessors
 	//--------------------------------------------------
-	
+
 	/**
 	 * @return the matrix with costs of the graph
  	 */
@@ -43,23 +46,23 @@ public class AdjacencyMatrixDirectedValuedGraph extends AdjacencyMatrixDirectedG
 	}
 
 	// ------------------------------------------------
-	// 					Methods
+	// 					Methods 
 	// ------------------------------------------------	
 	
 	/**
-     * removes the arc (from,to) if there exists at least one between these nodes in the graph. And if there remains no arc, removes the cost.
+     * removes the edge (x,y) if there exists at least one between these nodes in the graph. And if there remains no arc, removes the cost.
      */
 	@Override
-	public void removeArc(DirectedNode from, DirectedNode to) {
-		super.removeArc(from, to);
+	public void removeEdge(UndirectedNode x, UndirectedNode y) {
+		super.removeEdge(x, y);
 		// A completer
 	}
 
 	/**
-     * adds the arc (from,to,cost), we allow the multi-graph. If there is already one initial cost, we keep it.
+     * adds the edge (x,y,cost), we allow the multi-graph. If there is already one initial cost, we keep it.
      */
-	public void addArc(DirectedNode from, DirectedNode to, int cost ) {
-		super.addArc(from,to);
+	public void addEdge(UndirectedNode x, UndirectedNode y, int cost ) {
+		super.addEdge(x,y);
 		// A completer
 	}
 	
@@ -74,12 +77,15 @@ public class AdjacencyMatrixDirectedValuedGraph extends AdjacencyMatrixDirectedG
 		s.append("\n");
 		return s.toString();
 	}
-
+	
+	
 	public static void main(String[] args) {
-		int[][] matrix = GraphTools.generateGraphData(10, 30, false, false, false, 100001);
-        int[][] matrixValued = GraphTools.generateValuedGraphData(10, false, false, true, false, 100001);
-		AdjacencyMatrixDirectedValuedGraph am = new AdjacencyMatrixDirectedValuedGraph(matrix, matrixValued);
+		int[][] matrix = GraphTools.generateGraphData(10, 20, true, true, false, 100001);
+        int[][] matrixValued = GraphTools.generateValuedGraphData(10, false, true, true, false, 100001);
+		GraphTools.afficherMatrix(matrix);
+		AdjacencyMatrixUndirectedValuedGraph am = new AdjacencyMatrixUndirectedValuedGraph(matrix, matrixValued);
 		System.out.println(am);
 		// A completer
 	}
+
 }

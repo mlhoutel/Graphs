@@ -1,8 +1,8 @@
 package AdjacenyMatrix;
 
-import AdjacencyMatrix.AdjacencyMatrixUndirectedGraph;
-import GraphAlgorithms.GraphTools;
-import Nodes.UndirectedNode;
+import Graphs.AdjacencyMatrix.AdjacencyMatrixUndirectedGraph;
+import Graphs.GraphAlgorithms.GraphTools;
+import Graphs.Nodes.UndirectedNode;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

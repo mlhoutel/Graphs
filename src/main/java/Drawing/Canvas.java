@@ -1,4 +1,4 @@
-package Utils;
+package Drawing;
 
 import javax.swing.*;
 
