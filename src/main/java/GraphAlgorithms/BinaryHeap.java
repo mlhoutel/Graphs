@@ -1,7 +1,7 @@
 package GraphAlgorithms;
 
 import java.util.ArrayList;
-import main.java.utils.canvas;
+import main.java.utils.Canvas;
 
 public class BinaryHeap {
 
