@@ -1,18 +1,17 @@
 package GraphAlgorithms;
 
 import java.util.ArrayList;
+import main.java.utils.canvas;
 
 public class BinaryHeap {
 
     private ArrayList<Integer> nodes;
-    private int pos;
 
     public BinaryHeap() {
         this.nodes = new ArrayList<Integer>();
         for (int i = 0; i < nodes.size(); i++) {
             this.nodes.add(Integer.MAX_VALUE);
         }
-        this.pos = 0;
     }
 
     public class BinaryHeapException extends Exception {
@@ -21,17 +20,8 @@ public class BinaryHeap {
         }
     }
     
-    /*public void resize() {
-        ArrayList<Integer> tab = new int[this.nodes.size() + 32];
-        for (int i = 0; i < nodes.size(); i++) {
-            tab[i] = Integer.MAX_VALUE;
-        }
-        System.arraycopy(this.nodes, 0, tab, 0, this.nodes.size());
-        this.nodes = tab;
-    }*/
-
     public boolean isEmpty() {
-        return pos == 0;
+        return  this.nodes.size() == 0;
     }
     
     private int getFatherIndex(int i){
@@ -51,11 +41,11 @@ public class BinaryHeap {
     }
 
     private boolean hasFirstChild(int i) {
-        return getFirstChildIndex(i) <= this.nodes.size();
+        return getFirstChildIndex(i) < this.nodes.size();
     }
     
     private boolean hasSecondChild(int i) {
-        return getSecondChildIndex(i) <= this.nodes.size();
+        return getSecondChildIndex(i) < this.nodes.size();
     }
     
 
@@ -90,13 +80,19 @@ public class BinaryHeap {
         }
     }
 
+    /*
+        While the node has at least one child, we take
+        the child with the min value and swap it with the
+        current node to bring lower the higher value.
+    */
     public void percolateDown(int index) {
-        if (hasFirstChild(index)) {
+        if (!isLeaf(index)) {
+            int bestChildIndex = getBestChildPos(index);
             int value = this.nodes.get(index);
 
-             if(getFirstChildIndex(index) != Integer.MAX_VALUE){
-                 swap(index, minimumChildIndex);
-                 percolateDown(fatherIndex);
+            if (bestChildIndex < value) {
+                swap(index, bestChildIndex);
+                percolateDown(bestChildIndex);
             }
         }
     }
@@ -109,16 +105,14 @@ public class BinaryHeap {
     }
 
     private int getBestChildPos(int index) {
-        if (isLeaf(index)) {
-            return Integer.MAX_VALUE;
+        if (hasSecondChild(index)) {
+            int firstChildIndex = getFirstChildIndex(index);
+            int secondChildIndex  = getSecondChildIndex(index);
+            int firstChildValue = this.nodes.get(firstChildIndex);
+            int secondChildValue= this.nodes.get(secondChildIndex);
+            return (firstChildValue > secondChildValue) ? firstChildIndex : secondChildIndex;
         } else {
-            if (hasSecondChild(index)) {
-                int firstValue = getFirstChildIndex(index);
-                int sec
-                return 
-            } else {
-                return getFirstChildIndex(index);
-            }
+            return getFirstChildIndex(index);
         }
     }
 
@@ -141,7 +135,7 @@ public class BinaryHeap {
 
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (int i = 0; i < pos; i++) {
+        for (int i = 0; i < nodes.size(); i++) {
             s.append(nodes.get(i)).append(", ");
         }
         return s.toString();
@@ -163,7 +157,7 @@ public class BinaryHeap {
         } else {
             int left = 2 * root + 1;
             int right = 2 * root + 2;
-            if (right >= pos) {
+            if (right >= this.nodes.size()) {
                 return nodes.get(left) >= nodes.get(root) && testRec(left);
             } else {
                 return nodes.get(left) >= nodes.get(root) && testRec(left) && nodes.get(right) >= nodes.get(root) && testRec(right);
@@ -186,7 +180,8 @@ public class BinaryHeap {
             jarjarBin.insert(rand);            
             k--;
         }
-     // A completer
+        // A completer
+        Canvas canvas = new Canvas();
         System.out.println("\n" + jarjarBin);
         System.out.println(jarjarBin.test());
     }
