@@ -38,17 +38,12 @@ public class DrawBinaryHeap {
     }
     public static void main(String[] args) {
         BinaryHeap jarjarBin = new BinaryHeap();
-        System.out.println(jarjarBin.isEmpty() + "\n");
-        int k = 100;
-        int min = 2;
-        int max = 20;
-        while (k > 0) {
+        int k = 127;
+        int min = 1;
+        int max = 2000;
+        for (int i = 0; i < k; i++) {
             int rand = min + (int) (Math.random() * ((max - min) + 1));
-            System.out.print("insert " + rand);
-            System.out.println("\n" + jarjarBin);
-
             jarjarBin.insert(rand);
-            k--;
         }
 
         Display(jarjarBin);
