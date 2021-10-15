@@ -113,13 +113,12 @@ public class BinaryHeap {
             return Integer.MAX_VALUE;
         } else {
             if (hasSecondChild(index)) {
-
-            } else {
+                int firstValue = getFirstChildIndex(index);
+                int sec
                 return 
+            } else {
+                return getFirstChildIndex(index);
             }
-        	// A completer
-            //pour un noeud donné, on prend le plus petit fils et on swap (percolate down)
-        	return Integer.MAX_VALUE;
         }
     }
 
