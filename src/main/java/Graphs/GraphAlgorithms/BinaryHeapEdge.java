@@ -82,7 +82,9 @@ public class BinaryHeapEdge {
     }
 
     private boolean isLeaf(int src) {
-    	// A completer
+    	int left = 2 * src + 1;
+        int right = 2 * src + 2;
+        //TODO
     	return false;
     }
 
@@ -177,20 +179,24 @@ public class BinaryHeapEdge {
     }
 
     public static void main(String[] args) {
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
         BinaryHeapEdge jarjarBin = new BinaryHeapEdge();
         System.out.println(jarjarBin.isEmpty()+"\n");
-        int k = 10;
+        int k = 1;
         int m = k;
         int min = 2;
         int max = 20;
         while (k > 0) {
-            int rand = min + (int) (Math.random() * ((max - min) + 1));                        
-            jarjarBin.insert(new UndirectedNode(k), new UndirectedNode(k+30), rand);            
+            int rand = min + (int) (Math.random() * ((max - min) + 1));  
+            System.out.println("starting insert of: "+ rand);          
+            jarjarBin.insert(new UndirectedNode(k), new UndirectedNode(k+30), rand);      
+            System.out.println("insert done");    
             k--;
         }
         // A completer
-        
-        System.out.println(jarjarBin.test());
+        System.out.println("graph: " +jarjarBin);
+        System.out.println("test: " +jarjarBin.test());
     }
 
 }
