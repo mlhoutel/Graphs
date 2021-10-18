@@ -10,9 +10,8 @@ public class BinaryHeapEdge {
 
 	/**
 	 * A list structure for a faster management of the heap by indexing
-	 * 
 	 */
-	private  List<Triple<UndirectedNode,UndirectedNode,Integer>> binh;
+	private List<Triple<UndirectedNode,UndirectedNode,Integer>> binh;
 
     public BinaryHeapEdge() {
         this.binh = new ArrayList<>();
@@ -76,8 +75,7 @@ public class BinaryHeapEdge {
 	 * 
 	 */
     public Triple<UndirectedNode,UndirectedNode,Integer> remove() {
-
-    Triple<UndirectedNode, UndirectedNode, Integer> value = this.binh.get(0);
+        Triple<UndirectedNode, UndirectedNode, Integer> value = this.binh.get(0);
         if (!isLeaf(0)) {
             this.binh.set(0, this.binh.get(this.binh.size() - 1));
             this.binh.remove(binh.size() - 1);
@@ -110,7 +108,6 @@ public class BinaryHeapEdge {
         current node to bring lower the higher value.
     */
     private void percolateDown(int index) {
-
         if (!isLeaf(index)) {
             int bestChildIndex = getBestChildPos(index);
             int value = this.binh.get(index).getThird();
@@ -129,14 +126,18 @@ public class BinaryHeapEdge {
     * @param src an index of the list edges
     * @return the index of the child edge with the least weight
     */
-    private int getBestChildPos(int src) {
-    	int lastIndex = binh.size()-1; 
-        if (isLeaf(src)) { // the leaf is a stopping case, then we return a default value
-            return Integer.MAX_VALUE;
+    private int getBestChildPos(int index) {
+        /*
+        if (hasSecondChild(index)) {
+            int firstChildIndex = getFirstChildIndex(index);
+            int secondChildIndex = getSecondChildIndex(index);
+            int firstChildValue = this.binh.get(firstChildIndex).getThird();
+            int secondChildValue =  this.binh.get(secondChildIndex).getThird();
+            return (firstChildValue < secondChildValue) ? firstChildIndex : secondChildIndex;
         } else {
-        	// To complete
-        	return Integer.MAX_VALUE;
-        }
+            return getFirstChildIndex(index);
+        }*/
+        return 0;
     }
 
     private boolean isLeaf(int src) {
@@ -253,7 +254,9 @@ public class BinaryHeapEdge {
         // A completer
         jarjarBin.remove();
         System.out.println("graph: " +jarjarBin);
-        System.out.println("test: " +jarjarBin.test());
+        System.out.println("test: " + jarjarBin.test());
+        
+        jarjarBin.lovelyPrinting();
     }
 
 }

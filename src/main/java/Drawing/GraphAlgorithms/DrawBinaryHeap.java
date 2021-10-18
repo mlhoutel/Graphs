@@ -22,7 +22,7 @@ public class DrawBinaryHeap {
     }
 
     public static void Display(BinaryHeap bin) {
-        Canvas canvas = new Canvas("Binary Heap");
+        Canvas canvas = new Canvas("Binary Heap", true, Canvas.Layout.HIERARCHICAL);
         canvas.graph.getModel().beginUpdate();
         
         try {
@@ -48,5 +48,4 @@ public class DrawBinaryHeap {
 
         Display(jarjarBin);
     }
-
 }

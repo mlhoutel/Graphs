@@ -81,7 +81,6 @@ public class BinaryHeap {
         current node to bring lower the higher value.
     */
     private void percolateDown(int index) {
-
         if (!isLeaf(index)) {
             int bestChildIndex = getBestChildPos(index);
             int value = this.nodes.get(index);
