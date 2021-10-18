@@ -55,7 +55,6 @@ public class BinaryHeap {
         int index = this.nodes.size() - 1;
         this.percolateUp(index);
         this.percolateDown(index);
-
     }
 
     /*
@@ -63,7 +62,7 @@ public class BinaryHeap {
         is lower that its value, we swap the nodes to 
         bring higher the lower value.
     */
-    public void percolateUp(int index) {
+    private void percolateUp(int index) {
         if (hasFather(index)) {
             int value = this.nodes.get(index);
             int fatherIndex = getFatherIndex(index);
@@ -81,7 +80,7 @@ public class BinaryHeap {
         the child with the min value and swap it with the
         current node to bring lower the higher value.
     */
-    public void percolateDown(int index) {
+    private void percolateDown(int index) {
 
         if (!isLeaf(index)) {
             int bestChildIndex = getBestChildPos(index);

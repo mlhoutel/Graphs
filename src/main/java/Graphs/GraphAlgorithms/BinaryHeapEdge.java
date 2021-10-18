@@ -22,6 +22,30 @@ public class BinaryHeapEdge {
         return binh.isEmpty();
     }
 
+    public int getFatherIndex(int i) {
+        return (i - 1) / 2;
+    }
+
+    public int getFirstChildIndex(int i) {
+        return 2 * i + 1;
+    }
+
+    public int getSecondChildIndex(int i) {
+        return 2 * i + 2;
+    }
+
+    public boolean hasFather(int i) {
+        return i != 0;
+    }
+
+    public boolean hasFirstChild(int i) {
+        return getFirstChildIndex(i) < this.binh.size();
+    }
+
+    public boolean hasSecondChild(int i) {
+        return getSecondChildIndex(i) < this.binh.size();
+    }
+
     /**
 	 * Insert a new edge in the binary heap
 	 * 
@@ -38,7 +62,8 @@ public class BinaryHeapEdge {
 			int src = (dest-1)/2;
 			while(dest > 0 && binh.get(src).getThird() > binh.get(dest).getThird()){
 				swap(src, dest);
-				dest = src;src = (src-1)/2;
+				dest = src;
+                src = (src-1)/2;
 			}
 		}
     }
@@ -53,15 +78,48 @@ public class BinaryHeapEdge {
     public Triple<UndirectedNode,UndirectedNode,Integer> remove() {
 
     Triple<UndirectedNode, UndirectedNode, Integer> value = this.binh.get(0);
-    /*
-    int value =  this.binh.get(0).getThird();
-    if (!isLeaf(0)) {
-        this.binh.set(0, this.binh.get(this.binh.size() - 1));
-        this.binh.remove(binh.size() - 1);
-        this.percolateDown(0);
+        if (!isLeaf(0)) {
+            this.binh.set(0, this.binh.get(this.binh.size() - 1));
+            this.binh.remove(binh.size() - 1);
+            this.percolateDown(0);
+        }
+        return value;
     }
+
+    /*
+        While the node has a father and its father value
+        is lower that its value, we swap the nodes to 
+        bring higher the lower value.
     */
-    return value;
+    private void percolateUp(int index) {
+        if (hasFather(index)) {
+            int value = this.binh.get(index).getThird();
+            int fatherIndex = getFatherIndex(index);
+            int fatherValue = this.binh.get(fatherIndex).getThird();
+
+            if (fatherValue > value) {
+                swap(index, fatherIndex);
+                percolateUp(fatherIndex);
+            }
+        }
+    }
+
+    /*
+        While the node has at least one child, we take
+        the child with the min value and swap it with the
+        current node to bring lower the higher value.
+    */
+    private void percolateDown(int index) {
+
+        if (!isLeaf(index)) {
+            int bestChildIndex = getBestChildPos(index);
+            int value = this.binh.get(index).getThird();
+
+            if (bestChildIndex < value) {
+                swap(index, bestChildIndex);
+                percolateDown(bestChildIndex);
+            }
+        }
     }
     
     
@@ -83,9 +141,7 @@ public class BinaryHeapEdge {
 
     private boolean isLeaf(int src) {
     	int left = 2 * src + 1;
-        int right = 2 * src + 2;
-        //TODO
-    	return false;
+    	return left > binh.size()-1;
     }
 
     
@@ -183,7 +239,7 @@ public class BinaryHeapEdge {
         System.out.flush();
         BinaryHeapEdge jarjarBin = new BinaryHeapEdge();
         System.out.println(jarjarBin.isEmpty()+"\n");
-        int k = 1;
+        int k = 3;
         int m = k;
         int min = 2;
         int max = 20;
@@ -195,6 +251,7 @@ public class BinaryHeapEdge {
             k--;
         }
         // A completer
+        jarjarBin.remove();
         System.out.println("graph: " +jarjarBin);
         System.out.println("test: " +jarjarBin.test());
     }
