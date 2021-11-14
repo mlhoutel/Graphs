@@ -14,36 +14,56 @@ public class BinaryHeapEdge {
 	private List<Triple<UndirectedNode,UndirectedNode,Integer>> binh;
 
     public BinaryHeapEdge() {
-        this.binh = new ArrayList<>();
+        this.binh = new ArrayList<Triple<UndirectedNode,UndirectedNode,Integer>>();
     }
 
     public boolean isEmpty() {
         return binh.isEmpty();
     }
 
-    public int getFatherIndex(int i) {
-        return (i - 1) / 2;
+    public Triple<UndirectedNode,UndirectedNode,Integer> getFatherTriple(UndirectedNode n){
+        for (Triple<UndirectedNode,UndirectedNode,Integer> temp : binh){
+            if(temp.getSecond().equals(n)){
+                return temp;
+            }
+        }
+        return null;
     }
 
-    public int getFirstChildIndex(int i) {
-        return 2 * i + 1;
+
+   
+    public Triple<UndirectedNode,UndirectedNode,Integer>  getFirstChildTriple(UndirectedNode n) {
+        for (Triple<UndirectedNode,UndirectedNode,Integer> temp : binh){
+            if(temp.getFirst().equals(n)){
+                return temp;
+            }
+        }
+        return null;    
     }
 
-    public int getSecondChildIndex(int i) {
-        return 2 * i + 2;
+    public boolean hasFirstChild(UndirectedNode n){
+        return !getFirstChildTriple(n).equals(null);
     }
 
-    public boolean hasFather(int i) {
-        return i != 0;
+    public Triple<UndirectedNode,UndirectedNode,Integer> getSecondChildTriple(UndirectedNode n) {
+        int cpt = 0;
+        for (Triple<UndirectedNode,UndirectedNode,Integer> temp : binh){
+            if(temp.getFirst().equals(n)){
+                if(cpt == 1){
+                    return temp;
+                }else{
+                    cpt++;
+                }
+            }
+        }
+        return null;    
+    }
+    
+    public boolean hasSecondChild(UndirectedNode n){
+        return !getSecondChildTriple(n).equals(null);
     }
 
-    public boolean hasFirstChild(int i) {
-        return getFirstChildIndex(i) < this.binh.size();
-    }
-
-    public boolean hasSecondChild(int i) {
-        return getSecondChildIndex(i) < this.binh.size();
-    }
+   
 
     /**
 	 * Insert a new edge in the binary heap
@@ -53,18 +73,7 @@ public class BinaryHeapEdge {
 	 * @param val the edge weight
 	 */
     public void insert(UndirectedNode from, UndirectedNode to, int val) {
-		if(isEmpty()){
-			binh.add(new Triple<UndirectedNode,UndirectedNode,Integer>(from, to, val));
-		}else{
-			binh.add(new Triple<UndirectedNode,UndirectedNode,Integer>(from, to, val));
-			int dest = binh.size()-1;
-			int src = (dest-1)/2;
-			while(dest > 0 && binh.get(src).getThird() > binh.get(dest).getThird()){
-				swap(src, dest);
-				dest = src;
-                src = (src-1)/2;
-			}
-		}
+		//TODO
     }
 
     
@@ -89,15 +98,18 @@ public class BinaryHeapEdge {
         is lower that its value, we swap the nodes to 
         bring higher the lower value.
     */
-    private void percolateUp(int index) {
-        if (hasFather(index)) {
-            int value = this.binh.get(index).getThird();
-            int fatherIndex = getFatherIndex(index);
-            int fatherValue = this.binh.get(fatherIndex).getThird();
+    private void percolateUp(UndirectedNode n) {
+        Triple<UndirectedNode, UndirectedNode, Integer> fatherTriple = getFatherTriple(n);
+        if (fatherTriple != null) {
+            UndirectedNode father = fatherTriple.getFirst();
+            int fatherEdgeWeight = fatherTriple.getThird();
 
-            if (fatherValue > value) {
-                swap(index, fatherIndex);
-                percolateUp(fatherIndex);
+            Triple<UndirectedNode, UndirectedNode, Integer> grandFatherTriple = getFatherTriple(n);
+            if (grandFatherTriple != null) {
+                int grandFatherEdgeWeight = grandFatherTriple.getThird();
+                if(fatherEdgeWeight < grandFatherEdgeWeight){
+                    swap(grandFatherTriple, fatherTriple);
+                }
             }
         }
     }
@@ -107,9 +119,9 @@ public class BinaryHeapEdge {
         the child with the min value and swap it with the
         current node to bring lower the higher value.
     */
-    private void percolateDown(int index) {
-        if (!isLeaf(index)) {
-            int bestChildIndex = getBestChildPos(index);
+    private void percolateDown(UndirectedNode n) {
+        if (!isLeaf(n)) {
+            Triple<UndirectedNode, UndirectedNode, Integer> bestChild = getBestChildTriple(n);
             int value = this.binh.get(index).getThird();
 
             if (bestChildIndex < value) {
@@ -126,36 +138,38 @@ public class BinaryHeapEdge {
     * @param src an index of the list edges
     * @return the index of the child edge with the least weight
     */
-    private int getBestChildPos(int index) {
-        /*
-        if (hasSecondChild(index)) {
-            int firstChildIndex = getFirstChildIndex(index);
-            int secondChildIndex = getSecondChildIndex(index);
-            int firstChildValue = this.binh.get(firstChildIndex).getThird();
-            int secondChildValue =  this.binh.get(secondChildIndex).getThird();
-            return (firstChildValue < secondChildValue) ? firstChildIndex : secondChildIndex;
-        } else {
-            return getFirstChildIndex(index);
-        }*/
-        return 0;
+    private Triple<UndirectedNode, UndirectedNode, Integer> getBestChildTriple(UndirectedNode n) {
+        Triple<UndirectedNode, UndirectedNode, Integer> firstChildTriple = getFirstChildTriple(n);
+        Triple<UndirectedNode, UndirectedNode, Integer> secondChildTriple = getSecondChildTriple(n);
+        if (secondChildTriple != null) {
+            return (firstChildTriple.getThird() < secondChildTriple.getThird()) ? firstChildTriple : secondChildTriple;
+        }else if (firstChildTriple != null){
+            return firstChildTriple ;
+        }else{
+            return null;
+        }
     }
 
-    private boolean isLeaf(int src) {
-    	int left = 2 * src + 1;
-    	return left > binh.size()-1;
+    private boolean isLeaf(UndirectedNode n) {
+    	return !hasFirstChild(n);
     }
 
     
-    /**
-	 * Swap two edges in the binary heap
-	 * 
-	 * @param father an index of the list edges
-	 * @param child an index of the list edges
-	 */
-    private void swap(int father, int child) {         
-    	Triple<UndirectedNode,UndirectedNode,Integer> temp = new Triple<>(binh.get(father).getFirst(), binh.get(father).getSecond(), binh.get(father).getThird());
-    	binh.get(father).setTriple(binh.get(child));
-    	binh.get(child).setTriple(temp);
+    private void swap(UndirectedNode n1, UndirectedNode n2) {         
+    	UndirectedNode temp;
+        temp = n1;
+        n1 = n2;
+        n2 = temp;
+    }
+
+
+    private void swap(Triple<UndirectedNode, UndirectedNode, Integer> t1, 
+    Triple<UndirectedNode, UndirectedNode, Integer> t2) {         
+    	swap(t1.getFirst(), t2.getSecond());
+        int temp;
+        temp = t1.getThird();
+        t1.setThird(t2.getThird());
+        t2.setThird(temp);
     }
 
     
@@ -241,7 +255,6 @@ public class BinaryHeapEdge {
         BinaryHeapEdge jarjarBin = new BinaryHeapEdge();
         System.out.println(jarjarBin.isEmpty()+"\n");
         int k = 3;
-        int m = k;
         int min = 2;
         int max = 20;
         while (k > 0) {
@@ -252,12 +265,13 @@ public class BinaryHeapEdge {
             k--;
         }
         // A completer
+        System.out.println("removing in : " +jarjarBin);
+
         jarjarBin.remove();
         System.out.println("graph: " +jarjarBin);
         System.out.println("test: " + jarjarBin.test());
         
-        jarjarBin.lovelyPrinting();
+        //jarjarBin.lovelyPrinting();
     }
-
 }
 
