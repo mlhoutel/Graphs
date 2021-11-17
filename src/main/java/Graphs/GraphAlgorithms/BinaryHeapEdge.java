@@ -37,7 +37,7 @@ public class BinaryHeapEdge {
         // Percolate
         int index = this.binh.size() - 1;
         this.percolateUp(index);
-        this.percolateDown(index);
+        //this.percolateDown(index);
     }
 
     /*
@@ -46,6 +46,7 @@ public class BinaryHeapEdge {
         bring higher the lower value.
     */
     private void percolateUp(int index) {
+        /*
         if (hasFather(index)) {
             int value = this.binh.get(index);
             int fatherIndex = getFatherIndex(index);
@@ -56,6 +57,7 @@ public class BinaryHeapEdge {
                 percolateUp(fatherIndex);
             }
         }
+        */
     }
 
     /**
