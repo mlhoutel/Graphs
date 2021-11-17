@@ -45,7 +45,6 @@ public class DrawBinaryHeap {
             int rand = min + (int) (Math.random() * ((max - min) + 1));
             jarjarBin.insert(rand);
         }
-
         Display(jarjarBin);
     }
 }

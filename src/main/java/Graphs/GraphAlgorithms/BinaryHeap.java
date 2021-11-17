@@ -2,15 +2,14 @@ package Graphs.GraphAlgorithms;
 
 import java.util.ArrayList;
 
+import static Drawing.GraphAlgorithms.DrawBinaryHeap.Display;
+
 public class BinaryHeap {
 
     public ArrayList<Integer> nodes;
 
     public BinaryHeap() {
         this.nodes = new ArrayList<Integer>();
-        for (int i = 0; i < nodes.size(); i++) {
-            this.nodes.add(Integer.MAX_VALUE);
-        }
     }
 
     public class BinaryHeapException extends Exception {
@@ -166,26 +165,15 @@ public class BinaryHeap {
     public static void main(String[] args) {
         BinaryHeap jarjarBin = new BinaryHeap();
         System.out.println(jarjarBin.isEmpty() + "\n");
-        int k = 20;
-        int m = k;
-        int min = 2;
-        int max = 20;
-        while (k > 0) {
-            int rand = min + (int) (Math.random() * ((max - min) + 1));
-            System.out.print("insert " + rand);
-            System.out.println("\n" + jarjarBin);
 
-            jarjarBin.insert(rand);
-            k--;
-        }
-        // A completer
-        System.out.println("\n" + jarjarBin);
-        System.out.println("removing...");
-        System.out.println("removed value"+jarjarBin.remove());
-        System.out.println("\n" + jarjarBin);
-        System.out.println(jarjarBin.test());
-
-        //Display(jarjarBin);
+        jarjarBin.insert(2);
+        jarjarBin.insert(3);
+        jarjarBin.insert(1);
+        jarjarBin.insert(1);
+        jarjarBin.insert(6);
+        jarjarBin.insert(1);
+        System.out.println(jarjarBin.testRec(0) + "\n");
+        Display(jarjarBin);
     }
 
 }
