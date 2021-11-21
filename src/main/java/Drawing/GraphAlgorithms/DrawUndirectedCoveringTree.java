@@ -6,6 +6,7 @@ import java.util.Map;
 
 import Drawing.Canvas;
 import Graphs.AdjacencyList.DirectedGraph;
+import Graphs.AdjacencyList.UndirectedGraph;
 import Graphs.Algorithms.DFS;
 import Graphs.Collection.Triple;
 import Graphs.GraphAlgorithms.BinaryHeap;
@@ -14,9 +15,9 @@ import Graphs.Nodes.AbstractNode;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
 
-public class DrawDirectedCoveringTree {
+public class DrawUndirectedCoveringTree {
 
-    public static void Display(DirectedGraph graph, BinaryHeapEdge bin) {
+    public static void Display(UndirectedGraph graph, BinaryHeapEdge bin) {
         Canvas canvas = new Canvas("Directed Covering Tree", true, Canvas.Layout.CIRCLE);
         canvas.graph.getModel().beginUpdate();
 
@@ -25,21 +26,21 @@ public class DrawDirectedCoveringTree {
 
             HashMap<Integer, Object> nodes = new HashMap<Integer, Object>();
 
-            for (DirectedNode n : graph.getNodes()) {
+            for (UndirectedNode n : graph.getNodes()) {
                 nodes.put(n.getLabel(), canvas.graph.insertVertex(root, null, n.getLabel(), 0, 0, 60, 30));
             }
 
-            for (DirectedNode n : graph.getNodes()) {
-                for (Map.Entry<DirectedNode, Integer> sn : n.getSuccs().entrySet()) {
+            for (UndirectedNode n : graph.getNodes()) {
+                for (Map.Entry<UndirectedNode, Integer> sn : n.getNeighbours().entrySet()) {
                     Boolean inTree = false;
                     for (int i = 0; i < bin.size(); i++) {
                         Triple t = bin.get(i);
 
-                        Boolean a = ((DirectedNode)t.getFirst()).getLabel() == n.getLabel() && ((DirectedNode)t.getSecond()).getLabel() == sn.getKey().getLabel();
+                        Boolean a = ((UndirectedNode)t.getFirst()).getLabel() == n.getLabel() && ((UndirectedNode)t.getSecond()).getLabel() == sn.getKey().getLabel();
 
-                        Boolean b = ((DirectedNode)t.getSecond()).getLabel() == n.getLabel() && ((DirectedNode)t.getFirst()).getLabel() == sn.getKey().getLabel();
+                        Boolean b = ((UndirectedNode)t.getSecond()).getLabel() == n.getLabel() && ((UndirectedNode)t.getFirst()).getLabel() == sn.getKey().getLabel();
 
-                        inTree = inTree || a ;
+                        inTree = inTree || a || b;
                     }
                     if(inTree){
                         canvas.graph.insertEdge(root, null, sn.getValue() + " <in tree>", nodes.get(n.getLabel()), nodes.get(sn.getKey().getLabel()));

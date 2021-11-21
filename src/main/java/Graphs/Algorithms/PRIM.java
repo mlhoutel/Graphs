@@ -7,11 +7,14 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 import Drawing.AdjacencyList.DrawDirectedGraph;
+import Drawing.AdjacencyList.DrawUndirectedGraph;
 import Drawing.GraphAlgorithms.DrawBinaryHeapEdge;
 import Drawing.GraphAlgorithms.DrawDirectedCoveringTree;
+import Drawing.GraphAlgorithms.DrawUndirectedCoveringTree;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
+import Graphs.AdjacencyList.UndirectedValuedGraph;
 import Graphs.Collection.Triple;
 import Graphs.GraphAlgorithms.BinaryHeapEdge;
 import Graphs.GraphAlgorithms.GraphTools;
@@ -76,7 +79,7 @@ public class PRIM {
         while (!queue.isEmpty()) {
             Triple<DirectedNode, DirectedNode, Integer> head = queue.remove();
             
-            if (!visited.contains(head.getSecond())) {
+            if (!visited.contains(head.getSecond()) || !visited.contains(head.getFirst())) {
                 visited.add(head.getSecond());
 
                 System.out.print(head + " - " + visited + "\n");
@@ -94,12 +97,18 @@ public class PRIM {
 
     public static void main(String[] args) {
         int[][] mat = GraphTools.generateValuedGraphData(8, false, false, true, false, 100001);
-        // UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
-        DirectedValuedGraph al = new DirectedValuedGraph(mat);
-        //DrawDirectedGraph.Display(al);
-        System.out.println(al);
+        UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
+        //DirectedValuedGraph al = new DirectedValuedGraph(mat);
+        //System.out.println(al);
         BinaryHeapEdge binh = PRIM(al);
+        
+        //DrawDirectedGraph.Display(al);
         //DrawBinaryHeapEdge.Display(binh);
-        DrawDirectedCoveringTree.Display(al, binh);
+        //DrawDirectedCoveringTree.Display(al, binh);
+
+        DrawUndirectedGraph.Display(al);
+        DrawBinaryHeapEdge.Display(binh);
+        DrawUndirectedCoveringTree.Display(al, binh);
+        System.out.println(binh);
     }
 }
