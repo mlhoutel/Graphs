@@ -5,13 +5,13 @@ import java.util.List;
 import Graphs.Collection.Triple;
 import Graphs.Nodes.UndirectedNode;
 
-public class BinaryHeapEdge {
+public class BinaryHeapEdge<T> {
 
     /**
      * A list structure for a faster management of the heap by indexing
      * Complexité inchangée avec BinaryHeap.java
      */
-    private List<Triple<UndirectedNode, UndirectedNode, Integer>> binh;
+    private List<Triple<T, T, Integer>> binh;
 
     public BinaryHeapEdge() {
         this.binh = new ArrayList<>();
@@ -44,7 +44,7 @@ public class BinaryHeapEdge {
      * @param to   one node of the edge
      * @param val  the edge weight
      */
-    public void insert(UndirectedNode from, UndirectedNode to, int val) {
+    public void insert(T from, T to, int val) {
         if (isEmpty()) {
             binh.add(new Triple<>(from, to, val));
         } else {
@@ -67,7 +67,7 @@ public class BinaryHeapEdge {
      *
      * @return the edge with the minimal value (root of the binary heap)
      */
-    public Triple<UndirectedNode, UndirectedNode, Integer> remove() {
+    public Triple<T, T, Integer> remove() {
         if (binh.size() <= 0) {
             return null;
         } else if (binh.size() == 1) {
@@ -77,7 +77,7 @@ public class BinaryHeapEdge {
             swap(0, binh.size() - 1);
 
             //replacer la nouvelle racine
-            Triple<UndirectedNode, UndirectedNode, Integer> valRoot = binh.remove(binh.size() - 1);
+            Triple<T, T, Integer> valRoot = binh.remove(binh.size() - 1);
             int posElement = 0; //position de l'élément à replacer
             int dest = getBestChildPos(posElement);
 
@@ -129,7 +129,7 @@ public class BinaryHeapEdge {
      * @param child  an index of the list edges
      */
     private void swap(int father, int child) {
-        Triple<UndirectedNode, UndirectedNode, Integer> temp = new Triple<>(binh.get(father).getFirst(), binh.get(father).getSecond(), binh.get(father).getThird());
+        Triple<T, T, Integer> temp = new Triple<>(binh.get(father).getFirst(), binh.get(father).getSecond(), binh.get(father).getThird());
         binh.get(father).setTriple(binh.get(child));
         binh.get(child).setTriple(temp);
     }
@@ -142,7 +142,7 @@ public class BinaryHeapEdge {
      */
     public String toString() {
         StringBuilder s = new StringBuilder();
-        for (Triple<UndirectedNode, UndirectedNode, Integer> no : binh) {
+        for (Triple<T, T, Integer> no : binh) {
             s.append(no).append(", ");
         }
         return s.toString();
@@ -224,6 +224,7 @@ public class BinaryHeapEdge {
         jarjarBin.remove();
         jarjarBin.remove();
         System.out.print(jarjarBin.testRec(0));
+        System.out.print(jarjarBin);
         
     }
 
