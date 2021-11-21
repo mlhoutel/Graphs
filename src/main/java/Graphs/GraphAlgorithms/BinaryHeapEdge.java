@@ -21,6 +21,10 @@ public class BinaryHeapEdge<T> {
         return binh.isEmpty();
     }
 
+    public Triple<T, T, Integer> get(int index) {
+        return binh.get(index);
+    }
+
     public int getFatherIndex(int i) {
         return (i - 1) / 2;
     }
@@ -31,6 +35,14 @@ public class BinaryHeapEdge<T> {
 
     public int getSecondChildIndex(int i) {
         return 2 * i + 2;
+    }
+
+    public boolean hasFirstChild(int i) {
+        return getFirstChildIndex(i) < this.binh.size();
+    }
+
+    public boolean hasSecondChild(int i) {
+        return getSecondChildIndex(i) < this.binh.size();
     }
 
     public boolean hasFather(int i) {

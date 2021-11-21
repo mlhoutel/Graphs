@@ -161,7 +161,7 @@ public class BinaryHeap {
             }
         }
     }
-    
+
     public static void main(String[] args) {
         BinaryHeap jarjarBin = new BinaryHeap();
         System.out.println(jarjarBin.isEmpty() + "\n");

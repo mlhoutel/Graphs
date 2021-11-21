@@ -15,7 +15,7 @@ import Graphs.GraphAlgorithms.BinaryHeapEdge;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
-
+import Drawing.AdjacencyList.DrawDirectedGraph;
 public class PRIM {
 
     /*
@@ -94,6 +94,7 @@ public class PRIM {
         int[][] mat = GraphTools.generateValuedGraphData(8, false, false, true, false, 100001);
         // UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
+        DrawDirectedGraph.Display(al);
         System.out.println(al);
         System.out.println(PRIM(al));
     }  
