@@ -5,7 +5,7 @@ import java.util.List;
 import Graphs.Collection.Triple;
 import Graphs.Nodes.UndirectedNode;
 
-public class BinaryHeapEdge<T> {
+public class BinaryHeapEdge<T extends AbstractNode> {
 
     /**
      * A list structure for a faster management of the heap by indexing
@@ -23,6 +23,14 @@ public class BinaryHeapEdge<T> {
 
     public Triple<T, T, Integer> get(int index) {
         return binh.get(index);
+    }
+
+    public Integer size() {
+        return binh.size();
+    }
+
+    public List<Triple<T, T, Integer>> getList() {
+        return binh;
     }
 
     public int getFatherIndex(int i) {

@@ -1,6 +1,8 @@
 package Drawing.AdjacencyList;
 
 import java.util.HashMap;
+import java.util.Map;
+
 import Drawing.Canvas;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.GraphAlgorithms.GraphTools;
@@ -20,8 +22,8 @@ public class DrawDirectedGraph {
             }
             
             for (DirectedNode n : ug.getNodes()) {                
-                for (DirectedNode sn : n.getSuccs().keySet()) {
-                    canvas.graph.insertEdge(root, null, "", nodes.get(n.getLabel()), nodes.get(sn.getLabel()));
+                for (Map.Entry<DirectedNode, Integer> sn : n.getSuccs().entrySet()) {
+                    canvas.graph.insertEdge(root, null, sn.getValue(), nodes.get(n.getLabel()), nodes.get(sn.getKey().getLabel()));
                 }
             }
         }

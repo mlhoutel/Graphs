@@ -2,6 +2,7 @@ package Drawing.AdjacencyList;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 
 import Drawing.Canvas;
 import Graphs.AdjacencyList.UndirectedGraph;
@@ -24,9 +25,9 @@ public class DrawUndirectedGraph {
             
             HashSet<Integer> visited = new HashSet<Integer>();
             for (UndirectedNode n : ug.getNodes()) {                
-                for (UndirectedNode sn : n.getNeighbours().keySet()) {
-                    if (!visited.contains(sn.getLabel())) {
-                        canvas.graph.insertEdge(root, null, "", nodes.get(n.getLabel()), nodes.get(sn.getLabel()));
+                for (Map.Entry<UndirectedNode, Integer> sn : n.getNeighbours().entrySet()) {
+                    if (!visited.contains(sn.getKey().getLabel())) {
+                        canvas.graph.insertEdge(root, null, sn.getValue(), nodes.get(n.getLabel()), nodes.get(sn.getKey().getLabel()));
                     }
                 }
                 visited.add(n.getLabel());

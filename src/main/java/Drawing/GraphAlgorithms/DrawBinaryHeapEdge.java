@@ -1,25 +1,34 @@
 package Drawing.GraphAlgorithms;
 
+import java.util.HashMap;
+import java.util.HashSet;
+
 import Drawing.Canvas;
+import Graphs.Collection.Triple;
 import Graphs.GraphAlgorithms.BinaryHeap;
 import Graphs.GraphAlgorithms.BinaryHeapEdge;
+import Graphs.Nodes.AbstractNode;
 import Graphs.Nodes.UndirectedNode;
 
 public class DrawBinaryHeapEdge {
     
-    public static void VisitDisplay(BinaryHeapEdge bin, Canvas canvas, Object root, Object parent, int index) {
+    public static void VisitDisplay(BinaryHeapEdge bin, Canvas canvas, Object root) {
+        HashMap<AbstractNode, Object> nodes = new HashMap<>();
 
-        Object current = canvas.graph.insertVertex(root, null, bin.get(index).toString(), 0, 0, 60, 30);
-        canvas.graph.insertEdge(root, null, "", parent, current);
+        for (int i = 0; i < bin.size(); i++) {
+            Triple n = bin.get(i);
 
-        if (bin.hasFirstChild(index)) {
-            int childIndex = bin.getFirstChildIndex(index);
-            VisitDisplay(bin, canvas, root, current, childIndex);
-        }
-        
-        if (bin.hasSecondChild(index)) {
-            int childIndex = bin.getSecondChildIndex(index);
-            VisitDisplay(bin, canvas, root, current, childIndex);
+            if (!nodes.containsKey(n.getFirst())) {
+                Object first = canvas.graph.insertVertex(root, null, n.getFirst().toString(), 0, 0, 60, 30); 
+                nodes.put((AbstractNode)n.getFirst(), first);
+            } 
+
+            if (!nodes.containsKey(n.getSecond())) {
+                Object second = canvas.graph.insertVertex(root, null, n.getSecond().toString(), 0, 0, 60, 30); 
+                nodes.put((AbstractNode)n.getSecond(), second);
+            }
+
+            canvas.graph.insertEdge(root, null, n.getThird(), nodes.get(n.getFirst()), nodes.get(n.getSecond()));
         }
     }
 
@@ -29,7 +38,7 @@ public class DrawBinaryHeapEdge {
         
         try {
             Object parent = canvas.graph.getDefaultParent();
-            VisitDisplay(bin, canvas, parent, parent, 0);
+            VisitDisplay(bin, canvas, parent);
         }
         finally {
             canvas.graph.getModel().endUpdate();
