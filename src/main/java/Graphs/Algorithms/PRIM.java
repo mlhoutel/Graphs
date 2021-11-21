@@ -12,6 +12,7 @@ import Drawing.GraphAlgorithms.DrawDirectedCoveringTree;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
+import Graphs.AdjacencyList.UndirectedValuedGraph;
 import Graphs.Collection.Triple;
 import Graphs.GraphAlgorithms.BinaryHeapEdge;
 import Graphs.GraphAlgorithms.GraphTools;
@@ -43,6 +44,8 @@ public class PRIM {
 
             if (!visited.contains(head.getSecond())) {
                 visited.add(head.getSecond());
+
+                System.out.print(head + " - " + visited + "\n");
 
                 tree.insert(head.getFirst(), head.getSecond(), head.getThird());
 
@@ -94,12 +97,13 @@ public class PRIM {
 
     public static void main(String[] args) {
         int[][] mat = GraphTools.generateValuedGraphData(8, false, false, true, false, 100001);
-        // UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
-        DirectedValuedGraph al = new DirectedValuedGraph(mat);
-        //DrawDirectedGraph.Display(al);
+        //UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
+         DirectedValuedGraph al = new DirectedValuedGraph(mat);
+        // DrawDirectedGraph.Display(al);
         System.out.println(al);
         BinaryHeapEdge binh = PRIM(al);
+        System.out.println(binh);
         //DrawBinaryHeapEdge.Display(binh);
-        DrawDirectedCoveringTree.Display(al, binh);
+        //DrawDirectedCoveringTree.Display(al, binh);
     }
 }

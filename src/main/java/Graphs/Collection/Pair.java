@@ -32,4 +32,9 @@ public class Pair<A, B> {
 		return this.left.equals(pairo.getLeft()) && this.right.equals(pairo.getRight());
 	}
 
+	@Override
+	public String toString(){
+		return "<"+left+","+right+">";
+	}
+
 }
