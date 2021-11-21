@@ -1,0 +1,189 @@
+{
+    // Utilisez IntelliSense pour en savoir plus sur les attributs possibles.
+    // Pointez pour afficher la description des attributs existants.
+    // Pour plus d'informations, visitez : https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "Launch DrawDirectedGraph",
+            "request": "launch",
+            "mainClass": "Drawing.AdjacencyList.DrawDirectedGraph",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch DrawUndirectedGraph",
+            "request": "launch",
+            "mainClass": "Drawing.AdjacencyList.DrawUndirectedGraph",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch DrawBinaryHeap",
+            "request": "launch",
+            "mainClass": "Drawing.GraphAlgorithms.DrawBinaryHeap",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch DrawBinaryHeapEdge",
+            "request": "launch",
+            "mainClass": "Drawing.GraphAlgorithms.DrawBinaryHeapEdge",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch DrawDirectedCoveringTree",
+            "request": "launch",
+            "mainClass": "Drawing.GraphAlgorithms.DrawDirectedCoveringTree",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch DrawUndirectedCoveringTree",
+            "request": "launch",
+            "mainClass": "Drawing.GraphAlgorithms.DrawUndirectedCoveringTree",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch DirectedGraph",
+            "request": "launch",
+            "mainClass": "Graphs.AdjacencyList.DirectedGraph",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch DirectedValuedGraph",
+            "request": "launch",
+            "mainClass": "Graphs.AdjacencyList.DirectedValuedGraph",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch UndirectedGraph",
+            "request": "launch",
+            "mainClass": "Graphs.AdjacencyList.UndirectedGraph",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch UndirectedValuedGraph",
+            "request": "launch",
+            "mainClass": "Graphs.AdjacencyList.UndirectedValuedGraph",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch AdjacencyMatrixDirectedGraph",
+            "request": "launch",
+            "mainClass": "Graphs.AdjacencyMatrix.AdjacencyMatrixDirectedGraph",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch AdjacencyMatrixDirectedValuedGraph",
+            "request": "launch",
+            "mainClass": "Graphs.AdjacencyMatrix.AdjacencyMatrixDirectedValuedGraph",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch AdjacencyMatrixUndirectedGraph",
+            "request": "launch",
+            "mainClass": "Graphs.AdjacencyMatrix.AdjacencyMatrixUndirectedGraph",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch AdjacencyMatrixUndirectedValuedGraph",
+            "request": "launch",
+            "mainClass": "Graphs.AdjacencyMatrix.AdjacencyMatrixUndirectedValuedGraph",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch BFS",
+            "request": "launch",
+            "mainClass": "Graphs.Algorithms.BFS",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch Bellman",
+            "request": "launch",
+            "mainClass": "Graphs.Algorithms.Bellman",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch CFC",
+            "request": "launch",
+            "mainClass": "Graphs.Algorithms.CFC",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch DFS",
+            "request": "launch",
+            "mainClass": "Graphs.Algorithms.DFS",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch Dijkstra",
+            "request": "launch",
+            "mainClass": "Graphs.Algorithms.Dijkstra",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch Kruskal",
+            "request": "launch",
+            "mainClass": "Graphs.Algorithms.Kruskal",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch PRIM",
+            "request": "launch",
+            "mainClass": "Graphs.Algorithms.PRIM",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch BinaryHeap",
+            "request": "launch",
+            "mainClass": "Graphs.GraphAlgorithms.BinaryHeap",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch BinaryHeapEdge",
+            "request": "launch",
+            "mainClass": "Graphs.GraphAlgorithms.BinaryHeapEdge",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch GraphTools",
+            "request": "launch",
+            "mainClass": "Graphs.GraphAlgorithms.GraphTools",
+            "projectName": "Framework-Graph"
+        },
+        {
+            "type": "java",
+            "name": "Launch GraphToolsList",
+            "request": "launch",
+            "mainClass": "Graphs.GraphAlgorithms.GraphToolsList",
+            "projectName": "Framework-Graph"
+        }
+    ]
+}

@@ -12,6 +12,7 @@ import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.Collection.Pair;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
+import Graphs.Nodes.UndirectedNode;
 import Drawing.AdjacencyList.DrawDirectedGraph;
 
 public class Bellman {
@@ -22,24 +23,19 @@ public class Bellman {
         // Distance from source to node, with pred and value
         HashMap<DirectedNode, Pair<DirectedNode, Integer>> distances = new HashMap<>();
         for (DirectedNode node : graph.getNodes()){
-            distances.put(node, new Pair(new DirectedNode(-1), Integer.MAX_VALUE));
+            distances.put(node, new Pair(new DirectedNode(-1), 999999999));
         }
 
         distances.put(source, new Pair(source, 0));
 ;
         for (DirectedNode node : graph.getNodes()) {
-            for (Map.Entry<DirectedNode, Integer> succ : node.getSuccs().entrySet()) {
-                Integer temp = distances.get(succ.getKey()).getRight() + succ.getValue();
-
-                if (temp < distances.get(node).getRight()) {
-                    distances.put(node, new Pair(succ.getKey(), temp));
-                }
-            }
-
-            for (Map.Entry<DirectedNode, Integer> succ : node.getSuccs().entrySet()) {
-                if (distances.get(succ.getKey()).getRight() + succ.getValue() < distances.get(node).getRight()) {
-                    throw new RuntimeException("Boucle négative...");
-                }
+            System.out.println("-"+node);
+            for(int i=0;i<graph.getNbNodes()-1;i++)
+            {
+              for(int j=0;j<graph.getNbArcs();j++)
+              {
+                //TODO
+              }
             }
         }
 
@@ -51,6 +47,7 @@ public class Bellman {
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
         System.out.println(al);
 
+        DrawDirectedGraph.Display(al);
         System.out.println(calculateShortestPathFromSource(al, al.getNodes().get(0)));
     }  
 }
