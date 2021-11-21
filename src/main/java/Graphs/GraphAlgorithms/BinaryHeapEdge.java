@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Graphs.Collection.Triple;
+import Graphs.Nodes.AbstractNode;
 import Graphs.Nodes.UndirectedNode;
 
 public class BinaryHeapEdge<T extends AbstractNode> {

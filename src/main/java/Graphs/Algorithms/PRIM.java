@@ -6,16 +6,18 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+import Drawing.AdjacencyList.DrawDirectedGraph;
+import Drawing.GraphAlgorithms.DrawBinaryHeapEdge;
+import Drawing.GraphAlgorithms.DrawDirectedCoveringTree;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
-import Graphs.AdjacencyList.UndirectedValuedGraph;
 import Graphs.Collection.Triple;
 import Graphs.GraphAlgorithms.BinaryHeapEdge;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
-import Drawing.AdjacencyList.DrawDirectedGraph;
+
 public class PRIM {
 
     /*
@@ -24,7 +26,7 @@ public class PRIM {
     public static BinaryHeapEdge PRIM(UndirectedGraph graph) {
 
         HashSet<UndirectedNode> visited = new HashSet<>();
-        BinaryHeapEdge<UndirectedNode> tree = new BinaryHeapEdge();
+        BinaryHeapEdge<UndirectedNode> tree = new BinaryHeapEdge<UndirectedNode>();
 
         Comparator<Triple<UndirectedNode, UndirectedNode, Integer>> comparator = (p1, p2) -> { return p1.getThird() - p2.getThird(); };
         PriorityQueue<Triple<UndirectedNode, UndirectedNode, Integer>> queue = new PriorityQueue<>(comparator);
@@ -38,8 +40,8 @@ public class PRIM {
 
         while (!queue.isEmpty()) {
             Triple<UndirectedNode, UndirectedNode, Integer> head = queue.remove();
-            
-            if (!visited.contains(head.getSecond())) { 
+
+            if (!visited.contains(head.getSecond())) {
                 visited.add(head.getSecond());
 
                 tree.insert(head.getFirst(), head.getSecond(), head.getThird());
@@ -48,7 +50,7 @@ public class PRIM {
                     queue.add(new Triple<>(head.getSecond(), n.getKey(), n.getValue()));
                 }
             }
-        }   
+        }
 
         return tree;
     }
@@ -74,7 +76,7 @@ public class PRIM {
         while (!queue.isEmpty()) {
             Triple<DirectedNode, DirectedNode, Integer> head = queue.remove();
             
-            if (!visited.contains(head.getSecond())) { 
+            if (!visited.contains(head.getSecond())) {
                 visited.add(head.getSecond());
 
                 System.out.print(head + " - " + visited + "\n");
@@ -85,7 +87,7 @@ public class PRIM {
                     queue.add(new Triple<>(head.getSecond(), n.getKey(), n.getValue()));
                 }
             }
-        }   
+        }
 
         return tree;
     }
@@ -94,8 +96,10 @@ public class PRIM {
         int[][] mat = GraphTools.generateValuedGraphData(8, false, false, true, false, 100001);
         // UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
-        DrawDirectedGraph.Display(al);
+        //DrawDirectedGraph.Display(al);
         System.out.println(al);
-        System.out.println(PRIM(al));
-    }  
+        BinaryHeapEdge binh = PRIM(al);
+        //DrawBinaryHeapEdge.Display(binh);
+        DrawDirectedCoveringTree.Display(al, binh);
+    }
 }

@@ -17,9 +17,9 @@ import Graphs.Nodes.UndirectedNode;
 public class DrawDirectedCoveringTree {
 
     public static void Display(DirectedGraph graph, BinaryHeapEdge bin) {
-        Canvas canvas = new Canvas("Directed Covering Tree", true, Canvas.Layout.HIERARCHICAL);
+        Canvas canvas = new Canvas("Directed Covering Tree", true, Canvas.Layout.CIRCLE);
         canvas.graph.getModel().beginUpdate();
-        
+
         try {
             Object root = canvas.graph.getDefaultParent();
 
@@ -28,8 +28,8 @@ public class DrawDirectedCoveringTree {
             for (DirectedNode n : graph.getNodes()) {
                 nodes.put(n.getLabel(), canvas.graph.insertVertex(root, null, n.getLabel(), 0, 0, 60, 30));
             }
-            
-            for (DirectedNode n : graph.getNodes()) {                
+
+            for (DirectedNode n : graph.getNodes()) {
                 for (Map.Entry<DirectedNode, Integer> sn : n.getSuccs().entrySet()) {
                     Boolean inTree = false;
                     for (int i = 0; i < bin.size(); i++) {
@@ -41,15 +41,18 @@ public class DrawDirectedCoveringTree {
 
                         inTree = inTree || a || b;
                     }
-
-                    canvas.graph.insertEdge(root, null, sn.getValue() + " <in tree>", nodes.get(n.getLabel()), nodes.get(sn.getKey().getLabel()));
+                    if(inTree){
+                        canvas.graph.insertEdge(root, null, sn.getValue() + " <in tree>", nodes.get(n.getLabel()), nodes.get(sn.getKey().getLabel()));
+                    }else{
+                        canvas.graph.insertEdge(root, null, sn.getValue() , nodes.get(n.getLabel()), nodes.get(sn.getKey().getLabel()));
+                    }
                 }
             }
         }
         finally {
             canvas.graph.getModel().endUpdate();
-            canvas.graph.setCellsEditable(false);
-            canvas.graph.setCellsMovable(false);
+            //canvas.graph.setCellsEditable(false);
+            //canvas.graph.setCellsMovable(false);
             canvas.Draw();
         }
     }
