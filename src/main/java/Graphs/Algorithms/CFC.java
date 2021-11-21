@@ -1,26 +1,20 @@
 package Graphs.Algorithms;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Deque;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Queue;
-import java.util.Stack;
 
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
 import Graphs.GraphAlgorithms.GraphTools;
-import Graphs.Algorithms.DFS;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
 
 public class CFC {
     
     /*
-     * Calcul des composants fortement connexes
+     * Calcul des composants fortement connexes pour un DirectedGraph
      */
     public static List<List<DirectedNode>> CFC(DirectedGraph graph) {
         
@@ -50,7 +44,34 @@ public class CFC {
                 visited.add(n);
                 current_connex.addAll(DFS.DFSPointer(n, visited));
             }
-            connex.add(current_connex);
+
+            if (!current_connex.isEmpty()) {
+                connex.add(current_connex);
+            }
+        }
+
+        return connex;
+    }
+
+     
+    /*
+     * Calcul des composants fortement connexes pour un UndirectedGraph
+     */
+    public static List<List<UndirectedNode>> CFC(UndirectedGraph graph) {
+        
+        HashSet<UndirectedNode> visited = new HashSet<UndirectedNode>();
+
+        List<List<UndirectedNode>> connex = new ArrayList<>();
+        for (UndirectedNode n : graph.getNodes()) {
+            List<UndirectedNode> current_connex = new ArrayList<>();
+            if (!visited.contains(n)) {
+                visited.add(n);
+                current_connex.addAll(DFS.DFSPointer(n, visited));
+            }
+
+            if (!current_connex.isEmpty()) {
+                connex.add(current_connex);
+            }
         }
 
         return connex;
@@ -58,6 +79,7 @@ public class CFC {
     public static void main(String[] args) {
         int[][] mat = GraphTools.generateGraphData(5, 6, false, true, false, 100001);
         DirectedGraph al = new DirectedGraph(mat);
+        // UndirectedGraph al = new UndirectedGraph(mat);
         System.out.println(al);
         System.out.println(CFC(al));
     }
