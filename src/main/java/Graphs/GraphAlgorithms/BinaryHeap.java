@@ -8,9 +8,6 @@ public class BinaryHeap {
 
     public BinaryHeap() {
         this.nodes = new ArrayList<Integer>();
-        for (int i = 0; i < nodes.size(); i++) {
-            this.nodes.add(Integer.MAX_VALUE);
-        }
     }
 
     public class BinaryHeapException extends Exception {
