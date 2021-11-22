@@ -24,7 +24,7 @@ public class CFC {
         for (DirectedNode n : graph.getNodes()) {
             if (!visited.contains(n)) {
                 visited.add(n);
-                list.addAll(DFS.DFSPointer(n, visited));
+                list.addAll(DFS.DFSConvex(n, visited));
             }
         }
 
@@ -42,7 +42,7 @@ public class CFC {
             List<DirectedNode> current_connex = new ArrayList<>();
             if (!visited.contains(n)) {
                 visited.add(n);
-                current_connex.addAll(DFS.DFSPointer(n, visited));
+                current_connex.addAll(DFS.DFSConvex(n, visited));
             }
 
             if (!current_connex.isEmpty()) {
@@ -66,7 +66,7 @@ public class CFC {
             List<UndirectedNode> current_connex = new ArrayList<>();
             if (!visited.contains(n)) {
                 visited.add(n);
-                current_connex.addAll(DFS.DFSPointer(n, visited));
+                current_connex.addAll(DFS.DFSConvex(n, visited));
             }
 
             if (!current_connex.isEmpty()) {

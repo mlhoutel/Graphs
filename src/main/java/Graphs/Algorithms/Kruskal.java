@@ -3,6 +3,7 @@ package Graphs.Algorithms;
 
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
@@ -10,6 +11,7 @@ import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
 import Graphs.AdjacencyList.UndirectedValuedGraph;
+import Graphs.Collection.Pair;
 import Graphs.Collection.Triple;
 import Graphs.GraphAlgorithms.BinaryHeapEdge;
 import Graphs.GraphAlgorithms.GraphTools;
@@ -23,32 +25,27 @@ public class Kruskal {
     */
     public static BinaryHeapEdge Kruskal(UndirectedGraph graph) {
 
-        HashSet<UndirectedNode> visited = new HashSet<>();
         BinaryHeapEdge<UndirectedNode> tree = new BinaryHeapEdge();
+        HashSet<UndirectedNode> visited = new HashSet<>();
 
         Comparator<Triple<UndirectedNode, UndirectedNode, Integer>> comparator = (p1, p2) -> { return p1.getThird() - p2.getThird(); };
         PriorityQueue<Triple<UndirectedNode, UndirectedNode, Integer>> queue = new PriorityQueue<>(comparator);
 
-        UndirectedNode base = graph.getNodes().get(0);
-        visited.add(base);
+        List<Triple<UndirectedNode, UndirectedNode, Integer>> edges = DFS.DFSEdges(graph);
 
-        for (Map.Entry<UndirectedNode,Integer> n : base.getNeighbours().entrySet()) {
-            queue.add(new Triple<>(base, n.getKey(), n.getValue()));
+        for (Triple<UndirectedNode, UndirectedNode, Integer> edge : edges) {
+            queue.add(edge);
         }
 
-        while (!queue.isEmpty()) {
-            Triple<UndirectedNode, UndirectedNode, Integer> head = queue.remove();
-            
-            if (!visited.contains(head.getSecond())) { 
-                visited.add(head.getSecond());
+        while(!queue.isEmpty()) {
+            Triple<UndirectedNode, UndirectedNode, Integer> edge = queue.remove();
 
-                tree.insert(head.getFirst(), head.getSecond(), head.getThird());
-
-                for (Map.Entry<UndirectedNode,Integer> n : head.getSecond().getNeighbours().entrySet()) {
-                    queue.add(new Triple<>(head.getSecond(), n.getKey(), n.getValue()));
-                }
+            if (!visited.contains(edge.getFirst()) || !visited.contains(edge.getSecond())) {
+                visited.add(edge.getFirst());
+                visited.add(edge.getSecond());
+                tree.insert(edge.getFirst(), edge.getSecond(), edge.getThird());
             }
-        }   
+        }
 
         return tree;
     }
@@ -58,43 +55,36 @@ public class Kruskal {
     */
     public static BinaryHeapEdge Kruskal(DirectedGraph graph) {
 
-        HashSet<DirectedNode> visited = new HashSet<>();
         BinaryHeapEdge<DirectedNode> tree = new BinaryHeapEdge();
+        HashSet<DirectedNode> visited = new HashSet<>();
 
         Comparator<Triple<DirectedNode, DirectedNode, Integer>> comparator = (p1, p2) -> { return p1.getThird() - p2.getThird(); };
         PriorityQueue<Triple<DirectedNode, DirectedNode, Integer>> queue = new PriorityQueue<>(comparator);
 
-        DirectedNode base = graph.getNodes().get(0);
-        visited.add(base);
+        List<Triple<DirectedNode, DirectedNode, Integer>> edges = DFS.DFSEdges(graph);
 
-        for (Map.Entry<DirectedNode,Integer> n : base.getSuccs().entrySet()) {
-            queue.add(new Triple<>(base, n.getKey(), n.getValue()));
+        for (Triple<DirectedNode, DirectedNode, Integer> edge : edges) {
+            queue.add(edge);
         }
 
-        while (!queue.isEmpty()) {
-            Triple<DirectedNode, DirectedNode, Integer> head = queue.remove();
-            
-            if (!visited.contains(head.getSecond())) { 
-                visited.add(head.getSecond());
+        while(!queue.isEmpty()) {
+            Triple<DirectedNode, DirectedNode, Integer> edge = queue.remove();
 
-                System.out.print(head + " - " + visited + "\n");
-
-                tree.insert(head.getFirst(), head.getSecond(), head.getThird());
-
-                for (Map.Entry<DirectedNode,Integer> n : head.getSecond().getSuccs().entrySet()) {
-                    queue.add(new Triple<>(head.getSecond(), n.getKey(), n.getValue()));
-                }
+            if (!visited.contains(edge.getFirst()) || !visited.contains(edge.getSecond())) {
+                visited.add(edge.getFirst());
+                visited.add(edge.getSecond());
+                tree.insert(edge.getFirst(), edge.getSecond(), edge.getThird());
             }
-        }   
+        }
 
         return tree;
     }
 
     public static void main(String[] args) {
         int[][] mat = GraphTools.generateValuedGraphData(8, false, false, true, false, 100001);
-        // UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
-        DirectedValuedGraph al = new DirectedValuedGraph(mat);
+        UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
+        //DirectedValuedGraph al = new DirectedValuedGraph(mat);
         System.out.println(al);
-        System.out.println(PRIM(al));
+        System.out.println(Kruskal(al));
     }  
 }
