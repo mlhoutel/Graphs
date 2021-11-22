@@ -1,8 +1,10 @@
 package Graphs.Algorithms;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
@@ -18,28 +20,56 @@ import Drawing.AdjacencyList.DrawDirectedGraph;
 public class Bellman {
 
     
-    public static HashMap<DirectedNode, Pair<DirectedNode, Integer>> calculateShortestPathFromSource(DirectedGraph graph, DirectedNode source) {
+    public static HashMap<DirectedNode, Pair<DirectedNode, Integer>> calculateShortestPathFromSource(DirectedGraph graph, DirectedNode source) throws Exception {
 
-        // Distance from source to node, with pred and value
+        // Distance depuis source à node, avec prédécesseur et value
         HashMap<DirectedNode, Pair<DirectedNode, Integer>> distances = new HashMap<>();
         for (DirectedNode node : graph.getNodes()){
             distances.put(node, new Pair(new DirectedNode(-1), 999999999));
         }
 
         distances.put(source, new Pair(source, 0));
-;
-        for (DirectedNode node : graph.getNodes()) {
-            System.out.println("-"+node);
-            for(int i=0;i<graph.getNbNodes()-1;i++)
-            {
-              for(int j=0;j<graph.getNbArcs();j++)
-              {
-                //TODO
-              }
+        
+        //boucle principale
+        for (int i = 1; i< graph.getNbNodes()-1;i++){
+            for(int j = 0;j<graph.getNbNodes()-1;j++){
+                for(Entry<DirectedNode,Integer> edge:graph.getNodes().get(j).getPreds().entrySet()){
+                    if(distances.get(graph.getNodes().get(j)).getRight() + edge.getValue() < distances.get(edge.getKey()).getRight()){
+                        distances.put(edge.getKey(), new Pair<DirectedNode,Integer>(graph.getNodes().get(j), distances.get(graph.getNodes().get(j)).getRight() + edge.getValue()));
+                    }
+                }
+            }
+        }
+
+        //vérification absence de cycle négatif
+        for(int j = 0;j<graph.getNbNodes()-1;j++){
+            for(Entry<DirectedNode,Integer> edge:graph.getNodes().get(j).getPreds().entrySet()){
+                if(distances.get(graph.getNodes().get(j)).getRight() + edge.getValue() < distances.get(edge.getKey()).getRight()){
+                    throw new Exception("cycle négatif");
+                }
             }
         }
 
         return distances;
+    }
+
+    public static List<DirectedNode> getShortestPathFromSourceToDestination(DirectedGraph graph, DirectedNode source, DirectedNode destination){
+        HashMap<DirectedNode, Pair<DirectedNode, Integer>> shortestPaths = new HashMap<DirectedNode, Pair<DirectedNode, Integer>>();
+        try {
+            shortestPaths = calculateShortestPathFromSource(graph, source);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<DirectedNode> shortestPath = new LinkedList<DirectedNode>();
+        shortestPath.add(destination);
+        DirectedNode temp = destination;
+        int cpt = graph.getNodes().size();
+        while(temp != source && cpt >=0){
+            temp = shortestPaths.get(temp).getLeft();
+            shortestPath.add(temp);
+            cpt--;
+        }
+        return shortestPath;
     }
 
     public static void main(String[] args) {
@@ -48,6 +78,11 @@ public class Bellman {
         System.out.println(al);
 
         DrawDirectedGraph.Display(al);
-        System.out.println(calculateShortestPathFromSource(al, al.getNodes().get(0)));
-    }  
+        try {
+            System.out.println(calculateShortestPathFromSource(al, al.getNodes().get(0)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(getShortestPathFromSourceToDestination(al, al.getNodes().get(0),al.getNodes().get(7)));
+    }
 }
