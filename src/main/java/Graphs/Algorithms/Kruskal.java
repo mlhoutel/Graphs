@@ -7,6 +7,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
+import Drawing.AdjacencyList.DrawUndirectedGraph;
+import Drawing.GraphAlgorithms.DrawDirectedCoveringTree;
+import Drawing.GraphAlgorithms.DrawUndirectedCoveringTree;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
@@ -82,9 +85,11 @@ public class Kruskal {
 
     public static void main(String[] args) {
         int[][] mat = GraphTools.generateValuedGraphData(8, false, false, true, false, 100001);
-        UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
+        DirectedValuedGraph al = new DirectedValuedGraph(mat);
         //DirectedValuedGraph al = new DirectedValuedGraph(mat);
         System.out.println(al);
-        System.out.println(Kruskal(al));
-    }  
+        BinaryHeapEdge binh = Kruskal(al);
+        System.out.println(binh);
+        DrawDirectedCoveringTree.Display(al, binh);
+    }
 }
