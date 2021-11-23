@@ -98,9 +98,9 @@
                 <version>3.0.0</version>
                 <configuration>
                     <source>8</source>
-                    <outputDirectory>docs</outputDirectory>
+                    <reportOutputDirectory>docs</reportOutputDirectory>
                     <sourceFileIncludes>
-                        <sourceFileInclude>src/main/java/**/*.java</sourceFileInclude>
+                        <sourceFileInclude>**/*.java</sourceFileInclude>
                     </sourceFileIncludes>
                 </configuration>
                 <executions>
