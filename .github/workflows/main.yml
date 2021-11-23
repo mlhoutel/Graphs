@@ -12,12 +12,14 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: actions/setup-java@v1
+      - uses: actions/setup-java@v2
         with:
-          java-version: 11
-          java-package: jdk+fx
-      - name: Generate Javadoc
-        run: ./gradlew aggregateJavadocs
+          java-version: '11'
+          distribution: 'adopt'
+
+      - name: Build docs with Maven
+        run: mvn javadoc:javadoc
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.5.9
         with:
