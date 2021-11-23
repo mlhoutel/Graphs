@@ -15,7 +15,6 @@
     -   [x] Q5
     -   [] Q6
 -   [] TP5
-    -   [] Q4
 -   [x] DFS
 -   [x] BFS
 -   [x] Dijkstra

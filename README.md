@@ -4,4 +4,4 @@ This repository is used during the practice classes of "Graphe et algorithmes" c
 
 This is a standard maven project so please use the according import option in your IDE (IntelliJ IDEA or Eclipse).
 
-Generate javadoc with `javadoc -sourcepath ./src -d ./docs -subpackages .`
+Generate javadoc with `javadoc -sourcepath . -d ./docs -subpackages .`
