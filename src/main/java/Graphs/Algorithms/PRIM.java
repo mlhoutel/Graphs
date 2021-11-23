@@ -1,0 +1,115 @@
+package Graphs.Algorithms;
+
+
+import java.util.Comparator;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.PriorityQueue;
+
+import Drawing.AdjacencyList.DrawUndirectedGraph;
+import Drawing.GraphAlgorithms.DrawBinaryHeapEdge;
+import Drawing.GraphAlgorithms.DrawUndirectedCoveringTree;
+import Graphs.AdjacencyList.DirectedGraph;
+import Graphs.AdjacencyList.UndirectedGraph;
+import Graphs.AdjacencyList.UndirectedValuedGraph;
+import Graphs.Collection.Triple;
+import Graphs.GraphAlgorithms.BinaryHeapEdge;
+import Graphs.GraphAlgorithms.GraphTools;
+import Graphs.Nodes.DirectedNode;
+import Graphs.Nodes.UndirectedNode;
+
+public final class Prim {
+
+    private Prim() {}
+
+    /*
+    * Prim Algorithm for UndirectedGraph
+    */
+    public static BinaryHeapEdge Prim(UndirectedGraph graph) {
+
+        HashSet<UndirectedNode> visited = new HashSet<>();
+        BinaryHeapEdge<UndirectedNode> tree = new BinaryHeapEdge<UndirectedNode>();
+
+        Comparator<Triple<UndirectedNode, UndirectedNode, Integer>> comparator = (p1, p2) -> { return p1.getThird() - p2.getThird(); };
+        PriorityQueue<Triple<UndirectedNode, UndirectedNode, Integer>> queue = new PriorityQueue<>(comparator);
+
+        UndirectedNode base = graph.getNodes().get(0);
+        visited.add(base);
+
+        for (Map.Entry<UndirectedNode,Integer> n : base.getNeighbours().entrySet()) {
+            queue.add(new Triple<>(base, n.getKey(), n.getValue()));
+        }
+
+        while (!queue.isEmpty()) {
+            Triple<UndirectedNode, UndirectedNode, Integer> head = queue.remove();
+
+            if (!visited.contains(head.getSecond())) {
+                visited.add(head.getSecond());
+
+                System.out.print(head + " - " + visited + "\n");
+
+                tree.insert(head.getFirst(), head.getSecond(), head.getThird());
+
+                for (Map.Entry<UndirectedNode,Integer> n : head.getSecond().getNeighbours().entrySet()) {
+                    queue.add(new Triple<>(head.getSecond(), n.getKey(), n.getValue()));
+                }
+            }
+        }
+
+        return tree;
+    }
+
+    /*
+    * Prim Algorithm for DirectedGraph
+    */
+    public static BinaryHeapEdge Prim(DirectedGraph graph) {
+
+        HashSet<DirectedNode> visited = new HashSet<>();
+        BinaryHeapEdge<DirectedNode> tree = new BinaryHeapEdge();
+
+        Comparator<Triple<DirectedNode, DirectedNode, Integer>> comparator = (p1, p2) -> { return p1.getThird() - p2.getThird(); };
+        PriorityQueue<Triple<DirectedNode, DirectedNode, Integer>> queue = new PriorityQueue<>(comparator);
+
+        DirectedNode base = graph.getNodes().get(0);
+        visited.add(base);
+
+        for (Map.Entry<DirectedNode,Integer> n : base.getSuccs().entrySet()) {
+            queue.add(new Triple<>(base, n.getKey(), n.getValue()));
+        }
+
+        while (!queue.isEmpty()) {
+            Triple<DirectedNode, DirectedNode, Integer> head = queue.remove();
+            
+            if (!visited.contains(head.getSecond()) || !visited.contains(head.getFirst())) {
+                visited.add(head.getSecond());
+
+                System.out.print(head + " - " + visited + "\n");
+
+                tree.insert(head.getFirst(), head.getSecond(), head.getThird());
+
+                for (Map.Entry<DirectedNode,Integer> n : head.getSecond().getSuccs().entrySet()) {
+                    queue.add(new Triple<>(head.getSecond(), n.getKey(), n.getValue()));
+                }
+            }
+        }
+
+        return tree;
+    }
+
+    public static void main(String[] args) {
+        int[][] mat = GraphTools.generateValuedGraphData(8, false, false, true, false, 100001);
+        UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
+        //DirectedValuedGraph al = new DirectedValuedGraph(mat);
+        //System.out.println(al);
+        BinaryHeapEdge binh = Prim(al);
+        
+        //DrawDirectedGraph.Display(al);
+        //DrawBinaryHeapEdge.Display(binh);
+        //DrawDirectedCoveringTree.Display(al, binh);
+
+        DrawUndirectedGraph.Display(al);
+        DrawBinaryHeapEdge.Display(binh);
+        DrawUndirectedCoveringTree.Display(al, binh);
+        System.out.println(binh);
+    }
+}
