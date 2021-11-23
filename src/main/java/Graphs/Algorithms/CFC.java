@@ -14,17 +14,20 @@ import Graphs.Nodes.UndirectedNode;
 public class CFC {
     
     /*
-     * Calcul des composants fortement connexes pour un DirectedGraph
+     * Computation of strongly connected component for a DirectedGraph
+     * <b>complexity: 2*O(v + e) = O(v + e)</b>
+     * @param graph the DirectedGraph to explore
+     * @return the list of all strongly connected components in the graph
      */
     public static List<List<DirectedNode>> CFC(DirectedGraph graph) {
         
         HashSet<DirectedNode> visited = new HashSet<DirectedNode>();
         List<DirectedNode> list = new ArrayList<>();
 
-        for (DirectedNode n : graph.getNodes()) {
+        for (DirectedNode n : graph.getNodes()) {                       // O(v + e)
             if (!visited.contains(n)) {
                 visited.add(n);
-                list.addAll(DFS.DFSConvex(n, visited));
+                list.addAll(DFS.DFSConnected(n, visited));                 // O(v + e)
             }
         }
 
@@ -33,16 +36,16 @@ public class CFC {
         Collections.reverse(list);
         
         List<DirectedNode> decreasing = new ArrayList<>();
-        for (DirectedNode n : list) {
+        for (DirectedNode n : list) {                                   // O(v)
             decreasing.add(igraph.getNodes().get(n.getLabel()));
         }
 
         List<List<DirectedNode>> connex = new ArrayList<>();
-         for (DirectedNode n : decreasing) {
+         for (DirectedNode n : decreasing) {                            // O(v + e)
             List<DirectedNode> current_connex = new ArrayList<>();
             if (!visited.contains(n)) {
                 visited.add(n);
-                current_connex.addAll(DFS.DFSConvex(n, visited));
+                current_connex.addAll(DFS.DFSConnected(n, visited));       // O(v + e)
             }
 
             if (!current_connex.isEmpty()) {
@@ -54,19 +57,24 @@ public class CFC {
     }
 
      
+    
     /*
-     * Calcul des composants fortement connexes pour un UndirectedGraph
+     * Computation of strongly connected component for a UndirectedGraph
+     * <b>complexity: O(v + e)</b>
+     * @param graph the UndirectedGraph to explore
+     * @return the list of all strongly connected components in the graph
      */
     public static List<List<UndirectedNode>> CFC(UndirectedGraph graph) {
         
         HashSet<UndirectedNode> visited = new HashSet<UndirectedNode>();
 
         List<List<UndirectedNode>> connex = new ArrayList<>();
-        for (UndirectedNode n : graph.getNodes()) {
+
+        for (UndirectedNode n : graph.getNodes()) {                             // O(v + e)
             List<UndirectedNode> current_connex = new ArrayList<>();
             if (!visited.contains(n)) {
                 visited.add(n);
-                current_connex.addAll(DFS.DFSConvex(n, visited));
+                current_connex.addAll(DFS.DFSConnected(n, visited));           // O(v + e)
             }
 
             if (!current_connex.isEmpty()) {

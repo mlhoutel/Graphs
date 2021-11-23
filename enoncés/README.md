@@ -16,3 +16,10 @@
     -   [] Q6
 -   [] TP5
     -   [] Q4
+-   [x] DFS
+-   [x] BFS
+-   [x] Dijkstra
+-   [x] Bellman
+-   [x] Composants Fortement Connexes
+-   [x] Kruskal
+-   [x] Prim
