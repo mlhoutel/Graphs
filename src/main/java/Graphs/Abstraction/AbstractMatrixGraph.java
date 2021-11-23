@@ -1,6 +1,5 @@
 package Graphs.Abstraction;
 
-import Graphs.AdjacencyMatrix.AdjacencyMatrixUndirectedGraph;
 import Graphs.Nodes.AbstractNode;
 
 public abstract class AbstractMatrixGraph<A extends AbstractNode> implements IGraph {

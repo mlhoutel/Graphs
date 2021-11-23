@@ -1,8 +1,8 @@
 package Graphs.GraphAlgorithms;
 
-import Graphs.AdjacencyList.DirectedGraph;
-
 import java.util.List;
+
+import Graphs.AdjacencyList.DirectedGraph;
 
 public class GraphToolsList  extends GraphTools {
 

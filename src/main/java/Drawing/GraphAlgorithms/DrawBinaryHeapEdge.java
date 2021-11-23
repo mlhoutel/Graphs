@@ -1,11 +1,9 @@
 package Drawing.GraphAlgorithms;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 import Drawing.Canvas;
 import Graphs.Collection.Triple;
-import Graphs.GraphAlgorithms.BinaryHeap;
 import Graphs.GraphAlgorithms.BinaryHeapEdge;
 import Graphs.Nodes.AbstractNode;
 import Graphs.Nodes.UndirectedNode;

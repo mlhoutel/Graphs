@@ -1,18 +1,12 @@
 package Drawing.GraphAlgorithms;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 
 import Drawing.Canvas;
-import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
-import Graphs.Algorithms.DFS;
 import Graphs.Collection.Triple;
-import Graphs.GraphAlgorithms.BinaryHeap;
 import Graphs.GraphAlgorithms.BinaryHeapEdge;
-import Graphs.Nodes.AbstractNode;
-import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
 
 public class DrawUndirectedCoveringTree {

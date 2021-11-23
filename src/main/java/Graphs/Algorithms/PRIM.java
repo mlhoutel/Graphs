@@ -6,13 +6,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-import Drawing.AdjacencyList.DrawDirectedGraph;
 import Drawing.AdjacencyList.DrawUndirectedGraph;
 import Drawing.GraphAlgorithms.DrawBinaryHeapEdge;
-import Drawing.GraphAlgorithms.DrawDirectedCoveringTree;
 import Drawing.GraphAlgorithms.DrawUndirectedCoveringTree;
 import Graphs.AdjacencyList.DirectedGraph;
-import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
 import Graphs.AdjacencyList.UndirectedValuedGraph;
 import Graphs.Collection.Triple;

@@ -1,8 +1,8 @@
 package Graphs.GraphAlgorithms;
 
-import java.util.ArrayList;
-
 import static Drawing.GraphAlgorithms.DrawBinaryHeap.Display;
+
+import java.util.ArrayList;
 
 public class BinaryHeap {
 

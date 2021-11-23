@@ -7,12 +7,9 @@ import java.util.List;
 import java.util.Map;
 
 import Drawing.AdjacencyList.DrawDirectedGraph;
-import Drawing.AdjacencyList.DrawUndirectedGraph;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
-import Graphs.AdjacencyList.UndirectedValuedGraph;
-import Graphs.Collection.Pair;
 import Graphs.Collection.Triple;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
