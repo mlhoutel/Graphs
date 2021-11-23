@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"Drawing"},{"l":"Drawing.AdjacencyList"},{"l":"Drawing.GraphAlgorithms"},{"l":"Graphs.Abstraction"},{"l":"Graphs.AdjacencyList"},{"l":"Graphs.AdjacencyMatrix"},{"l":"Graphs.Algorithms"},{"l":"Graphs.Collection"},{"l":"Graphs.GraphAlgorithms"},{"l":"Graphs.Nodes"}]
