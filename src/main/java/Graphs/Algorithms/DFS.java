@@ -15,7 +15,10 @@ import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
 
-public class DFS {
+public final class DFS {
+    
+    private DFS() {}
+
      /*
      * Recursive Depth First Search algorithm for UndirectedGraph nodes (connected/disconnected)
      * <b>complexity: O(v + e)</b>

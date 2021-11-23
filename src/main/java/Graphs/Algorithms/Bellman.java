@@ -12,8 +12,9 @@ import Graphs.Collection.Pair;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 
-public class Bellman {
+public final class Bellman {
 
+    private Bellman() {}
     
     public static HashMap<DirectedNode, Pair<DirectedNode, Integer>> calculateShortestPathFromSource(DirectedGraph graph, DirectedNode source) throws Exception {
 

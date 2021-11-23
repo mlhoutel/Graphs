@@ -16,7 +16,9 @@ import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
 
-public class Kruskal {
+public final class Kruskal {
+
+    private Kruskal() {}
 
     /*
     * Kruskal Algorithm for UndirectedGraph

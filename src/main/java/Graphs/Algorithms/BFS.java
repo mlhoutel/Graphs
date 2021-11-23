@@ -13,7 +13,9 @@ import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
 
-public class BFS {
+public final class BFS {
+
+    private BFS() {}
     
     /*
      * Recursive Breadth First Search algorithm for UndirectedGraph nodes (connected/disconnected)

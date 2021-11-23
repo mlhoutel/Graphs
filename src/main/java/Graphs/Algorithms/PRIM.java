@@ -18,12 +18,14 @@ import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
 
-public class PRIM {
+public final class Prim {
+
+    private Prim() {}
 
     /*
-    * PRIM Algorithm for UndirectedGraph
+    * Prim Algorithm for UndirectedGraph
     */
-    public static BinaryHeapEdge PRIM(UndirectedGraph graph) {
+    public static BinaryHeapEdge Prim(UndirectedGraph graph) {
 
         HashSet<UndirectedNode> visited = new HashSet<>();
         BinaryHeapEdge<UndirectedNode> tree = new BinaryHeapEdge<UndirectedNode>();
@@ -58,9 +60,9 @@ public class PRIM {
     }
 
     /*
-    * PRIM Algorithm for DirectedGraph
+    * Prim Algorithm for DirectedGraph
     */
-    public static BinaryHeapEdge PRIM(DirectedGraph graph) {
+    public static BinaryHeapEdge Prim(DirectedGraph graph) {
 
         HashSet<DirectedNode> visited = new HashSet<>();
         BinaryHeapEdge<DirectedNode> tree = new BinaryHeapEdge();
@@ -99,7 +101,7 @@ public class PRIM {
         UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
         //DirectedValuedGraph al = new DirectedValuedGraph(mat);
         //System.out.println(al);
-        BinaryHeapEdge binh = PRIM(al);
+        BinaryHeapEdge binh = Prim(al);
         
         //DrawDirectedGraph.Display(al);
         //DrawBinaryHeapEdge.Display(binh);

@@ -11,7 +11,9 @@ import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
 
-public class CFC {
+public final class CFC {
+
+    private CFC() {}
     
     /*
      * Computation of strongly connected component for a DirectedGraph

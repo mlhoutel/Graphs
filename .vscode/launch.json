@@ -152,9 +152,9 @@
         },
         {
             "type": "java",
-            "name": "Launch PRIM",
+            "name": "Launch Prim",
             "request": "launch",
-            "mainClass": "Graphs.Algorithms.PRIM",
+            "mainClass": "Graphs.Algorithms.Prim",
             "projectName": "Framework-Graph"
         },
         {

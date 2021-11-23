@@ -12,7 +12,9 @@ import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 
-public class Dijkstra {
+public final class Dijkstra {
+
+    private Dijkstra() {}
 
     public static HashMap<DirectedNode, LinkedList<DirectedNode>> calculateShortestPathFromSource(DirectedGraph graph, DirectedNode source) {
 
