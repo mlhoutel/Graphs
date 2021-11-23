@@ -116,7 +116,7 @@ public class BinaryHeap {
     /**
      * Test if the node is a leaf in the binary heap
      * 
-     * @returns true if it's a leaf or false else
+     * @return true if it's a leaf or false else
      * 
      */
     public boolean isLeaf(int index) {
@@ -140,7 +140,7 @@ public class BinaryHeap {
     /**
      * Recursive test to check the validity of the binary heap
      * 
-     * @returns a boolean equal to True if the binary tree is compact from left to right
+     * @return a boolean equal to True if the binary tree is compact from left to right
      * 
      */
     public boolean test() {

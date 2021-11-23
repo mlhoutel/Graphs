@@ -1,3 +1,4 @@
 {
-    "conventionalCommits.scopes": ["TP1", "TP4", "TP2"]
+    "conventionalCommits.scopes": ["TP1", "TP4", "TP2"],
+    "java.configuration.updateBuildConfiguration": "disabled"
 }

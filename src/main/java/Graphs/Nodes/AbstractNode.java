@@ -51,7 +51,7 @@ public abstract class AbstractNode {
 	}
 
 	/**
-	 * check if two nodes are equals => the label is the key
+	 * check if two nodes are equals then the label is the key
 	 * @param n an object which is an abstract node
 	 * @return true iff this and n are equal
 	 */
