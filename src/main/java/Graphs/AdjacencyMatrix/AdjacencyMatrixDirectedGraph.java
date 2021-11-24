@@ -6,7 +6,7 @@ import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 
 import java.util.ArrayList;
-import java.util.List; 
+import java.util.List;
 
 /**
  * This class represents the directed graphs structured by an adjacency matrix.
@@ -16,7 +16,7 @@ public class AdjacencyMatrixDirectedGraph extends AbstractMatrixGraph<DirectedNo
 
 	//--------------------------------------------------
 	// 				Constructors
-	//-------------------------------------------------- 
+	//--------------------------------------------------
 
 	public AdjacencyMatrixDirectedGraph() {
 		super();
@@ -67,12 +67,11 @@ public class AdjacencyMatrixDirectedGraph extends AbstractMatrixGraph<DirectedNo
 		}
 		return v;
 	}
-	
-	
+
 	// ------------------------------------------------
-	// 					Methods 
-	// ------------------------------------------------		
-	
+	// 					Methods
+	// ------------------------------------------------
+
 	@Override
 	public boolean isArc(DirectedNode from, DirectedNode to) {
 		return matrix[from.getLabel()][to.getLabel()] > 0;
