@@ -119,7 +119,7 @@ public final class BFS {
     }
 
      /*
-     * Recursive Breadth First Search algorithm for Adjacency Matrix Directed Graph 
+     *  Iterative Breadth First Search algorithm for Adjacency Matrix Directed Graph 
      * <b>complexity: O(v²)</b>
      * @param graph the AdjacencyMatrixDirectedGraph to search
      * @return the list of all nodes (indexes) in the graph
@@ -145,6 +145,7 @@ public final class BFS {
             {
                 if (matrix.getMatrix()[node][i] != 0 && (!visites[i]))
                 {
+                    //visite
                     q.add(i);
                     res.add(i);
                     visites[i] = true;

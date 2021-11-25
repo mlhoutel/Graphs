@@ -10,6 +10,7 @@ import Drawing.AdjacencyList.DrawDirectedGraph;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
+import Graphs.AdjacencyMatrix.AdjacencyMatrixDirectedGraph;
 import Graphs.Collection.Triple;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
@@ -195,6 +196,29 @@ public final class DFS {
         return list;
     }
 
+
+/*
+     * Depth First Search algorithm for Adjacency Matrix Directed Graph 
+     * <b>complexity: O(v²)</b>
+     * @param graph the AdjacencyMatrixDirectedGraph to search
+     * @return the list of all nodes (indexes) in the graph
+     */
+    // function to perform DFS on the graph
+    public static List<Integer> dfsMatrix(AdjacencyMatrixDirectedGraph matrix, int start, boolean[] visites,List<Integer> res)
+    {
+        //visite
+        res.add(start);
+        visites[start] = true;
+
+        // boucle
+        for (int i = 0; i < matrix.getNbNodes(); i++) { // O(v)
+            if (matrix.getMatrix()[start][i] != 0 && (!visites[i])) {
+                dfsMatrix(matrix, i, visites, res); // O(v)
+            }
+        }
+        return res;
+}
+
     public static void main(String[] args) {
         int[][] mat = GraphTools.generateGraphData(5, 6, false, true, false, 100001);
         // DirectedGraph al = new DirectedGraph(mat);
@@ -203,5 +227,11 @@ public final class DFS {
         System.out.println(DFS(al));
         System.out.println(DFSEdges(al));
         DrawDirectedGraph.Display(al);
+        AdjacencyMatrixDirectedGraph amd = new AdjacencyMatrixDirectedGraph(al);
+
+        boolean[] visites = new boolean[amd.getNbNodes()];
+        Arrays.fill(visites, false);
+        List<Integer> res = new ArrayList<>();
+        System.out.println("DFSMatrix:"+dfsMatrix(amd,0,visites,res));
     }
 }
