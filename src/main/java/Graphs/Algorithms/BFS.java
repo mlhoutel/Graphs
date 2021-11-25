@@ -1,6 +1,7 @@
 package Graphs.Algorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +12,7 @@ import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
 import Graphs.AdjacencyList.UndirectedValuedGraph;
+import Graphs.AdjacencyMatrix.AdjacencyMatrixDirectedGraph;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
@@ -118,12 +120,53 @@ public final class BFS {
         return list;
     }
 
+     /*
+     *  Iterative Breadth First Search algorithm for Adjacency Matrix Directed Graph 
+     * <b>complexity: O(v²)</b>
+     * @param graph the AdjacencyMatrixDirectedGraph to search
+     * @return the list of all nodes (indexes) in the graph
+     */
+    public static List<Integer> BFSMatrix(AdjacencyMatrixDirectedGraph matrix, int start)
+    {
+        // initialisation
+        boolean[] visites = new boolean[matrix.getNbNodes()];
+        Arrays.fill(visites, false);
+        List<Integer> q = new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        q.add(start);
+        res.add(start);
+        visites[start] = true;
+
+        //boucle
+        int node;
+        while (!q.isEmpty()) // O(v)
+        {
+            node = q.get(0);
+            q.remove(q.get(0));
+            for(int i = 0; i < matrix.getNbNodes(); i++) // O(v)
+            {
+                if (matrix.getMatrix()[node][i] != 0 && (!visites[i]))
+                {
+                    //visite
+                    q.add(i);
+                    res.add(i);
+                    visites[i] = true;
+                }
+            }
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         int[][] mat = GraphTools.generateGraphData(5, 6, false, true, false, 100001);
         // DirectedGraph al = new DirectedGraph(mat);
+
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
         System.out.println(al);
         System.out.println(BFS(al));
         DrawDirectedGraph.Display(al);
+
+        AdjacencyMatrixDirectedGraph amd = new AdjacencyMatrixDirectedGraph(al);
+        System.out.println("BFSMatrix:"+BFSMatrix(amd,0));
     }
 }
