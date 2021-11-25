@@ -18,7 +18,7 @@ public class DrawDirectedGraph {
 
             HashMap<Integer, Object> nodes = new HashMap<Integer, Object>();
             for (DirectedNode n : ug.getNodes()) {
-                nodes.put(n.getLabel(), canvas.graph.insertVertex(root, null, n.getLabel(), 0, 0, 60, 30));
+                nodes.put(n.getLabel(), canvas.graph.insertVertex(root, null, n.getLabel(), 0, 0, Canvas.WIDTH, Canvas.HEIGHT));
             }
 
             for (DirectedNode n : ug.getNodes()) {

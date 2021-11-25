@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.Map.Entry;
 
 import Drawing.AdjacencyList.DrawDirectedGraph;
+import Drawing.GraphAlgorithms.DrawDirectedCoveringTree;
+import Drawing.GraphAlgorithms.DrawUndirectedCoveringTree;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.Collection.Pair;
+import Graphs.GraphAlgorithms.BinaryHeapEdge;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 
@@ -73,12 +76,24 @@ public final class Bellman {
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
         System.out.println(al);
 
-        DrawDirectedGraph.Display(al);
         try {
             System.out.println(calculateShortestPathFromSource(al, al.getNodes().get(0)));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(getShortestPathFromSourceToDestination(al, al.getNodes().get(0),al.getNodes().get(7)));
+
+        int From = 7;
+        int To = 0;
+
+        List<DirectedNode> path = getShortestPathFromSourceToDestination(al, al.getNodes().get(To), al.getNodes().get(From));
+        System.out.println(path);
+        BinaryHeapEdge binh = new BinaryHeapEdge();
+
+        for (int i = 1; i < path.size(); i++) {
+            binh.insert(path.get(i - 1), path.get(i),0);
+        }
+
+
+        DrawDirectedCoveringTree.Display(al, binh);
     }
 }

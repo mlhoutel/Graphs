@@ -21,7 +21,7 @@ public class DrawUndirectedCoveringTree {
             HashMap<Integer, Object> nodes = new HashMap<Integer, Object>();
 
             for (UndirectedNode n : graph.getNodes()) {
-                nodes.put(n.getLabel(), canvas.graph.insertVertex(root, null, n.getLabel(), 0, 0, 60, 30));
+                nodes.put(n.getLabel(), canvas.graph.insertVertex(root, null, n.getLabel(), 0, 0, Canvas.WIDTH, Canvas.HEIGHT));
             }
 
             for (UndirectedNode n : graph.getNodes()) {
@@ -37,7 +37,7 @@ public class DrawUndirectedCoveringTree {
                         inTree = inTree || a || b;
                     }
                     if(inTree){
-                        canvas.graph.insertEdge(root, null, sn.getValue() + " <in tree>", nodes.get(n.getLabel()), nodes.get(sn.getKey().getLabel()));
+                        canvas.graph.insertEdge(root, null, sn.getValue(), nodes.get(n.getLabel()), nodes.get(sn.getKey().getLabel()), "strokeColor=#FD7272;");
                     }else{
                         canvas.graph.insertEdge(root, null, sn.getValue() , nodes.get(n.getLabel()), nodes.get(sn.getKey().getLabel()));
                     }

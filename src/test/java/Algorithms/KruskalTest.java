@@ -12,10 +12,10 @@ import Graphs.Algorithms.BFS;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.UndirectedNode;
 
-public class BFSTest {
+public class KruskalTest {
 
     @Test
-    void BFS() {
+    void Kruskal() {
         //GIVEN
         int[][] mat = GraphTools.generateGraphData(5, 6, false, true, false, 100001);
         UndirectedGraph al = new UndirectedGraph(mat);

@@ -107,8 +107,8 @@ public final class Prim {
         //DrawBinaryHeapEdge.Display(binh);
         //DrawDirectedCoveringTree.Display(al, binh);
 
-        DrawUndirectedGraph.Display(al);
-        DrawBinaryHeapEdge.Display(binh);
+        //DrawUndirectedGraph.Display(al);
+        //DrawBinaryHeapEdge.Display(binh);
         DrawUndirectedCoveringTree.Display(al, binh);
         System.out.println(binh);
     }

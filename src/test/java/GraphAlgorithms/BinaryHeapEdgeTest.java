@@ -1,4 +1,4 @@
-package Algorithms;
+package GraphAlgorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +12,7 @@ import Graphs.Algorithms.BFS;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.UndirectedNode;
 
-public class BFSTest {
+public class BinaryHeapEdgeTest {
 
     @Test
     void BFS() {
@@ -21,13 +21,9 @@ public class BFSTest {
         UndirectedGraph al = new UndirectedGraph(mat);
 
         //WHEN
-        List<UndirectedNode> result = BFS.BFS(al);
-        List<Integer> labels = new ArrayList<Integer>();
-        for (UndirectedNode node : result) {
-            labels.add(node.getLabel());
-        }
+        //List<UndirectedNode> result = BFS.BFS(al);
 
         //THEN
-        Assertions.assertEquals(labels, new ArrayList(Arrays.asList(0,2,4,1,3)));
+        //Assertions.assertEquals(labels, new ArrayList(Arrays.asList(0,2,4,1,3)));
     }
 }

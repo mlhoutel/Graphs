@@ -12,10 +12,10 @@ import Graphs.Algorithms.BFS;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.UndirectedNode;
 
-public class BFSTest {
+public class CFCTest {
 
     @Test
-    void BFS() {
+    void CFC() {
         //GIVEN
         int[][] mat = GraphTools.generateGraphData(5, 6, false, true, false, 100001);
         UndirectedGraph al = new UndirectedGraph(mat);

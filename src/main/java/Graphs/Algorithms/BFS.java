@@ -6,7 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+import Drawing.AdjacencyList.DrawDirectedGraph;
 import Graphs.AdjacencyList.DirectedGraph;
+import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
 import Graphs.AdjacencyList.UndirectedValuedGraph;
 import Graphs.GraphAlgorithms.GraphTools;
@@ -119,8 +121,9 @@ public final class BFS {
     public static void main(String[] args) {
         int[][] mat = GraphTools.generateGraphData(5, 6, false, true, false, 100001);
         // DirectedGraph al = new DirectedGraph(mat);
-        UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
+        DirectedValuedGraph al = new DirectedValuedGraph(mat);
         System.out.println(al);
         System.out.println(BFS(al));
+        DrawDirectedGraph.Display(al);
     }
 }

@@ -17,12 +17,12 @@ public class DrawBinaryHeapEdge {
             Triple n = bin.get(i);
 
             if (!nodes.containsKey(n.getFirst())) {
-                Object first = canvas.graph.insertVertex(root, null, n.getFirst().toString(), 0, 0, 60, 30); 
+                Object first = canvas.graph.insertVertex(root, null, n.getFirst().toString(), 0, 0, Canvas.WIDTH, Canvas.HEIGHT);
                 nodes.put((AbstractNode)n.getFirst(), first);
             } 
 
             if (!nodes.containsKey(n.getSecond())) {
-                Object second = canvas.graph.insertVertex(root, null, n.getSecond().toString(), 0, 0, 60, 30); 
+                Object second = canvas.graph.insertVertex(root, null, n.getSecond().toString(), 0, 0, Canvas.WIDTH, Canvas.HEIGHT);
                 nodes.put((AbstractNode)n.getSecond(), second);
             }
 

@@ -7,9 +7,11 @@ import java.util.List;
 import java.util.Map;
 
 import Drawing.AdjacencyList.DrawDirectedGraph;
+import Drawing.AdjacencyList.DrawUndirectedGraph;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
+import Graphs.AdjacencyList.UndirectedValuedGraph;
 import Graphs.Collection.Triple;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
@@ -198,10 +200,10 @@ public final class DFS {
     public static void main(String[] args) {
         int[][] mat = GraphTools.generateGraphData(5, 6, false, true, false, 100001);
         // DirectedGraph al = new DirectedGraph(mat);
-        DirectedValuedGraph al = new DirectedValuedGraph(mat);
+        UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
         System.out.println(al);
         System.out.println(DFS(al));
         System.out.println(DFSEdges(al));
-        DrawDirectedGraph.Display(al);
+        DrawUndirectedGraph.Display(al);
     }
 }

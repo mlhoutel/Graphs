@@ -5,13 +5,16 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
+import Drawing.AdjacencyList.DrawDirectedGraph;
 import Graphs.AdjacencyList.DirectedGraph;
+import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
 
-public final class CFC {
+public final class
+CFC {
 
     private CFC() {}
     
@@ -88,10 +91,11 @@ public final class CFC {
     }
     public static void main(String[] args) {
         int[][] mat = GraphTools.generateGraphData(5, 6, false, true, false, 100001);
-        DirectedGraph al = new DirectedGraph(mat);
+        DirectedValuedGraph al = new DirectedValuedGraph(mat);
         // UndirectedGraph al = new UndirectedGraph(mat);
         System.out.println(al);
         System.out.println(CFC(al));
+        DrawDirectedGraph.Display(al);
     }
 
 }

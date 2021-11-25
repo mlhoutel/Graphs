@@ -7,7 +7,7 @@ public class DrawBinaryHeap {
     
     public static void VisitDisplay(BinaryHeap bin, Canvas canvas, Object root, Object parent, int index) {
 
-        Object current = canvas.graph.insertVertex(root, null, bin.nodes.get(index).toString(), 0, 0, 60, 30);
+        Object current = canvas.graph.insertVertex(root, null, bin.nodes.get(index).toString(), 0, 0, Canvas.WIDTH, Canvas.HEIGHT);
         canvas.graph.insertEdge(root, null, "", parent, current);
 
         if (bin.hasFirstChild(index)) {
