@@ -3,7 +3,7 @@ package Drawing.AdjacencyList;
 import java.util.HashMap;
 import java.util.Map;
 
-import Drawing.Canvas;
+import Drawing.DrawCanvas.Canvas;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;

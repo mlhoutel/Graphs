@@ -1,6 +1,6 @@
 package Drawing.GraphAlgorithms;
 
-import Drawing.Canvas;
+import Drawing.DrawCanvas.Canvas;
 import Graphs.GraphAlgorithms.BinaryHeap;
 
 public class DrawBinaryHeap {

@@ -1,4 +1,4 @@
-package Drawing;
+package Drawing.DrawCanvas;
 
 import java.awt.*;
 import java.util.Map;

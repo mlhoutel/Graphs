@@ -3,7 +3,7 @@ package Drawing.GraphAlgorithms;
 import java.util.HashMap;
 import java.util.Map;
 
-import Drawing.Canvas;
+import Drawing.DrawCanvas.Canvas;
 import Graphs.AdjacencyList.UndirectedGraph;
 import Graphs.Collection.Triple;
 import Graphs.GraphAlgorithms.BinaryHeapEdge;
