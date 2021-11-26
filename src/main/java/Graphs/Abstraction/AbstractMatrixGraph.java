@@ -28,6 +28,7 @@ public abstract class AbstractMatrixGraph<A extends AbstractNode> implements IGr
 
     /**
      * Returns the list of nodes in the graph
+     * @return list of nodes in the graph
      */
     public int[][] getMatrix() {
         return this.matrix;
@@ -35,6 +36,7 @@ public abstract class AbstractMatrixGraph<A extends AbstractNode> implements IGr
 
     /**
      * Returns the number of nodes in the graph (referred to as the order of the graph)
+     * @return the number of nodes in the graph 
      */
     public int getNbNodes() {
         return this.order;

@@ -76,14 +76,18 @@ public class DirectedNode extends AbstractNode {
 
     /**
 	 * add a new successor with its value cost. If the successor exists, the weight is changed.
-	 */
+	 * @param v node
+     * @param val value
+     */
 	public void addSucc(DirectedNode v,int val) {
 		this.succs.put(v, val);
 	}
    
 	/**
 	 * add a new predecessor with its value cost. If the predecessor exists, the weight is changed.
-	 */
+     * @param v node
+     * @param val value
+     */
 	public void addPred(DirectedNode v,int val) {
 		this.preds.put(v, val);
 	}

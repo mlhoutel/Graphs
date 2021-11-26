@@ -37,6 +37,7 @@ public abstract class AbstractListGraph<A extends AbstractNode> implements IGrap
 
     /**
      * Returns the list of nodes in the graph
+     * @return list of nodes in the graph
      */
     public List<A> getNodes() {
         return nodes;
@@ -44,6 +45,7 @@ public abstract class AbstractListGraph<A extends AbstractNode> implements IGrap
 
     /**
      * Returns the number of nodes in the graph (referred to as the order of the graph)
+     * @return number of nodes in the graph
      */
     public int getNbNodes() {
         return this.order;

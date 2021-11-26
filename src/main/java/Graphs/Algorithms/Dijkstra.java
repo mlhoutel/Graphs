@@ -24,7 +24,7 @@ public final class Dijkstra {
      * <b>complexity: O(E log V)</b>
      * @param graph the DirectedGraph to explore
      * @param source the DirectedNode to go from
-     * @return
+     * @return all nearest nodes and their cost
      */
     public static HashMap<DirectedNode, Pair<DirectedNode, Integer>> Dijkstra(DirectedGraph graph, DirectedNode source) {
 
@@ -87,7 +87,7 @@ public final class Dijkstra {
      * @param graph the DirectedGraph to explore
      * @param source the DirectedNode to go from
      * @param destination the DirectedNode to go to
-     * @return shortest path from source to destination as a List<DirectedNode>
+     * @return shortest path from source to destination as a List
      */
     public static List<DirectedNode> ShortestPath(DirectedGraph graph, DirectedNode source, DirectedNode destination) {
 
@@ -113,7 +113,7 @@ public final class Dijkstra {
      * @param graph the UndirectedNode to explore
      * @param source the UndirectedNode to go from
      * @param destination the UndirectedNode to go to
-     * @return shortest path from source to destination as a List<UndirectedNode>
+     * @return shortest path from source to destination as a List
      */
 
     public static List<UndirectedNode> ShortestPath(UndirectedGraph graph, UndirectedNode source, UndirectedNode destination) {

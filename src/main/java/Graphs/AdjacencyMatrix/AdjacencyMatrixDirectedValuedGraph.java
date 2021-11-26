@@ -47,6 +47,8 @@ public class AdjacencyMatrixDirectedValuedGraph extends AdjacencyMatrixDirectedG
 	// ------------------------------------------------	
 	
 	/**
+	 * @param from arc from
+	 * @param to arc to
      * removes the arc (from,to) if there exists at least one between these nodes in the graph. And if there remains no arc, removes the cost.
      */
 	@Override
@@ -56,6 +58,9 @@ public class AdjacencyMatrixDirectedValuedGraph extends AdjacencyMatrixDirectedG
 	}
 
 	/**
+	 * @param from arc from
+	 * @param to arc to
+	 * @param cost arc cost
      * adds the arc (from,to,cost), we allow the multi-graph. If there is already one initial cost, we keep it.
      */
 	public void addArc(DirectedNode from, DirectedNode to, int cost ) {

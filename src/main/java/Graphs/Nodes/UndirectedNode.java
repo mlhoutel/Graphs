@@ -50,6 +50,8 @@ public class UndirectedNode extends AbstractNode {
 	
 	/**
 	 * add a new neighbour with its value cost. If the neighbour exists, the weight is changed.
+     * @param v node
+     * @param val value
 	 */
 	public void addNeigh(UndirectedNode v, int val) {
 		this.neighbours.put(v, val);

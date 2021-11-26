@@ -36,6 +36,9 @@ public class DirectedValuedGraph extends DirectedGraph {
     
 
     /**
+     * @param from node from
+     * @param to node to
+     * @param cost arc cost
      * Adds the arc (from,to) with cost  if it is not already present in the graph
      */
     public void addArc(DirectedNode from, DirectedNode to, int cost) {

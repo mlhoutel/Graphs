@@ -107,6 +107,7 @@ public class UndirectedGraph extends AbstractListGraph<UndirectedNode> implement
     }
 
     /**
+     * @param src source node
      * @return the corresponding nodes in the list this.nodes
      */
     public UndirectedNode getNodeOfList(UndirectedNode src) {

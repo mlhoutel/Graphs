@@ -78,6 +78,8 @@ public class AdjacencyMatrixDirectedGraph extends AbstractMatrixGraph<DirectedNo
 	}
 
 	/**
+	 * @param from arc from
+	 * @param to arc to
 	 * removes the arc (from,to) if there exists at least one between these nodes in the graph.
 	 */
 	@Override
@@ -88,6 +90,8 @@ public class AdjacencyMatrixDirectedGraph extends AbstractMatrixGraph<DirectedNo
 	}
 
 	/**
+	 * @param from arc from
+	 * @param to arc to
 	 * Adds the arc (from,to). we allow multiple graph.
 	 */
 	@Override

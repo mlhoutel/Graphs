@@ -56,10 +56,11 @@ public class BinaryHeap {
         this.percolateDown(index);
     }
 
-    /*
-        While the node has a father and its father value
-        is lower that its value, we swap the nodes to 
-        bring higher the lower value.
+    /**
+     * While the node has a father and its father value
+     * is lower that its value, we swap the nodes to
+     * bring higher the lower value.
+     * @param index node id
     */
     private void percolateUp(int index) {
         if (hasFather(index)) {
@@ -74,10 +75,11 @@ public class BinaryHeap {
         }
     }
 
-    /*
-        While the node has at least one child, we take
-        the child with the min value and swap it with the
-        current node to bring lower the higher value.
+    /**
+     * While the node has at least one child, we take
+     * the child with the min value and swap it with the
+     * current node to bring lower the higher value.
+     * @param index node id
     */
     private void percolateDown(int index) {
         if (!isLeaf(index)) {
@@ -115,9 +117,8 @@ public class BinaryHeap {
 
     /**
      * Test if the node is a leaf in the binary heap
-     * 
+     * @param index node id
      * @return true if it's a leaf or false else
-     * 
      */
     public boolean isLeaf(int index) {
         return !hasFirstChild(index);
@@ -139,9 +140,7 @@ public class BinaryHeap {
 
     /**
      * Recursive test to check the validity of the binary heap
-     * 
      * @return a boolean equal to True if the binary tree is compact from left to right
-     * 
      */
     public boolean test() {
         return this.isEmpty() || testRec(0);

@@ -28,7 +28,7 @@ public final class Bellman {
      * <b>complexity: O(E log V)</b>
      * @param graph the DirectedGraph to explore
      * @param source the DirectedNode to go from
-     * @return
+     * @return all nearest nodes and their cost
      */
     public static HashMap<DirectedNode, Pair<DirectedNode, Integer>> Bellman(DirectedGraph graph, DirectedNode source) throws Exception {
 
@@ -70,7 +70,7 @@ public final class Bellman {
      * <b>complexity: O(E log V)</b>
      * @param graph the UndirectedGraph to explore
      * @param source the UndirectedNode to go from
-     * @return
+     * @return all nearest nodes and their cost
      */
     public static HashMap<UndirectedNode, Pair<UndirectedNode, Integer>> Bellman(UndirectedGraph graph, UndirectedNode source) throws Exception {
 

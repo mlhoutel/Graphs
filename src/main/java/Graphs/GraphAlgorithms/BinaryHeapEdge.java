@@ -60,7 +60,6 @@ public class BinaryHeapEdge<T extends AbstractNode> {
 
     /**
      * Insert a new edge in the binary heap
-     *
      * @param from one node of the edge
      * @param to   one node of the edge
      * @param val  the edge weight
@@ -85,7 +84,6 @@ public class BinaryHeapEdge<T extends AbstractNode> {
 
     /**
      * Removes the root edge in the binary heap, and swap the edges to keep a valid binary heap
-     *
      * @return the edge with the minimal value (root of the binary heap)
      */
     public Triple<T, T, Integer> remove() {
@@ -114,7 +112,6 @@ public class BinaryHeapEdge<T extends AbstractNode> {
 
     /**
      * From an edge indexed by src, find the child having the least weight and return it
-     *
      * @param src an index of the list edges
      * @return the index of the child edge with the least weight
      */
@@ -145,7 +142,6 @@ public class BinaryHeapEdge<T extends AbstractNode> {
 
     /**
      * Swap two edges in the binary heap
-     *
      * @param father an index of the list edges
      * @param child  an index of the list edges
      */
@@ -158,7 +154,6 @@ public class BinaryHeapEdge<T extends AbstractNode> {
 
     /**
      * Create the string of the visualisation of a binary heap
-     *
      * @return the string of the binary heap
      */
     public String toString() {
@@ -207,7 +202,6 @@ public class BinaryHeapEdge<T extends AbstractNode> {
 
     /**
      * Recursive test to check the validity of the binary heap
-     *
      * @return a boolean equal to True if the binary tree is compact from left to right
      */
     private boolean test() {

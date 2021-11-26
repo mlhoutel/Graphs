@@ -36,6 +36,9 @@ public class UndirectedValuedGraph extends UndirectedGraph{
     
 
     /**
+     * @param x node A
+     * @param y node B
+     * @param cost arc cost
      * Adds the edge (from,to) with cost if it is not already present in the graph
      */
     public void addEdge(UndirectedNode x, UndirectedNode y, int cost) {

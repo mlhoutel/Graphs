@@ -103,6 +103,7 @@ public class DirectedGraph extends AbstractListGraph<DirectedNode> implements ID
     }
 
     /**
+     * @param src source node
      * @return the corresponding nodes in the list this.nodes
      */
     public DirectedNode getNodeOfList(DirectedNode src) {

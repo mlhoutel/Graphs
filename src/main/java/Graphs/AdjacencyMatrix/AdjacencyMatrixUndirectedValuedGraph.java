@@ -50,6 +50,8 @@ public class AdjacencyMatrixUndirectedValuedGraph extends AdjacencyMatrixUndirec
 	// ------------------------------------------------	
 	
 	/**
+	 * @param x arc from
+	 * @param y arc to
      * removes the edge (x,y) if there exists at least one between these nodes in the graph. And if there remains no arc, removes the cost.
      */
 	@Override
@@ -59,6 +61,9 @@ public class AdjacencyMatrixUndirectedValuedGraph extends AdjacencyMatrixUndirec
 	}
 
 	/**
+	 * @param x arc from
+	 * @param y arc to
+	 * @param cost arc cost
      * adds the edge (x,y,cost), we allow the multi-graph. If there is already one initial cost, we keep it.
      */
 	public void addEdge(UndirectedNode x, UndirectedNode y, int cost ) {

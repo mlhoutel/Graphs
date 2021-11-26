@@ -102,6 +102,7 @@
                     <sourceFileIncludes>
                         <sourceFileInclude>**/*.java</sourceFileInclude>
                     </sourceFileIncludes>
+                    <stylesheetfile>dracula-javadoc.css</stylesheetfile>
                 </configuration>
                 <executions>
                     <execution>

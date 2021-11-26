@@ -73,6 +73,8 @@ public class AdjacencyMatrixUndirectedGraph extends AbstractMatrixGraph<Undirect
 	}
 	
 	/**
+	 * @param x arc from
+	 * @param y arc to
      * removes the edge (x,y) if there exists at least one between these nodes in the graph.
      */
 	@Override
@@ -82,6 +84,8 @@ public class AdjacencyMatrixUndirectedGraph extends AbstractMatrixGraph<Undirect
 	}
 
 	/**
+	 * @param x arc from
+	 * @param y arc to
      * adds the edge (x,y), we allow the multi-graph.
      */
 	@Override

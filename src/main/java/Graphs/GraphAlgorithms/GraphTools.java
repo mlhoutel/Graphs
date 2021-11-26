@@ -13,7 +13,6 @@ public class GraphTools {
 	}
 
 	/**
-	 * 
 	 * @param n, the number of vertices
 	 * @param multi, at true if we want a multi-graph
 	 * @param s, at true if the graph is symmetric
@@ -85,7 +84,6 @@ public class GraphTools {
 	}
 
 	/**
-	 * 
 	 * @param n, the number of vertices
 	 * @param m, the number of edges
 	 * @param multi, at true if we want a multi-graph
@@ -155,13 +153,13 @@ public class GraphTools {
 	}
 
 	/**
-	 * 
 	 * @param n, the number of vertices
 	 * @param multi, at true if we want a multi-graph
 	 * @param s, at true if the graph is symmetric
 	 * @param c, at true if the graph is connexted
 	 * @param neg, at true if the graph has negative weights 
 	 * @param seed, the unique seed giving a unique random graph
+	 * @return the generated matrix
 	 */
 	public static int[][] generateValuedGraphData(int n, boolean multi, boolean s, boolean c, boolean neg, int seed){
 		if(_DEBBUG>0){

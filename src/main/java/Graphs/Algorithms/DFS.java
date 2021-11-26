@@ -204,8 +204,8 @@ public final class DFS {
      * <b>complexity: O(v^2)</b>
      * @param matrix the AdjacencyMatrixDirectedGraph to search
      * @param start the strating index
-     * @param visites
-     * @param res
+     * @param visites visited nodes
+     * @param res nodes that still have to be visited
      * @return the list of all nodes (indexes) in the graph
      */
     public static List<Integer> DFSMatrix(AdjacencyMatrixDirectedGraph matrix, int start, boolean[] visites, List<Integer> res) {
@@ -227,8 +227,8 @@ public final class DFS {
      * <b>complexity: O(v^2)</b>
      * @param matrix the AdjacencyMatrixDirectedGraph to search
      * @param start the strating index
-     * @param visites
-     * @param res
+     * @param visites visited nodes
+     * @param res nodes that still have to be visited
      * @return the list of all nodes (indexes) in the graph
      */
     public static List<Integer> DFSMatrix(AdjacencyMatrixUndirectedGraph matrix, int start, boolean[] visites, List<Integer> res) {
