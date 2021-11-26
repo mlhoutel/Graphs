@@ -24,10 +24,11 @@ public final class Bellman {
     private Bellman() {}
 
     /**
-     * Dijkstra Algorithm for DirectedGraph
+     * Bellman Algorithm for DirectedGraph
      * <b>complexity: O(E log V)</b>
      * @param graph the DirectedGraph to explore
      * @param source the DirectedNode to go from
+     * @throws Exception if negative cycles
      * @return all nearest nodes and their cost
      */
     public static HashMap<DirectedNode, Pair<DirectedNode, Integer>> Bellman(DirectedGraph graph, DirectedNode source) throws Exception {
@@ -66,10 +67,11 @@ public final class Bellman {
     }
 
     /**
-     * Dijkstra Algorithm for UndirectedGraph
+     * Bellman Algorithm for UndirectedGraph
      * <b>complexity: O(E log V)</b>
      * @param graph the UndirectedGraph to explore
      * @param source the UndirectedNode to go from
+     * @throws Exception if negative cycles
      * @return all nearest nodes and their cost
      */
     public static HashMap<UndirectedNode, Pair<UndirectedNode, Integer>> Bellman(UndirectedGraph graph, UndirectedNode source) throws Exception {
@@ -111,7 +113,8 @@ public final class Bellman {
      * @param graph the DirectedGraph to explore
      * @param source the DirectedNode to go from
      * @param destination the DirectedNode to go to
-     * @return shortest path from source to destination as a List<DirectedNode>
+     * @throws Exception if negative cycles
+     * @return shortest path from source to destination as a List of DirectedNode
      */
     public static List<DirectedNode> ShortestPath(DirectedGraph graph, DirectedNode source, DirectedNode destination) throws Exception {
 
@@ -137,7 +140,8 @@ public final class Bellman {
      * @param graph the DirectedGraph to explore
      * @param source the DirectedNode to go from
      * @param destination the DirectedNode to go to
-     * @return shortest path from source to destination as a List<DirectedNode>
+     * @throws Exception if negative cycles
+     * @return shortest path from source to destination as a List of DirectedNode
      */
     public static List<UndirectedNode> ShortestPath(UndirectedGraph graph, UndirectedNode source, UndirectedNode destination) throws Exception {
 
