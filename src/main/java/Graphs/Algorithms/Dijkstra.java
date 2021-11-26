@@ -1,100 +1,163 @@
 package Graphs.Algorithms;
 
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.Set;
 
 import Drawing.AdjacencyList.DrawDirectedGraph;
+import Drawing.GraphAlgorithms.DrawDirectedCoveringTree;
 import Graphs.AdjacencyList.DirectedGraph;
+import Graphs.AdjacencyList.DirectedValuedGraph;
+import Graphs.AdjacencyList.UndirectedGraph;
+import Graphs.Collection.Pair;
+import Graphs.GraphAlgorithms.BinaryHeapEdge;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
+import Graphs.Nodes.UndirectedNode;
 
 public final class Dijkstra {
 
     private Dijkstra() {}
 
-    public static HashMap<DirectedNode, LinkedList<DirectedNode>> calculateShortestPathFromSource(DirectedGraph graph, DirectedNode source) {
+    /**
+     * Dijkstra Algorithm for DirectedGraph
+     * <b>complexity: O(E log V)</b>
+     * @param graph the DirectedGraph to explore
+     * @param source the DirectedNode to go from
+     * @return
+     */
+    public static HashMap<DirectedNode, Pair<DirectedNode, Integer>> Dijkstra(DirectedGraph graph, DirectedNode source) {
 
         //initialisation
+        HashMap<DirectedNode, Pair<DirectedNode, Integer>> distances = new HashMap<>();
+        for (DirectedNode node : graph.getNodes()){
+            distances.put(node, new Pair<>(null, 999999999));
+        }
 
-        HashMap<DirectedNode, Integer> distances = new HashMap<>();
-        for(DirectedNode node : graph.getNodes()){
-            distances.put(node, Integer.MAX_VALUE);
-        }
-        HashMap<DirectedNode, LinkedList<DirectedNode>> shortestPaths = new HashMap<>();
-        for(DirectedNode node : graph.getNodes()){
-            shortestPaths.put(node,new LinkedList<>());
-        }
-        distances.put(source, 0);
+        distances.put(source, new Pair<>(source, 0));
+
         Set<DirectedNode> settledNodes = new HashSet<>();
         Set<DirectedNode> unsettledNodes = new HashSet<>();
 
         unsettledNodes.add(source);
 
         //déroulement
+        while (!unsettledNodes.isEmpty()) {
 
-        while (unsettledNodes.size() != 0) {
-            DirectedNode currentNode = getLowestDistanceNode(unsettledNodes,distances);
+            DirectedNode currentNode = getLowestDistanceNode(unsettledNodes, distances);
             unsettledNodes.remove(currentNode);
-            for (Entry < DirectedNode, Integer> adjacencyPair:
-                currentNode.getSuccs().entrySet()) {
+
+            for (Map.Entry<DirectedNode, Integer> adjacencyPair: currentNode.getSuccs().entrySet()) {
                 DirectedNode adjacentNode = adjacencyPair.getKey();
                 Integer edgeWeight = adjacencyPair.getValue();
+
                 if (!settledNodes.contains(adjacentNode)) {
-                    CalculateMinimumDistance(adjacentNode, edgeWeight, currentNode, distances,shortestPaths);
+                    Integer distance = distances.get(currentNode).getRight() + edgeWeight;
+                    if (distance < distances.get(adjacentNode).getRight()) {
+                        distances.put(adjacentNode, new Pair<>(distances.get(adjacentNode).getLeft(), distance));
+                    }
                     unsettledNodes.add(adjacentNode);
                 }
             }
+
             settledNodes.add(currentNode);
         }
-        return shortestPaths;
+
+        return distances;
     }
 
-    private static void CalculateMinimumDistance(DirectedNode evaluationNode,
-        Integer edgeWeigh, DirectedNode sourceNode, HashMap<DirectedNode, Integer> distances, HashMap<DirectedNode, LinkedList<DirectedNode>> shortestPaths) {
-        Integer sourceDistance = distances.get(sourceNode);
-        if (sourceDistance + edgeWeigh < distances.get(evaluationNode)) {
-            distances.put(evaluationNode,sourceDistance + edgeWeigh);
-            LinkedList<DirectedNode> shortestPath = new LinkedList<>(shortestPaths.get(sourceNode));
-            shortestPath.add(sourceNode);
-            shortestPaths.put(evaluationNode, shortestPath);
-        }
-}
-
-    private static DirectedNode getLowestDistanceNode(Set < DirectedNode > unsettledNodes, HashMap<DirectedNode, Integer> distances) {
+    private static DirectedNode getLowestDistanceNode(Set<DirectedNode> unsettledNodes, HashMap<DirectedNode, Pair<DirectedNode, Integer>> distances) {
         DirectedNode lowestDistanceNode = null;
-        int lowestDistance = Integer.MAX_VALUE;
+        Integer lowestDistance = Integer.MAX_VALUE;
+
         for (DirectedNode node: unsettledNodes) {
-            int nodeDistance = distances.get(node);
+            Integer nodeDistance = distances.get(node).getRight();
             if (nodeDistance < lowestDistance) {
                 lowestDistance = nodeDistance;
                 lowestDistanceNode = node;
             }
         }
+
         return lowestDistanceNode;
     }
 
-    private static void printShortestPath(DirectedNode source, DirectedNode dest,LinkedList<DirectedNode> shortestPath){
-        System.out.println("Shortest path from "+ source.getLabel() + " to " + dest.getLabel() + ": " +shortestPath);
+    /**
+     * Get the Shortest Path from source to destination with the Dijkstra algorithm for DirectedGraph
+     * <b>complexity: O(E log V)</b>
+     * @param graph the DirectedGraph to explore
+     * @param source the DirectedNode to go from
+     * @param destination the DirectedNode to go to
+     * @return shortest path from source to destination as a List<DirectedNode>
+     */
+    public static List<DirectedNode> ShortestPath(DirectedGraph graph, DirectedNode source, DirectedNode destination) {
 
+        HashMap<DirectedNode, Pair<DirectedNode, Integer>> shortestPaths = Dijkstra(graph, destination);
+        List<DirectedNode> shortestPath = new LinkedList<DirectedNode>();
+
+        shortestPath.add(source);
+        DirectedNode temp = source;
+
+        int cpt = graph.getNodes().size();
+        while (temp != destination && cpt >= 0) {
+            temp = shortestPaths.get(temp).getLeft();
+            shortestPath.add(temp);
+            cpt--;
+        }
+
+        return shortestPath;
     }
 
+    /**
+     * Get the Shortest Path from source to destination with the Dijkstra algorithm for UndirectedGraph
+     * <b>complexity: O(E log V)</b>
+     * @param graph the UndirectedNode to explore
+     * @param source the UndirectedNode to go from
+     * @param destination the UndirectedNode to go to
+     * @return shortest path from source to destination as a List<UndirectedNode>
+     */
+
+    public static List<UndirectedNode> ShortestPath(UndirectedGraph graph, UndirectedNode source, UndirectedNode destination) {
+
+        // HashMap<UndirectedNode, Pair<UndirectedNode, Integer>> shortestPaths = Dijkstra(graph, destination);
+        List<UndirectedNode> shortestPath = new LinkedList<UndirectedNode>();
+
+        shortestPath.add(source);
+        UndirectedNode temp = source;
+        /*
+        int cpt = graph.getNodes().size();
+        while (temp != destination && cpt >= 0) {
+            temp = shortestPaths.get(temp).getLeft();
+            shortestPath.add(temp);
+            cpt--;
+        }
+        */
+        return shortestPath;
+    }
 
     public static void main(String[] args) {
-        int[][] mat = GraphTools.generateGraphData(10, 10, false, true, false, 100001);
+        int[][] mat = GraphTools.generateValuedGraphData(10, true, false, true, false, 100001);
         GraphTools.afficherMatrix(mat);
-        DirectedGraph al = new DirectedGraph(mat);
+        DirectedValuedGraph al = new DirectedValuedGraph(mat);
         DrawDirectedGraph.Display(al);
 
+        System.out.println(Dijkstra(al, al.getNodes().get(0)));
 
-        for(DirectedNode src : al.getNodes()){
-            HashMap<DirectedNode, LinkedList<DirectedNode>> shortestPath = calculateShortestPathFromSource(al,src);
-            for(DirectedNode dest : al.getNodes()){
-                printShortestPath(src, dest, shortestPath.get(dest));
+        for(DirectedNode src : al.getNodes()) {
+            for(DirectedNode dest : al.getNodes()) {
+                System.out.println(ShortestPath(al ,src ,dest));
             }
         }
+
+        int From = 7;
+        int To = 0;
+
+        List<DirectedNode> path = ShortestPath(al, al.getNodes().get(From), al.getNodes().get(To));
+        BinaryHeapEdge<DirectedNode> binh = new BinaryHeapEdge<DirectedNode>();
+
+        for (int i = 1; i < path.size(); i++) {
+            binh.insert(path.get(i - 1), path.get(i),0);
+        }
+
+        DrawDirectedCoveringTree.Display(al, binh);
     }
 }

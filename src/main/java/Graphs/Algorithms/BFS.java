@@ -13,6 +13,7 @@ import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
 import Graphs.AdjacencyList.UndirectedValuedGraph;
 import Graphs.AdjacencyMatrix.AdjacencyMatrixDirectedGraph;
+import Graphs.AdjacencyMatrix.AdjacencyMatrixUndirectedGraph;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
@@ -20,8 +21,8 @@ import Graphs.Nodes.UndirectedNode;
 public final class BFS {
 
     private BFS() {}
-    
-    /*
+
+    /**
      * Recursive Breadth First Search algorithm for UndirectedGraph nodes (connected/disconnected)
      * <b>complexity: O(v + e)</b>
      * @param graph the UndirectedGraph to visit
@@ -44,7 +45,7 @@ public final class BFS {
         return list;
     }
 
-    /*
+    /**
      * Recursive Breadth First Search algorithm for UndirectedGraph nodes (connected)
      * <b>complexity: O(v + e)</b>
      * @param queue the UndirectedNodes waiting to be visited 
@@ -71,7 +72,7 @@ public final class BFS {
     }
 
 
-    /*
+    /**
      * Recursive Breadth First Search algorithm for DirectedGraph nodes (connected/disconnected)
      * <b>complexity: O(v + e)</b>
      * @param graph the DirectedGraph to search
@@ -94,9 +95,9 @@ public final class BFS {
         return list;
     }
 
-    /*
+    /**
      * Recursive Breadth First Search algorithm for DirecteGraph nodes (connected)
-     * @complexity O(v + e)
+     * <b>complexity: O(v + e)</b>
      * @param queue the DirectedNode waiting to be visited 
      * @param visited the Set of already visited DirectedNode
      * @return the list of all DirectedNode in the graph
@@ -120,14 +121,14 @@ public final class BFS {
         return list;
     }
 
-     /*
+    /**
      *  Iterative Breadth First Search algorithm for Adjacency Matrix Directed Graph 
-     * <b>complexity: O(v²)</b>
-     * @param graph the AdjacencyMatrixDirectedGraph to search
+     * <b>complexity: O(v^2)</b>
+     * @param matrix the AdjacencyMatrixDirectedGraph to search
+     * @param start the strating index
      * @return the list of all nodes (indexes) in the graph
      */
-    public static List<Integer> BFSMatrix(AdjacencyMatrixDirectedGraph matrix, int start)
-    {
+    public static List<Integer> BFSMatrix(AdjacencyMatrixDirectedGraph matrix, int start) {
         // initialisation
         boolean[] visites = new boolean[matrix.getNbNodes()];
         Arrays.fill(visites, false);
@@ -139,14 +140,45 @@ public final class BFS {
 
         //boucle
         int node;
-        while (!q.isEmpty()) // O(v)
-        {
+        while (!q.isEmpty())  {                                         // O(v^2)
             node = q.get(0);
             q.remove(q.get(0));
-            for(int i = 0; i < matrix.getNbNodes(); i++) // O(v)
-            {
-                if (matrix.getMatrix()[node][i] != 0 && (!visites[i]))
-                {
+            for(int i = 0; i < matrix.getNbNodes(); i++) {              // O(v)
+                if (matrix.getMatrix()[node][i] != 0 && (!visites[i])) {
+                    //visite
+                    q.add(i);
+                    res.add(i);
+                    visites[i] = true;
+                }
+            }
+        }
+        return res;
+    }
+
+    /**
+     *  Iterative Breadth First Search algorithm for Adjacency Matrix Directed Graph
+     * <b>complexity: O(v^2)</b>
+     * @param matrix the AdjacencyMatrixDirectedGraph to search
+     * @param start the strating index
+     * @return the list of all nodes (indexes) in the graph
+     */
+    public static List<Integer> BFSMatrix(AdjacencyMatrixUndirectedGraph matrix, int start) {
+        // initialisation
+        boolean[] visites = new boolean[matrix.getNbNodes()];
+        Arrays.fill(visites, false);
+        List<Integer> q = new ArrayList<>();
+        List<Integer> res = new ArrayList<>();
+        q.add(start);
+        res.add(start);
+        visites[start] = true;
+
+        //boucle
+        int node;
+        while (!q.isEmpty())  {                                         // O(v^2)
+            node = q.get(0);
+            q.remove(q.get(0));
+            for(int i = 0; i < matrix.getNbNodes(); i++) {              // O(v)
+                if (matrix.getMatrix()[node][i] != 0 && (!visites[i])) { // TODO: empecher duplicatas (2 sens)
                     //visite
                     q.add(i);
                     res.add(i);

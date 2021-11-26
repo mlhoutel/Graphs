@@ -11,9 +11,6 @@ import Drawing.AdjacencyList.DrawUndirectedGraph;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
-<<<<<<< HEAD
-import Graphs.AdjacencyList.UndirectedValuedGraph;
-=======
 import Graphs.AdjacencyMatrix.AdjacencyMatrixDirectedGraph;
 import Graphs.AdjacencyMatrix.AdjacencyMatrixUndirectedGraph;
 import Graphs.Collection.Triple;
@@ -25,7 +22,7 @@ public final class DFS {
     
     private DFS() {}
 
-     /*
+    /**
      * Recursive Depth First Search algorithm for UndirectedGraph nodes (connected/disconnected)
      * <b>complexity: O(v + e)</b>
      * @param graph the UndirectedGraph to search
@@ -45,7 +42,7 @@ public final class DFS {
         return list;
     }
 
-    /*
+    /**
      * Recursive Depth First Search algorithm for UndirectedGraph nodes (connected)
      * <b>complexity: O(v + e)</b>
      * @param node the UndirectedNode to search
@@ -66,8 +63,8 @@ public final class DFS {
 
         return list;
     }
-    
-    /*
+
+    /**
      * Recursive Depth First Search algorithm for DirectedGraph nodes (connected/disconnected)
      * <b>complexity: O(v + e)</b>
      * @param graph the DirectedGraph to search
@@ -87,7 +84,7 @@ public final class DFS {
         return list;
     }
 
-    /*
+    /**
      * Recursive Depth First Search algorithm for DirectedGraph nodes (connected)
      * <b>complexity: O(v + e)</b>
      * @param node the DirectedNode to search
@@ -109,7 +106,7 @@ public final class DFS {
         return list;
     }
 
-    /*
+    /**
      * Recursive Depth First Search algorithm for DirectedGraph edges (connected/disconnected)
      * <b>complexity: O(v + e)</b>
      * @param graph the DirectedGraph to search
@@ -129,7 +126,7 @@ public final class DFS {
         return list;
     }
 
-    /*
+    /**
      * Recursive Depth First Search algorithm for DirectedGraph edges (connected)
      * <b>complexity: O(v + e)</b>
      * @param node the DirectedNode to search
@@ -153,8 +150,8 @@ public final class DFS {
         return list;
     }
 
-     
-    /*
+
+    /**
      * Recursive Depth First Search algorithm for UndirectedGraph edges (connected/disconnected)
      * <b>complexity: O(v + e)</b>
      * @param graph the UndirectedGraph to search
@@ -174,7 +171,7 @@ public final class DFS {
         return list;
     }
 
-    /*
+    /**
      * Recursive Depth First Search algorithm for UndirectedGraph edges (connected)
      * <b>complexity: O(v + e)</b>
      * @param node the UndirectedNode to search
@@ -202,27 +199,51 @@ public final class DFS {
     }
 
 
-/*
+    /**
      * Depth First Search algorithm for Adjacency Matrix Directed Graph 
-     * <b>complexity: O(v²)</b>
-     * @param graph the AdjacencyMatrixDirectedGraph to search
+     * <b>complexity: O(v^2)</b>
+     * @param matrix the AdjacencyMatrixDirectedGraph to search
+     * @param start the strating index
+     * @param visites
+     * @param res
      * @return the list of all nodes (indexes) in the graph
      */
-    // function to perform DFS on the graph
-    public static List<Integer> dfsMatrix(AdjacencyMatrixDirectedGraph matrix, int start, boolean[] visites,List<Integer> res)
-    {
+    public static List<Integer> DFSMatrix(AdjacencyMatrixDirectedGraph matrix, int start, boolean[] visites, List<Integer> res) {
         //visite
         res.add(start);
         visites[start] = true;
 
         // boucle
-        for (int i = 0; i < matrix.getNbNodes(); i++) { // O(v)
+        for (int i = 0; i < matrix.getNbNodes(); i++) {                 // O(v^2)
             if (matrix.getMatrix()[start][i] != 0 && (!visites[i])) {
-                dfsMatrix(matrix, i, visites, res); // O(v)
+                DFSMatrix(matrix, i, visites, res);                     // O(v)
             }
         }
         return res;
-}
+    }
+
+    /**
+     * Depth First Search algorithm for Adjacency Matrix Undirected Graph
+     * <b>complexity: O(v^2)</b>
+     * @param matrix the AdjacencyMatrixDirectedGraph to search
+     * @param start the strating index
+     * @param visites
+     * @param res
+     * @return the list of all nodes (indexes) in the graph
+     */
+    public static List<Integer> DFSMatrix(AdjacencyMatrixUndirectedGraph matrix, int start, boolean[] visites, List<Integer> res) {
+        //visite
+        res.add(start);
+        visites[start] = true;
+
+        // boucle
+        for (int i = 0; i < matrix.getNbNodes(); i++) {                 // O(v^2)
+            if (matrix.getMatrix()[start][i] != 0 && (!visites[i])) {   // TODO: empecher duplicatas (2 sens)
+                DFSMatrix(matrix, i, visites, res);                     // O(v)
+            }
+        }
+        return res;
+    }
 
     public static void main(String[] args) {
         int[][] mat = GraphTools.generateGraphData(5, 6, false, true, false, 100001);
@@ -239,6 +260,6 @@ public final class DFS {
         boolean[] visites = new boolean[amd.getNbNodes()];
         Arrays.fill(visites, false);
         List<Integer> res = new ArrayList<>();
-        System.out.println("DFSMatrix:" + dfsMatrix(amd,0,visites,res));
+        System.out.println("DFSMatrix:" + DFSMatrix(amd,0,visites,res));
     }
 }

@@ -22,8 +22,11 @@ public final class Prim {
 
     private Prim() {}
 
-    /*
+    /**
     * Prim Algorithm for UndirectedGraph
+    * <b>complexity: O(V Log E)</b>
+    * @param graph the UndirectedGraph to explore
+    * @return the minimum spanning tree as a BinaryHeapEdge
     */
     public static BinaryHeapEdge Prim(UndirectedGraph graph) {
 
@@ -37,21 +40,19 @@ public final class Prim {
         visited.add(base);
 
         for (Map.Entry<UndirectedNode,Integer> n : base.getNeighbours().entrySet()) {
-            queue.add(new Triple<>(base, n.getKey(), n.getValue()));
+            queue.add(new Triple<>(base, n.getKey(), n.getValue()));                                    // O(V Log E)
         }
 
-        while (!queue.isEmpty()) {
+        while (!queue.isEmpty()) {                                                                       // O(V Log E)
             Triple<UndirectedNode, UndirectedNode, Integer> head = queue.remove();
 
             if (!visited.contains(head.getSecond())) {
                 visited.add(head.getSecond());
 
-                System.out.print(head + " - " + visited + "\n");
-
                 tree.insert(head.getFirst(), head.getSecond(), head.getThird());
 
                 for (Map.Entry<UndirectedNode,Integer> n : head.getSecond().getNeighbours().entrySet()) {
-                    queue.add(new Triple<>(head.getSecond(), n.getKey(), n.getValue()));
+                    queue.add(new Triple<>(head.getSecond(), n.getKey(), n.getValue()));                 // O(V Log E)
                 }
             }
         }
@@ -59,9 +60,12 @@ public final class Prim {
         return tree;
     }
 
-    /*
-    * Prim Algorithm for DirectedGraph
-    */
+    /**
+     * Prim Algorithm for UndirectedGraph
+     * <b>complexity: O(V Log E)</b>
+     * @param graph the DirectedGraph to explore
+     * @return the minimum spanning tree as a BinaryHeapEdge
+     */
     public static BinaryHeapEdge Prim(DirectedGraph graph) {
 
         HashSet<DirectedNode> visited = new HashSet<>();
@@ -74,21 +78,19 @@ public final class Prim {
         visited.add(base);
 
         for (Map.Entry<DirectedNode,Integer> n : base.getSuccs().entrySet()) {
-            queue.add(new Triple<>(base, n.getKey(), n.getValue()));
+            queue.add(new Triple<>(base, n.getKey(), n.getValue()));                                // O(V Log E)
         }
 
-        while (!queue.isEmpty()) {
+        while (!queue.isEmpty()) {                                                                  // O(V Log E)
             Triple<DirectedNode, DirectedNode, Integer> head = queue.remove();
             
             if (!visited.contains(head.getSecond()) || !visited.contains(head.getFirst())) {
                 visited.add(head.getSecond());
 
-                System.out.print(head + " - " + visited + "\n");
-
                 tree.insert(head.getFirst(), head.getSecond(), head.getThird());
 
                 for (Map.Entry<DirectedNode,Integer> n : head.getSecond().getSuccs().entrySet()) {
-                    queue.add(new Triple<>(head.getSecond(), n.getKey(), n.getValue()));
+                    queue.add(new Triple<>(head.getSecond(), n.getKey(), n.getValue()));             // O(V Log E)
                 }
             }
         }
@@ -97,7 +99,7 @@ public final class Prim {
     }
 
     public static void main(String[] args) {
-        int[][] mat = GraphTools.generateValuedGraphData(8, false, false, true, false, 100001);
+        int[][] mat = GraphTools.generateValuedGraphData(10, false, false, true, false, 10212121);
         UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
         //DirectedValuedGraph al = new DirectedValuedGraph(mat);
         //System.out.println(al);

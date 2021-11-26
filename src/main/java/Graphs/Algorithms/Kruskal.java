@@ -20,9 +20,12 @@ public final class Kruskal {
 
     private Kruskal() {}
 
-    /*
+    /**
     * Kruskal Algorithm for UndirectedGraph
-    */
+     * <b>complexity: O(E log E)</b>
+     * @param graph the UndirectedGraph to explore
+     * @return the minimum spanning tree as a BinaryHeapEdge
+     */
     public static BinaryHeapEdge Kruskal(UndirectedGraph graph) {
 
         BinaryHeapEdge<UndirectedNode> tree = new BinaryHeapEdge();
@@ -34,10 +37,10 @@ public final class Kruskal {
         List<Triple<UndirectedNode, UndirectedNode, Integer>> edges = DFS.DFSEdges(graph);
 
         for (Triple<UndirectedNode, UndirectedNode, Integer> edge : edges) {
-            queue.add(edge);
+            queue.add(edge);                                                        // O (E log E)
         }
 
-        while(!queue.isEmpty()) {
+        while(!queue.isEmpty()) {                                                   // O (V)
             Triple<UndirectedNode, UndirectedNode, Integer> edge = queue.remove();
 
             if (!visited.contains(edge.getFirst()) || !visited.contains(edge.getSecond())) {
@@ -50,9 +53,12 @@ public final class Kruskal {
         return tree;
     }
 
-    /*
+    /**
     * Kruskal Algorithm for DirectedGraph
-    */
+     * <b>complexity: O(E log E)</b>
+     * @param graph the DirectedGraph to explore
+     * @return the minimum spanning tree as a BinaryHeapEdge
+     */
     public static BinaryHeapEdge Kruskal(DirectedGraph graph) {
 
         BinaryHeapEdge<DirectedNode> tree = new BinaryHeapEdge();
@@ -64,10 +70,10 @@ public final class Kruskal {
         List<Triple<DirectedNode, DirectedNode, Integer>> edges = DFS.DFSEdges(graph);
 
         for (Triple<DirectedNode, DirectedNode, Integer> edge : edges) {
-            queue.add(edge);
+            queue.add(edge);                                                                // O (E log E)
         }
 
-        while(!queue.isEmpty()) {
+        while(!queue.isEmpty()) {                                                           // O (V)
             Triple<DirectedNode, DirectedNode, Integer> edge = queue.remove();
 
             if (!visited.contains(edge.getFirst()) || !visited.contains(edge.getSecond())) {
