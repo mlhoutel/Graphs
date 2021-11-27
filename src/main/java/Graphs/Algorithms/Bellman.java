@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import Drawing.AdjacencyList.DrawDirectedGraph;
+import Drawing.AdjacencyList.DrawGraph;
 import Drawing.GraphAlgorithms.DrawDirectedCoveringTree;
 import Drawing.GraphAlgorithms.DrawUndirectedCoveringTree;
 import Graphs.AdjacencyList.DirectedGraph;
@@ -21,6 +21,8 @@ import Graphs.Nodes.UndirectedNode;
 
 public final class Bellman {
 
+    private final static int MAX_VALUE = 99999999;
+
     private Bellman() {}
 
     /**
@@ -31,12 +33,12 @@ public final class Bellman {
      * @throws Exception if negative cycles
      * @return all nearest nodes and their cost
      */
-    public static HashMap<DirectedNode, Pair<DirectedNode, Integer>> Bellman(DirectedGraph graph, DirectedNode source) throws Exception {
+    public static HashMap<DirectedNode, Pair<DirectedNode, Integer>> Bellman(DirectedGraph graph, DirectedNode source) throws BellmanException {
 
         // Distance depuis source à node, avec prédécesseur et value
         HashMap<DirectedNode, Pair<DirectedNode, Integer>> distances = new HashMap<>();
         for (DirectedNode node : graph.getNodes()){
-            distances.put(node, new Pair<>(null, 99999999));
+            distances.put(node, new Pair<>(null, MAX_VALUE));
         }
 
         distances.put(source, new Pair<>(source, 0));
@@ -45,20 +47,25 @@ public final class Bellman {
         for (int i = 1; i < graph.getNbNodes() - 1; i++) {
             for (DirectedNode node : graph.getNodes()) {
                 for (Map.Entry<DirectedNode,Integer> edge : node.getPreds().entrySet()) {
-                    Integer value = distances.get(node).getRight() + edge.getValue();
-
-                    if (value < distances.get(edge.getKey()).getRight()) {
-                        distances.put(edge.getKey(), new Pair<>(node, value));
+                    DirectedNode u = node;
+                    DirectedNode v = edge.getKey();
+                    int w = edge.getValue();
+                    if (distances.get(u).getRight() != MAX_VALUE && distances.get(u).getRight() < w + distances.get(v).getRight()) {
+                        distances.put(v, new Pair<>(node, distances.get(u).getRight()+w));
                     }
                 }
             }
         }
 
+        System.out.println("chek negative circle");
         //vérification absence de cycle négatif
         for (DirectedNode node : graph.getNodes()) {
             for (Entry<DirectedNode,Integer> edge : node.getPreds().entrySet()) {
-                if (distances.get(node).getRight() + edge.getValue() < distances.get(edge.getKey()).getRight()) {
-                    throw new Exception("Cycle négatif");
+                DirectedNode u = node;
+                DirectedNode v = edge.getKey();
+                int w = edge.getValue();
+                if (distances.get(u).getRight() != 99999999 && distances.get(u).getRight() < w + distances.get(v).getRight()) {
+                    throw new BellmanException(BellmanException.NEGATIVE_CYCLE_MSG);
                 }
             }
         }
@@ -74,7 +81,7 @@ public final class Bellman {
      * @throws Exception if negative cycles
      * @return all nearest nodes and their cost
      */
-    public static HashMap<UndirectedNode, Pair<UndirectedNode, Integer>> Bellman(UndirectedGraph graph, UndirectedNode source) throws Exception {
+    public static HashMap<UndirectedNode, Pair<UndirectedNode, Integer>> Bellman(UndirectedGraph graph, UndirectedNode source) throws BellmanException {
 
         // Distance depuis source à node, avec prédécesseur et value
         HashMap<UndirectedNode, Pair<UndirectedNode, Integer>> distances = new HashMap<>();
@@ -99,7 +106,7 @@ public final class Bellman {
         for (UndirectedNode node : graph.getNodes()) {
             for (Entry<UndirectedNode,Integer> edge : node.getNeighbours().entrySet()) {
                 if (distances.get(node).getRight() + edge.getValue() < distances.get(edge.getKey()).getRight()) {
-                    throw new Exception("Cycle négatif");
+                    throw new BellmanException(BellmanException.NEGATIVE_CYCLE_MSG);
                 }
             }
         }
@@ -116,7 +123,7 @@ public final class Bellman {
      * @throws Exception if negative cycles
      * @return shortest path from source to destination as a List of DirectedNode
      */
-    public static List<DirectedNode> ShortestPath(DirectedGraph graph, DirectedNode source, DirectedNode destination) throws Exception {
+    public static List<DirectedNode> ShortestPath(DirectedGraph graph, DirectedNode source, DirectedNode destination) throws BellmanException {
 
         HashMap<DirectedNode, Pair<DirectedNode, Integer>> shortestPaths = Bellman(graph, destination);
         List<DirectedNode> shortestPath = new LinkedList<DirectedNode>();
@@ -126,7 +133,11 @@ public final class Bellman {
 
         int cpt = graph.getNodes().size();
         while (temp != destination && cpt >= 0) {
-            temp = shortestPaths.get(temp).getLeft();
+            if(shortestPaths.get(temp).getLeft() != null){
+                temp = shortestPaths.get(temp).getLeft();
+            }else{
+                throw new BellmanException(BellmanException.NO_PATH_MSG);
+            }
             shortestPath.add(temp);
             cpt--;
         }

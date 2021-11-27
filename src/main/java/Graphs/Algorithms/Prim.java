@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-import Drawing.AdjacencyList.DrawUndirectedGraph;
+import Drawing.AdjacencyList.DrawGraph;
 import Drawing.GraphAlgorithms.DrawBinaryHeapEdge;
 import Drawing.GraphAlgorithms.DrawDirectedCoveringTree;
 import Drawing.GraphAlgorithms.DrawUndirectedCoveringTree;
@@ -108,11 +108,11 @@ public final class Prim {
         //System.out.println(al);
         BinaryHeapEdge binh = Prim(al);
         
-        //DrawDirectedGraph.Display(al);
+        //DrawGraph.Display(al);
         //DrawBinaryHeapEdge.Display(binh);
         //DrawDirectedCoveringTree.Display(al, binh);
 
-        //DrawUndirectedGraph.Display(al);
+        //DrawGraph.Display(al);
         //DrawBinaryHeapEdge.Display(binh);
         DrawDirectedCoveringTree.Display(al, binh);
         System.out.println(binh);

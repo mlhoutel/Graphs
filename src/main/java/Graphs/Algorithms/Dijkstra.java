@@ -4,7 +4,7 @@ package Graphs.Algorithms;
 import java.util.*;
 import java.util.Map.Entry;
 
-import Drawing.AdjacencyList.DrawDirectedGraph;
+import Drawing.AdjacencyList.DrawGraph;
 import Drawing.GraphAlgorithms.DrawDirectedCoveringTree;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
@@ -138,7 +138,7 @@ public final class Dijkstra {
         int[][] mat = GraphTools.generateValuedGraphData(10, true, false, true, false, 100001);
         GraphTools.afficherMatrix(mat);
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
-        DrawDirectedGraph.Display(al);
+        DrawGraph.Display(al);
 
         System.out.println(Dijkstra(al, al.getNodes().get(0)));
 

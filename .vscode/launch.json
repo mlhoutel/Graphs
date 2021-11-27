@@ -12,16 +12,16 @@
         },
         {
             "type": "java",
-            "name": "Launch DrawDirectedGraph",
+            "name": "Launch DrawGraph",
             "request": "launch",
-            "mainClass": "Drawing.AdjacencyList.DrawDirectedGraph",
+            "mainClass": "Drawing.AdjacencyList.DrawGraph",
             "projectName": "Framework-Graph"
         },
         {
             "type": "java",
-            "name": "Launch DrawUndirectedGraph",
+            "name": "Launch DrawGraph",
             "request": "launch",
-            "mainClass": "Drawing.AdjacencyList.DrawUndirectedGraph",
+            "mainClass": "Drawing.AdjacencyList.DrawGraph",
             "projectName": "Framework-Graph"
         },
         {

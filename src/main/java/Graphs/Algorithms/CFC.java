@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-import Drawing.AdjacencyList.DrawDirectedGraph;
+import Drawing.AdjacencyList.DrawGraph;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
@@ -153,7 +153,7 @@ CFC {
         // UndirectedGraph al = new UndirectedGraph(mat);
         System.out.println(al);
         System.out.println(CFC(al));
-        DrawDirectedGraph.Display(al);
+        DrawGraph.Display(al);
     }
 
 }
