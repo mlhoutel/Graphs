@@ -35,9 +35,12 @@ public class DrawDirectedGraph {
     }
 
     public static void main(String[] args) {
-        int[][] Matrix = GraphTools.generateGraphData(10, 20, false, false, false, 100001);
-        GraphTools.afficherMatrix(Matrix);
-        DirectedGraph al = new DirectedGraph(Matrix);
+        //int[][] Matrix = GraphTools.generateGraphData(10, 20, false, false, false, 100001);
+        //GraphTools.afficherMatrix(Matrix);
+        //DirectedGraph al = new DirectedGraph(Matrix);
+
+        int[][] mat = GraphTools.generateGraphData(5, 6, false, true, false, 100001);
+        DirectedGraph al = new DirectedGraph(mat);
 
         Display(al);
     }
