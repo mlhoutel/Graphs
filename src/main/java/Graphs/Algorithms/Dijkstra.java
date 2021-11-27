@@ -99,8 +99,11 @@ public final class Dijkstra {
 
         int cpt = graph.getNodes().size();
         while (temp != destination && cpt >= 0) {
-            temp = shortestPaths.get(temp).getLeft();
-            shortestPath.add(temp);
+            if(shortestPaths.get(temp).getLeft() != null){
+                temp = shortestPaths.get(temp).getLeft();
+            }else{
+                throw new DijkstraException(BellmanException.NO_PATH_MSG);
+            }
             cpt--;
         }
 

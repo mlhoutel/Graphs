@@ -57,7 +57,6 @@ public final class Bellman {
             }
         }
 
-        System.out.println("chek negative circle");
         //vérification absence de cycle négatif
         for (DirectedNode node : graph.getNodes()) {
             for (Entry<DirectedNode,Integer> edge : node.getPreds().entrySet()) {
