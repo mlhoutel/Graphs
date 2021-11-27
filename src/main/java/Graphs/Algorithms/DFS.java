@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import Drawing.AdjacencyList.DrawDirectedGraph;
-import Drawing.AdjacencyList.DrawUndirectedGraph;
+import Drawing.AdjacencyList.DrawGraph;
+import Drawing.AdjacencyList.DrawGraph;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
@@ -253,7 +253,7 @@ public final class DFS {
         System.out.println(DFS(al));
         System.out.println(DFSEdges(al));
 
-        DrawDirectedGraph.Display(al);
+        DrawGraph.Display(al);
 
         AdjacencyMatrixDirectedGraph amd = new AdjacencyMatrixDirectedGraph(al);
 

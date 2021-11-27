@@ -7,7 +7,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import Drawing.AdjacencyList.DrawDirectedGraph;
+import Drawing.AdjacencyList.DrawGraph;
 import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
@@ -196,7 +196,7 @@ public final class BFS {
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
         System.out.println(al);
         System.out.println(BFS(al));
-        DrawDirectedGraph.Display(al);
+        DrawGraph.Display(al);
 
         AdjacencyMatrixDirectedGraph amd = new AdjacencyMatrixDirectedGraph(al);
         System.out.println("BFSMatrix:"+BFSMatrix(amd,0));
