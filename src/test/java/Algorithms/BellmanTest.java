@@ -22,7 +22,7 @@ import Graphs.Nodes.UndirectedNode;
 public class BellmanTest {
 
     @Test
-    void BellmanTest_no_path() throws Exception {
+    void BellmanTest_should_throw_no_path() throws Exception {
         //GIVEN
         int[][] mat = GraphTools.generateValuedGraphData(5, false, false, true, false, 100001);
         DirectedGraph al = new DirectedGraph(mat);
@@ -61,7 +61,7 @@ public class BellmanTest {
     }
 
     @Test
-    void BellmanTest_negative_cycle() throws Exception {
+    void BellmanTest_should_throw_negative_cycle() throws Exception {
         //GIVEN
         int[][] mat = GraphTools.generateValuedGraphData(10, false, false, true, true, 855);
         DirectedValuedGraph al = new DirectedValuedGraph(mat);

@@ -89,7 +89,7 @@ public final class Dijkstra {
      * @param destination the DirectedNode to go to
      * @return shortest path from source to destination as a List
      */
-    public static List<DirectedNode> ShortestPath(DirectedGraph graph, DirectedNode source, DirectedNode destination) {
+    public static List<DirectedNode> ShortestPath(DirectedGraph graph, DirectedNode source, DirectedNode destination) throws DijkstraException {
 
         HashMap<DirectedNode, Pair<DirectedNode, Integer>> shortestPaths = Dijkstra(graph, destination);
         List<DirectedNode> shortestPath = new LinkedList<DirectedNode>();
@@ -102,7 +102,7 @@ public final class Dijkstra {
             if(shortestPaths.get(temp).getLeft() != null){
                 temp = shortestPaths.get(temp).getLeft();
             }else{
-                throw new DijkstraException(BellmanException.NO_PATH_MSG);
+                throw new DijkstraException(DijkstraException.NO_PATH_MSG);
             }
             cpt--;
         }
@@ -110,34 +110,7 @@ public final class Dijkstra {
         return shortestPath;
     }
 
-    /**
-     * Get the Shortest Path from source to destination with the Dijkstra algorithm for UndirectedGraph
-     * <b>complexity: O(E log V)</b>
-     * @param graph the UndirectedNode to explore
-     * @param source the UndirectedNode to go from
-     * @param destination the UndirectedNode to go to
-     * @return shortest path from source to destination as a List
-     */
-
-    public static List<UndirectedNode> ShortestPath(UndirectedGraph graph, UndirectedNode source, UndirectedNode destination) {
-
-        // HashMap<UndirectedNode, Pair<UndirectedNode, Integer>> shortestPaths = Dijkstra(graph, destination);
-        List<UndirectedNode> shortestPath = new LinkedList<UndirectedNode>();
-
-        shortestPath.add(source);
-        UndirectedNode temp = source;
-        /*
-        int cpt = graph.getNodes().size();
-        while (temp != destination && cpt >= 0) {
-            temp = shortestPaths.get(temp).getLeft();
-            shortestPath.add(temp);
-            cpt--;
-        }
-        */
-        return shortestPath;
-    }
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws DijkstraException {
         int[][] mat = GraphTools.generateValuedGraphData(10, true, false, true, false, 100001);
         GraphTools.afficherMatrix(mat);
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
