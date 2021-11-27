@@ -1,6 +1,7 @@
 package Graphs.GraphAlgorithms;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -203,6 +204,21 @@ public class GraphTools {
 		System.out.println();
 	}
 
+
+	/**
+	 * @param m a matrix
+	 */
+	public static void afficherArraysMatrix(int[][] m){
+		System.out.println("new int [][] {");
+
+		for(int[] line : m) {
+			String strln = Arrays.toString(line);
+			System.out.println("	{ " + strln.substring(1, strln.length() - 1) + " },");
+		}
+
+
+		System.out.println("};");
+	}
 
 	/**
 	 * @param mat, a matrix
