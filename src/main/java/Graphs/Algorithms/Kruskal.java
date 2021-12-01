@@ -1,10 +1,7 @@
 package Graphs.Algorithms;
 
 
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.PriorityQueue;
+import java.util.*;
 
 import Drawing.GraphAlgorithms.DrawDirectedCoveringTree;
 import Graphs.AdjacencyList.DirectedGraph;
@@ -61,8 +58,13 @@ public final class Kruskal {
      */
     public static BinaryHeapEdge Kruskal(DirectedGraph graph) {
 
-        BinaryHeapEdge<DirectedNode> tree = new BinaryHeapEdge();
-        HashSet<DirectedNode> visited = new HashSet<>();
+        BinaryHeapEdge<DirectedNode> tree = new BinaryHeapEdge<>();
+        HashMap<DirectedNode, HashSet<DirectedNode>> subsets = new HashMap<>();
+
+        // Initilize sets of visited for each node
+        for (DirectedNode node : graph.getNodes()) {
+            subsets.put(node, new HashSet<>(Arrays.asList(node))); // only the current node is reachable
+        }
 
         Comparator<Triple<DirectedNode, DirectedNode, Integer>> comparator = (p1, p2) -> { return p1.getThird() - p2.getThird(); };
         PriorityQueue<Triple<DirectedNode, DirectedNode, Integer>> queue = new PriorityQueue<>(comparator);
@@ -76,9 +78,13 @@ public final class Kruskal {
         while(!queue.isEmpty()) {                                                           // O (V)
             Triple<DirectedNode, DirectedNode, Integer> edge = queue.remove();
 
-            if (!visited.contains(edge.getFirst()) || !visited.contains(edge.getSecond())) {
-                visited.add(edge.getFirst());
-                visited.add(edge.getSecond());
+            // TODO: fix
+            if (!subsets.get(edge.getFirst()).contains(edge.getSecond()) && !subsets.get(edge.getSecond()).contains(edge.getFirst())) {
+                ArrayList<DirectedNode> subsetB = new ArrayList<>(subsets.get(edge.getSecond()));
+                ArrayList<DirectedNode> subsetA = new ArrayList<>(subsets.get(edge.getFirst()));
+                subsets.get(edge.getFirst()).addAll(subsetB);
+                subsets.get(edge.getSecond()).addAll(subsetA);
+
                 tree.insert(edge.getFirst(), edge.getSecond(), edge.getThird());
             }
         }

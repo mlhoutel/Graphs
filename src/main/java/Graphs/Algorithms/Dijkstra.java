@@ -148,8 +148,8 @@ public final class Dijkstra {
             }
         }
 
-        int From = 7;
-        int To = 0;
+        int From = 0;
+        int To = 7;
 
         List<DirectedNode> path = ShortestPath(al, al.getNodes().get(From), al.getNodes().get(To));
         BinaryHeapEdge<DirectedNode> binh = new BinaryHeapEdge<DirectedNode>();
