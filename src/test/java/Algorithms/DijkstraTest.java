@@ -35,12 +35,29 @@ public class DijkstraTest {
     }
 
     @Test
-    void Dijkstra_ok() throws DijkstraException {
+    void Dijkstra_should_throw_no_path_2() throws DijkstraException {
         int[][] mat = GraphTools.generateValuedGraphData(10, true, false, true, false, 100001);
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
 
         int From = 7;
-        int To = 0;
+        int To = 1;
+
+        //WHENZEN
+        Exception exception = Assertions.assertThrows(DijkstraException.class, () -> {
+            List<DirectedNode> path = Dijkstra.ShortestPath(al, al.getNodes().get(From), al.getNodes().get(To));
+        });
+
+        //THEN
+        Assertions.assertEquals(DijkstraException.NO_PATH_MSG, exception.getMessage());
+    }
+
+    @Test
+    void Dijkstra_ok() throws DijkstraException {
+        int[][] mat = GraphTools.generateValuedGraphData(10, true, false, true, false, 100001);
+        DirectedValuedGraph al = new DirectedValuedGraph(mat);
+
+        int From = 1;
+        int To = 7;
 
         //WHENZEN
         Exception exception = Assertions.assertThrows(DijkstraException.class, () -> {
