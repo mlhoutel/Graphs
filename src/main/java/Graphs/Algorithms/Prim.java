@@ -8,8 +8,10 @@ import java.util.PriorityQueue;
 
 import Drawing.AdjacencyList.DrawGraph;
 import Drawing.GraphAlgorithms.DrawBinaryHeapEdge;
+import Drawing.GraphAlgorithms.DrawDirectedCoveringTree;
 import Drawing.GraphAlgorithms.DrawUndirectedCoveringTree;
 import Graphs.AdjacencyList.DirectedGraph;
+import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
 import Graphs.AdjacencyList.UndirectedValuedGraph;
 import Graphs.Collection.Triple;
@@ -99,8 +101,9 @@ public final class Prim {
     }
 
     public static void main(String[] args) {
-        int[][] mat = GraphTools.generateValuedGraphData(10, false, false, true, false, 10212121);
-        UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
+        int[][] mat = GraphTools.generateValuedGraphData(8, false, false, true, false, 100001);
+        DirectedValuedGraph al = new DirectedValuedGraph(mat);
+        GraphTools.afficherArraysMatrix(mat);
         //DirectedValuedGraph al = new DirectedValuedGraph(mat);
         //System.out.println(al);
         BinaryHeapEdge binh = Prim(al);
@@ -111,7 +114,7 @@ public final class Prim {
 
         //DrawGraph.Display(al);
         //DrawBinaryHeapEdge.Display(binh);
-        DrawUndirectedCoveringTree.Display(al, binh);
+        DrawDirectedCoveringTree.Display(al, binh);
         System.out.println(binh);
     }
 }
