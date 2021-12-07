@@ -11,23 +11,38 @@ import Graphs.AdjacencyList.UndirectedGraph;
 import Graphs.Algorithms.BFS;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.UndirectedNode;
+import Graphs.Algorithms.CFC;
 
 public class CFCTest {
 
     @Test
     void CFC() {
         //GIVEN
-        int[][] mat = GraphTools.generateGraphData(5, 6, false, true, false, 100001);
+        int[][] mat = new int [][] {
+            { 0, 0, 1, 0, 1 },
+            { 0, 0, 1, 0, 1 },
+            { 1, 1, 0, 1, 0 },
+            { 0, 0, 1, 0, 1 },
+            { 1, 1, 0, 1, 0 },
+        };
+
         UndirectedGraph al = new UndirectedGraph(mat);
 
         //WHEN
-        List<UndirectedNode> result = BFS.BFS(al);
-        List<Integer> labels = new ArrayList<Integer>();
-        for (UndirectedNode node : result) {
-            labels.add(node.getLabel());
+        List<List<UndirectedNode>> result = CFC.CFC(al);
+        List<List<Integer>> labels = new ArrayList<>();
+        
+        for (List<UndirectedNode> connected : result) {
+            List<Integer> clabels = new ArrayList<Integer>();
+            for (UndirectedNode node : connected) {
+                clabels.add(node.getLabel());
+            }
+            labels.add(clabels);
         }
-
+        
+        List<List<Integer>> trueValues = new ArrayList<>();
+        trueValues.add(new ArrayList<>(Arrays.asList(0, 2, 1, 4, 3)));
         //THEN
-        Assertions.assertEquals(labels, new ArrayList(Arrays.asList(0,2,4,1,3)));
+        Assertions.assertEquals(labels, trueValues);
     }
 }

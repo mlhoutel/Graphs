@@ -149,11 +149,14 @@ CFC {
 
     public static void main(String[] args) {
         int[][] mat = GraphTools.generateGraphData(5, 6, false, true, false, 100001);
+        
+        GraphTools.afficherArraysMatrix(mat);
+
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
         // UndirectedGraph al = new UndirectedGraph(mat);
         System.out.println(al);
         System.out.println(CFC(al));
-        DrawGraph.Display(al);
+        //DrawGraph.Display(al);
     }
 
 }
