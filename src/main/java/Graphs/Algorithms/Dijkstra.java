@@ -10,12 +10,15 @@ import Graphs.AdjacencyList.DirectedGraph;
 import Graphs.AdjacencyList.DirectedValuedGraph;
 import Graphs.AdjacencyList.UndirectedGraph;
 import Graphs.Collection.Pair;
+import Graphs.Collection.Triple;
 import Graphs.GraphAlgorithms.BinaryHeapEdge;
 import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
 
 public final class Dijkstra {
+
+    private final static int MAX_VALUE = 999999999;
 
     private Dijkstra() {}
 
@@ -29,56 +32,54 @@ public final class Dijkstra {
     public static HashMap<DirectedNode, Pair<DirectedNode, Integer>> Dijkstra(DirectedGraph graph, DirectedNode source) {
 
         //initialisation
+        Set<DirectedNode> to_visit = new HashSet<>();
         HashMap<DirectedNode, Pair<DirectedNode, Integer>> distances = new HashMap<>();
         for (DirectedNode node : graph.getNodes()){
-            distances.put(node, new Pair<>(null, 999999999));
+            distances.put(node, new Pair<>(null, MAX_VALUE));
+            to_visit.add(node);
         }
 
         distances.put(source, new Pair<>(source, 0));
+        to_visit.remove(source);
 
-        Set<DirectedNode> settledNodes = new HashSet<>();
-        Set<DirectedNode> unsettledNodes = new HashSet<>();
-
-        unsettledNodes.add(source);
-
+        DirectedNode current = source;
         //déroulement
-        while (!unsettledNodes.isEmpty()) {
+        while (!to_visit.isEmpty()) {
 
-            DirectedNode currentNode = getLowestDistanceNode(unsettledNodes, distances);
-            unsettledNodes.remove(currentNode);
+            Triple<DirectedNode, DirectedNode, Integer> nearest = getLowestDistanceNode(to_visit, distances);
+            current = nearest.getFirst();
+            if (current == null) break; // pas possible d'accéder aux autres
 
-            for (Map.Entry<DirectedNode, Integer> adjacencyPair: currentNode.getSuccs().entrySet()) {
-                DirectedNode adjacentNode = adjacencyPair.getKey();
-                Integer edgeWeight = adjacencyPair.getValue();
 
-                if (!settledNodes.contains(adjacentNode)) {
-                    Integer distance = distances.get(currentNode).getRight() + edgeWeight;
-                    if (distance < distances.get(adjacentNode).getRight()) {
-                        distances.put(adjacentNode, new Pair<>(distances.get(adjacentNode).getLeft(), distance));
-                    }
-                    unsettledNodes.add(adjacentNode);
+            distances.put(nearest.getFirst(), new Pair<>(nearest.getSecond(), nearest.getThird()));
+
+
+            for (Map.Entry<DirectedNode, Integer> succ: current.getSuccs().entrySet()) {
+                Integer distance = distances.get(current).getRight() + succ.getValue();
+                if (distances.get(succ.getKey()).getRight() > distance) {
+                    distances.put(succ.getKey(), new Pair<>(current, distance));
                 }
             }
 
-            settledNodes.add(currentNode);
+            to_visit.remove(current);
         }
 
         return distances;
     }
 
-    private static DirectedNode getLowestDistanceNode(Set<DirectedNode> unsettledNodes, HashMap<DirectedNode, Pair<DirectedNode, Integer>> distances) {
-        DirectedNode lowestDistanceNode = null;
-        Integer lowestDistance = Integer.MAX_VALUE;
+    private static Triple<DirectedNode, DirectedNode, Integer> getLowestDistanceNode(Set<DirectedNode> to_visit, HashMap<DirectedNode, Pair<DirectedNode, Integer>> distances) {
+        Triple<DirectedNode, DirectedNode, Integer> smallest = new Triple<>(null, null,MAX_VALUE);
 
-        for (DirectedNode node: unsettledNodes) {
-            Integer nodeDistance = distances.get(node).getRight();
-            if (nodeDistance < lowestDistance) {
-                lowestDistance = nodeDistance;
-                lowestDistanceNode = node;
+        for (DirectedNode node : to_visit) {
+            for (Map.Entry<DirectedNode, Integer> pred: node.getPreds().entrySet()) {
+                Integer distance = distances.get(pred.getKey()).getRight() + pred.getValue();
+                if (smallest.getThird() > distance) {
+                    smallest = new Triple<>(node, pred.getKey(), distance);
+                }
             }
         }
 
-        return lowestDistanceNode;
+        return smallest;
     }
 
     /**
@@ -91,14 +92,16 @@ public final class Dijkstra {
      */
     public static List<DirectedNode> ShortestPath(DirectedGraph graph, DirectedNode source, DirectedNode destination) throws DijkstraException {
 
-        HashMap<DirectedNode, Pair<DirectedNode, Integer>> shortestPaths = Dijkstra(graph, destination);
+        HashMap<DirectedNode, Pair<DirectedNode, Integer>> shortestPaths = Dijkstra(graph, source);
+
+        System.out.println(shortestPaths);
         List<DirectedNode> shortestPath = new LinkedList<DirectedNode>();
 
-        shortestPath.add(source);
-        DirectedNode temp = source;
+        DirectedNode temp = destination;
+        shortestPath.add(temp);
 
         int cpt = graph.getNodes().size();
-        while (temp != destination && cpt >= 0) {
+        while (temp != source && cpt >= 0) {
             if(shortestPaths.get(temp).getLeft() != null){
                 temp = shortestPaths.get(temp).getLeft();
             }else{
@@ -116,18 +119,11 @@ public final class Dijkstra {
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
         DrawGraph.Display(al);
 
-        System.out.println(Dijkstra(al, al.getNodes().get(0)));
-
-        for(DirectedNode src : al.getNodes()) {
-            for(DirectedNode dest : al.getNodes()) {
-                System.out.println(ShortestPath(al ,src ,dest));
-            }
-        }
-
-        int From = 6;
-        int To = 5;
+        int From = 0;
+        int To = 2;
 
         List<DirectedNode> path = ShortestPath(al, al.getNodes().get(From), al.getNodes().get(To));
+        System.out.println(path);
         BinaryHeapEdge<DirectedNode> binh = new BinaryHeapEdge<DirectedNode>();
 
         for (int i = 1; i < path.size(); i++) {

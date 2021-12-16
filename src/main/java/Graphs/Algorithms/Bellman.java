@@ -63,7 +63,7 @@ public final class Bellman {
                 DirectedNode u = node;
                 DirectedNode v = edge.getKey();
                 int w = edge.getValue();
-                if (distances.get(u).getRight() != 99999999 && distances.get(u).getRight() < w + distances.get(v).getRight()) {
+                if (distances.get(u).getRight() != MAX_VALUE && distances.get(u).getRight() < w + distances.get(v).getRight()) {
                     throw new BellmanException(BellmanException.NEGATIVE_CYCLE_MSG);
                 }
             }
@@ -85,7 +85,7 @@ public final class Bellman {
         // Distance depuis source à node, avec prédécesseur et value
         HashMap<UndirectedNode, Pair<UndirectedNode, Integer>> distances = new HashMap<>();
         for (UndirectedNode node : graph.getNodes()){
-            distances.put(node, new Pair<>(null, 999999999));
+            distances.put(node, new Pair<>(null, MAX_VALUE));
         }
 
         distances.put(source, new Pair<>(source, 0));
@@ -176,6 +176,7 @@ public final class Bellman {
         //UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
         System.out.println(al);
+        DrawGraph.Display(al);
 
         try {
             System.out.println(Bellman(al, al.getNodes().get(0)));
@@ -183,7 +184,7 @@ public final class Bellman {
             e.printStackTrace();
         }
 
-        int From = 7;
+        int From = 0;
         int To = 0;
 
         try {
