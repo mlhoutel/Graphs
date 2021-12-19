@@ -50,24 +50,28 @@ public final class Bellman {
                     DirectedNode u = node;
                     DirectedNode v = edge.getKey();
                     int w = edge.getValue();
-                    if (distances.get(u).getRight() != MAX_VALUE && distances.get(u).getRight() < w + distances.get(v).getRight()) {
+                    if (distances.get(u).getRight() != MAX_VALUE && distances.get(u).getRight() + w < distances.get(v).getRight()) {
                         distances.put(v, new Pair<>(node, distances.get(u).getRight()+w));
                     }
                 }
             }
         }
 
-        //vérification absence de cycle négatif
         for (DirectedNode node : graph.getNodes()) {
-            for (Entry<DirectedNode,Integer> edge : node.getPreds().entrySet()) {
+            for (Map.Entry<DirectedNode,Integer> edge : node.getPreds().entrySet()) {
                 DirectedNode u = node;
                 DirectedNode v = edge.getKey();
                 int w = edge.getValue();
-                if (distances.get(u).getRight() != MAX_VALUE && distances.get(u).getRight() < w + distances.get(v).getRight()) {
+                int a = distances.get(u).getRight();
+                int b = distances.get(v).getRight();
+                int c = w ;
+                if (distances.get(u).getRight() != MAX_VALUE && distances.get(u).getRight() +w < distances.get(v).getRight()) {
                     throw new BellmanException(BellmanException.NEGATIVE_CYCLE_MSG);
                 }
             }
         }
+
+
 
         return distances;
     }
@@ -174,18 +178,12 @@ public final class Bellman {
     public static void main(String[] args) {
         int[][] mat = GraphTools.generateValuedGraphData(8, false, false, true, false, 100001);
         //UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
+
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
-        System.out.println(al);
         DrawGraph.Display(al);
 
-        try {
-            System.out.println(Bellman(al, al.getNodes().get(0)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         int From = 0;
-        int To = 0;
+        int To = 3;
 
         try {
             // List<UndirectedNode> path = ShortestPath(al, al.getNodes().get(From), al.getNodes().get(To));
