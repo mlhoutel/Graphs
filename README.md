@@ -6,6 +6,7 @@
 
 <br />
 <div align="center">
+<img src="./docs/screenshots/Docs.png">
 <p>
 <a href="https://mlhoutel.github.io/Graphs/">
 <strong>Browse the docs »</strong>
