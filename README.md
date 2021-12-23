@@ -2,15 +2,11 @@
 [![Version][version-shield]][version-url]
 [![Language][language-shield]][language-url]
 
-# Graph-Framework
+# Graphs
 
 <br />
 <div align="center">
-<a href="https://mlhoutel.github.io/Graphs/">
-<img src="./docs/screenshots/Graph.png" alt="Logo" width="600" height="400">
-</a>
-  
-<p align="center">
+<p>
 <a href="https://mlhoutel.github.io/Graphs/">
 <strong>Browse the docs »</strong>
 </a>
@@ -25,7 +21,9 @@ This is a standard maven project so please use the according import option in yo
 
 ### Built With
 
-Graphs made with https://github.com/vlsi/jgraphx-publish
+- **[javadoc](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html)**
+- **[jgraphx](https://github.com/vlsi/jgraphx-publish)**
+- **[setup java](https://github.com/actions/setup-java)**
 
 ### Exemple
 
@@ -57,26 +55,40 @@ try {
 ```
 #### Screenshots
 
+<div align="center">
 <img src="./docs/screenshots/Dijkstra.png">
-<p align="center">Dijkstra</p>
+<p>Dijkstra</p>
+</div>
 
+<div align="center">
 <img src="./docs/screenshots/Bellman.png">
-<p align="center">Bellman</p>
+<p>Bellman</p>
+</div>
 
+<div align="center">
 <img src="./docs/screenshots/Prim.png">
-<p align="center">Prim</p>
+<p>Prim</p>
+</div>
 
+<div align="center">
 <img src="./docs/screenshots/Kruskal.png">
-<p align="center">Kruskal</p>
+<p>Kruskal</p>
+</div>
 
+<div align="center">
 <img src="./docs/screenshots/Circular.png">
-<p align="center">Circular</p>
+<p>Circular</p>
+</div>
 
+<div align="center">
 <img src="./docs/screenshots/BinaryHeap.png">
-<p align="center">BinaryHeap</p>
+<p>BinaryHeap</p>
+</div>
 
+<div align="center">
 <img src="./docs/screenshots/BinaryHeapEdge.png">
-<p align="center">BinaryHeapEdge</p>
+<p>BinaryHeapEdge</p>
+</div>
 
 
 ### Build docs
@@ -88,9 +100,9 @@ Generate javadoc with `mvn javadoc:javadoc`
 - Raphael Painter
 - Maël Lhoutelier
 
-[build-shield]: https://img.shields.io/github/workflow/status/mlhoutel/Graphs/publish/main?style=flat-square
-[build-url]: https://github.com/mlhoutel/Graphs/blob/main/.github/workflows/docs.yml
+[build-shield]: https://img.shields.io/github/workflow/status/mlhoutel/Graphs/publish/master?style=flat-square
+[build-url]: https://github.com/mlhoutel/Graphs/blob/main/.github/workflows/main.yml
 [version-shield]: https://img.shields.io/badge/version-1.0.0-orange?style=flat-square
-[version-url]: https://github.com/mlhoutel/Graphs/blob/main/CMakeLists.txt
+[version-url]: https://github.com/mlhoutel/Graphs/blob/main/pom.xml
 [language-shield]: https://img.shields.io/github/languages/top/mlhoutel/Graphs?style=flat-square
 [language-url]: https://github.com/mlhoutel/Graphs/search?l=java
