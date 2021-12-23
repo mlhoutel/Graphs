@@ -21,9 +21,9 @@ This is a standard maven project so please use the according import option in yo
 
 ### Built With
 
-- **[javadoc](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html)
-- **[jgraphx](https://github.com/vlsi/jgraphx-publish)
-- **[setup java](https://github.com/actions/setup-java)
+- **[javadoc](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/javadoc.html)**
+- **[jgraphx](https://github.com/vlsi/jgraphx-publish)**
+- **[setup java](https://github.com/actions/setup-java)**
 
 ### Exemple
 
