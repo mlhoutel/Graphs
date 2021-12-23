@@ -15,8 +15,7 @@ import Graphs.GraphAlgorithms.GraphTools;
 import Graphs.Nodes.DirectedNode;
 import Graphs.Nodes.UndirectedNode;
 
-public final class
-CFC {
+public final class CFC {
 
     private CFC() {}
     

@@ -88,6 +88,7 @@ public final class Dijkstra {
      * @param graph the DirectedGraph to explore
      * @param source the DirectedNode to go from
      * @param destination the DirectedNode to go to
+     * @throws DijkstraException if no path
      * @return shortest path from source to destination as a List
      */
     public static List<DirectedNode> ShortestPath(DirectedGraph graph, DirectedNode source, DirectedNode destination) throws DijkstraException {
@@ -104,32 +105,41 @@ public final class Dijkstra {
         while (temp != source && cpt >= 0) {
             if(shortestPaths.get(temp).getLeft() != null){
                 temp = shortestPaths.get(temp).getLeft();
+                shortestPath.add(temp);
             }else{
                 throw new DijkstraException(DijkstraException.NO_PATH_MSG);
             }
             cpt--;
         }
 
+        Collections.reverse(shortestPath);
+
         return shortestPath;
     }
 
-    public static void main(String[] args) throws DijkstraException {
+    public static void main(String[] args) {
         int[][] mat = GraphTools.generateValuedGraphData(10, true, false, true, false, 100001);
         GraphTools.afficherMatrix(mat);
+
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
-        DrawGraph.Display(al);
+        // DrawGraph.Display(al);
 
         int From = 0;
-        int To = 2;
+        int To = 9;
 
-        List<DirectedNode> path = ShortestPath(al, al.getNodes().get(From), al.getNodes().get(To));
-        System.out.println(path);
-        BinaryHeapEdge<DirectedNode> binh = new BinaryHeapEdge<DirectedNode>();
+        try {
+            List<DirectedNode> path = ShortestPath(al, al.getNodes().get(From), al.getNodes().get(To));
 
-        for (int i = 1; i < path.size(); i++) {
-            binh.insert(path.get(i - 1), path.get(i),0);
+            System.out.println(path);
+            BinaryHeapEdge<DirectedNode> binh = new BinaryHeapEdge<DirectedNode>();
+
+            for (int i = 1; i < path.size(); i++) {
+                binh.insert(path.get(i - 1), path.get(i),0);
+            }
+
+            DrawDirectedCoveringTree.Display(al, binh);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-
-        DrawDirectedCoveringTree.Display(al, binh);
     }
 }

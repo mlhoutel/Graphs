@@ -30,7 +30,7 @@ public final class Bellman {
      * <b>complexity: O(E log V)</b>
      * @param graph the DirectedGraph to explore
      * @param source the DirectedNode to go from
-     * @throws Exception if negative cycles
+     * @throws BellmanException if negative cycles
      * @return all nearest nodes and their cost
      */
     public static HashMap<DirectedNode, Pair<DirectedNode, Integer>> Bellman(DirectedGraph graph, DirectedNode source) throws BellmanException {
@@ -81,7 +81,7 @@ public final class Bellman {
      * <b>complexity: O(E log V)</b>
      * @param graph the UndirectedGraph to explore
      * @param source the UndirectedNode to go from
-     * @throws Exception if negative cycles
+     * @throws BellmanException if negative cycles
      * @return all nearest nodes and their cost
      */
     public static HashMap<UndirectedNode, Pair<UndirectedNode, Integer>> Bellman(UndirectedGraph graph, UndirectedNode source) throws BellmanException {
@@ -123,7 +123,7 @@ public final class Bellman {
      * @param graph the DirectedGraph to explore
      * @param source the DirectedNode to go from
      * @param destination the DirectedNode to go to
-     * @throws Exception if negative cycles
+     * @throws BellmanException if negative cycles
      * @return shortest path from source to destination as a List of DirectedNode
      */
     public static List<DirectedNode> ShortestPath(DirectedGraph graph, DirectedNode source, DirectedNode destination) throws BellmanException {
@@ -138,7 +138,7 @@ public final class Bellman {
         while (temp != destination && cpt >= 0) {
             if(shortestPaths.get(temp).getLeft() != null){
                 temp = shortestPaths.get(temp).getLeft();
-            }else{
+            } else {
                 throw new BellmanException(BellmanException.NO_PATH_MSG);
             }
             shortestPath.add(temp);
@@ -154,20 +154,24 @@ public final class Bellman {
      * @param graph the DirectedGraph to explore
      * @param source the DirectedNode to go from
      * @param destination the DirectedNode to go to
-     * @throws Exception if negative cycles
+     * @throws BellmanException if negative cycles
      * @return shortest path from source to destination as a List of DirectedNode
      */
-    public static List<UndirectedNode> ShortestPath(UndirectedGraph graph, UndirectedNode source, UndirectedNode destination) throws Exception {
+    public static List<UndirectedNode> ShortestPath(UndirectedGraph graph, UndirectedNode source, UndirectedNode destination) throws BellmanException {
 
         HashMap<UndirectedNode, Pair<UndirectedNode, Integer>> shortestPaths = Bellman(graph, destination);
-        List<UndirectedNode> shortestPath = new LinkedList<UndirectedNode>();
+        List<UndirectedNode> shortestPath = new LinkedList<>();
 
         shortestPath.add(source);
         UndirectedNode temp = source;
 
         int cpt = graph.getNodes().size();
         while (temp != destination && cpt >= 0) {
-            temp = shortestPaths.get(temp).getLeft();
+            if(shortestPaths.get(temp).getLeft() != null){
+                temp = shortestPaths.get(temp).getLeft();
+            } else {
+                throw new BellmanException(BellmanException.NO_PATH_MSG);
+            }
             shortestPath.add(temp);
             cpt--;
         }
@@ -180,7 +184,7 @@ public final class Bellman {
         //UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
 
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
-        DrawGraph.Display(al);
+        // DrawGraph.Display(al);
 
         int From = 0;
         int To = 3;
@@ -190,7 +194,7 @@ public final class Bellman {
             List<DirectedNode> path = ShortestPath(al, al.getNodes().get(From), al.getNodes().get(To));
 
             System.out.println(path);
-            BinaryHeapEdge binh = new BinaryHeapEdge();
+            BinaryHeapEdge<DirectedNode> binh = new BinaryHeapEdge<>();
 
             for (int i = 1; i < path.size(); i++) {
                 binh.insert(path.get(i - 1), path.get(i),0);
