@@ -180,14 +180,14 @@ public final class Bellman {
     }
 
     public static void main(String[] args) {
-        int[][] mat = GraphTools.generateValuedGraphData(8, false, false, true, false, 100001);
+        int[][] mat = GraphTools.generateValuedGraphData(7, false, false, true, false, 10011);
         //UndirectedValuedGraph al = new UndirectedValuedGraph(mat);
 
         DirectedValuedGraph al = new DirectedValuedGraph(mat);
         // DrawGraph.Display(al);
 
-        int From = 0;
-        int To = 3;
+        int From = 2;
+        int To = 4;
 
         try {
             // List<UndirectedNode> path = ShortestPath(al, al.getNodes().get(From), al.getNodes().get(To));
