@@ -1,4 +1,9 @@
 package AdjacencyList;
+import Graphs.AdjacencyList.DirectedGraph;
+import Graphs.AdjacencyList.UndirectedGraph;
+import Graphs.GraphAlgorithms.GraphTools;
+import Graphs.Nodes.DirectedNode;
+import Graphs.Nodes.UndirectedNode;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.Assertions;
 
@@ -32,16 +37,50 @@ public class UndirectedGraphTest {
 
     @Test
     void isEdge() {
-        Assertions.fail();
+        //GIVEN
+        int[][] Matrix = GraphTools.generateGraphData(10, 20, false, false, false, 100001);
+        UndirectedGraph al = new UndirectedGraph(Matrix);
+        UndirectedNode from = al.getNodes().get(0);
+        UndirectedNode  to = al.getNodes().get(3);
+
+        //WHEN
+        Boolean result = al.isEdge(from, to);
+
+        //THEN
+        Assertions.assertTrue(result);
     }
 
     @Test
     void removeEdge() {
-        Assertions.fail();
+        //GIVEN
+        int[][] Matrix = GraphTools.generateGraphData(10, 20, false, false, false, 100001);
+        UndirectedGraph al = new UndirectedGraph(Matrix);
+        UndirectedNode  from = al.getNodes().get(0);
+        UndirectedNode  to = al.getNodes().get(3);
+        Assertions.assertTrue(al.isEdge(from, to));
+
+        //WHEN
+        al.removeEdge(from, to);
+        Boolean result = al.isEdge(from,to);
+
+        //THEN
+        Assertions.assertFalse(result);
     }
 
     @Test
     void addEdge() {
-        Assertions.fail();
+        //GIVEN
+        int[][] Matrix = GraphTools.generateGraphData(10, 20, false, false, false, 100001);
+        UndirectedGraph al = new UndirectedGraph(Matrix);
+        UndirectedNode  from = al.getNodes().get(0);
+        UndirectedNode  to = al.getNodes().get(5);
+        Assertions.assertFalse(al.isEdge(from, to));
+
+        //WHEN
+        al.addEdge(from, to);
+        Boolean result = al.isEdge(from, to);
+
+        //THEN
+        Assertions.assertTrue(result);
     }
 }
